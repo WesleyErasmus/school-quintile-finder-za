@@ -20,8 +20,9 @@ const PageHero = () => {
           </div>
         </section>
       </div>
+    
     </>
-  );
-};
+  )
+}
 
-export default PageHero;
+export default PageHero

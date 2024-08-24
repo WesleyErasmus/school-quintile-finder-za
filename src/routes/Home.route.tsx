@@ -1,11 +1,15 @@
-import PageHero from "../components/page-hero"
+import PageHero from "../components/page-hero";
+import SearchBar from "../components/search-bar";
 
 const Home = () => {
   return (
     <>
-    <PageHero />
+      <div className="max-w-3xl mx-auto text-center">
+        <PageHero />
+        <SearchBar />
+      </div>
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
