@@ -1,33 +1,43 @@
 import { useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { useDataContext } from "../hooks/data-context.hook";
+
 
 const SearchBar = () => {
+  const { data, setSelectedSchool, setIsLoading, setSearchTerm } =
+    useDataContext();
   const [firstSuggestion, setFirstSuggestion] = useState(null);
-  const [selectedItem, setSelectedItem] = useState(null)
-  const items = [
-    {
-      id: 0,
-      name: "Cobol",
-    },
-    {
-      id: 1,
-      name: "JavaScript",
-    },
-    {
-      id: 2,
-      name: "Basic",
-    },
-    {
-      id: 3,
-      name: "PHP",
-    },
-    {
-      id: 4,
-      name: "Java",
-    },
-  ];
+
+  const formatData = () => {
+     const formattedData = [];
+    if (data) {
+       for (let index = 0; index < data.length; index++) {
+         const item = data[index];
+
+         const formattedItem = {
+           id: item.id,
+           name: item.institution_name,
+         };
+
+         for (const key in item) {
+           if (key !== "id" && key !== "institution_name") {
+             formattedItem[key] = item[key];
+           }
+         }
+
+         formattedData.push(formattedItem);
+       }
+
+       return formattedData;
+    } else {
+      return [];
+    }
+  }
+
+  const formattedData = formatData();
 
   const handleOnSearch = (string: string, results) => {
+    setSearchTerm(string);
     if (results.length > 0) {
       setFirstSuggestion(results[0]);
     } else {
@@ -37,37 +47,47 @@ const SearchBar = () => {
 
   const handleOnSelect = (item) => {
     if (firstSuggestion === item) {
-      console.log("The first item was successfully selected on enter key down", item)
-      setSelectedItem(item);
+      console.log(
+        "The first item was successfully selected on enter key down",
+        item
+      );
+      setIsLoading(true);
+      setSelectedSchool(item);
     } else if (item === item) {
       console.log("The item selection was successful", item);
-      setSelectedItem(item);
-    }
-    
-    else {
-      console.log("The item was not selected")
+      setIsLoading(true);
+      setSelectedSchool(item);
+    } else {
+      console.log(
+        "Failed: The item from the search bar suggestions was not selected"
+      );
     }
   };
 
-  const handleKeyDown = (e: { key: string; preventDefault: () => void; }) => {
+  const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
     if (e.key === "Enter" && firstSuggestion) {
       e.preventDefault();
       handleOnSelect(firstSuggestion);
     }
   };
 
-  const formatResult = (item) => {
-    return (
-      <>
-        <span style={{ display: "block", textAlign: "left" }}>
-          id: {item.id}
+  const formatResult = (item) => (
+    <>
+      <span style={{ display: "block", textAlign: "left" }}>
+        {item.name}
+
+        <span className="ml-1 italic inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
+          {" "}
+          Quintile:{" "}
+          <span className="text-indigo-600 text-xs ml-1">{item.quintile}</span>
         </span>
-        <span style={{ display: "block", textAlign: "left" }}>
-          name: {item.name}
+        <span className="ml-1 italic inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
+          {" "}
+          {item.province}
         </span>
-      </>
-    );
-  };
+      </span>
+    </>
+  );
 
   return (
     <>
@@ -85,7 +105,7 @@ const SearchBar = () => {
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                 }}
                 className="text-sm"
-                items={items}
+                items={formattedData}
                 onSearch={handleOnSearch}
                 onSelect={handleOnSelect}
                 autoFocus
@@ -96,13 +116,6 @@ const SearchBar = () => {
           </div>
         </div>
       </form>
-
-      {selectedItem && (
-        <>
-          <p className="mt-4">Id: {selectedItem.id}</p>
-          <p>Name: {selectedItem.name}</p>
-        </>
-      )}
     </>
   );
 };
