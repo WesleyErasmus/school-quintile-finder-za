@@ -1,4 +1,4 @@
-import TopNavbar from "./components/top-navbar";
+import TopNavbar from "./components/TopNavbar";
 import Home from "./routes/Home.route";
 
 function App() {

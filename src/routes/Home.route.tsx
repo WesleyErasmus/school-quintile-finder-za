@@ -1,12 +1,12 @@
-import PageHero from "../components/page-hero";
-import SearchBar from "../components/search-bar";
+import Hero from "../components/Hero";
+import SearchBar from "../components/SearchBar";
 import { DataProvider } from "../hooks/data-context.hook";
 
 const Home = () => {
   return (
     <>
       <div className="max-w-3xl mx-auto text-center">
-        <PageHero />
+        <Hero />
         <DataProvider>
           <SearchBar />
         </DataProvider>

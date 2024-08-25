@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import useFetchData from "./use-fetch-data";
+import useFetchData from "./use-fetch-data.hook";
 import { School } from "../types/School";
 
 interface DataContextType {
