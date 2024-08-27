@@ -14,9 +14,15 @@ const PhaseFilter = () => {
     { name: "Specialized Schools", filterFunction: placeholderFn },
   ];
 
+  const quintileIndex = 0;
+
   return (
     <>
-      <Dropdown buttonName={"Phase"} filterOptions={filterOptions} />
+      <Dropdown
+        buttonName={"Quintiles"}
+        filterOptions={filterOptions}
+        activeIndex={quintileIndex}
+      />
     </>
   );
 };

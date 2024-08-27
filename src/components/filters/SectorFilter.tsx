@@ -10,9 +10,15 @@ const SectorFilter = () => {
     { name: "Private Schools", filterFunction: placeholderFn },
   ];
 
+const quintileIndex = 0;
+
   return (
     <>
-      <Dropdown buttonName={"Sector"} filterOptions={filterOptions} />
+      <Dropdown
+        activeIndex={quintileIndex}
+        buttonName={"Sector"}
+        filterOptions={filterOptions}
+      />
     </>
   );
 };

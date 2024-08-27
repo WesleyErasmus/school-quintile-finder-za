@@ -17,11 +17,17 @@ const ProvinceFilter = () => {
     { name: "Western Cape", filterFunction: placeholderFn },
   ];
 
-  return (
-    <>
-      <Dropdown buttonName={"Province"} filterOptions={filterOptions} />
-    </>
-  );
+ const quintileIndex = 0;
+
+ return (
+   <>
+     <Dropdown
+       buttonName={"Quintiles"}
+       filterOptions={filterOptions}
+       activeIndex={quintileIndex}
+     />
+   </>
+ );
 };
 
 export default ProvinceFilter;
