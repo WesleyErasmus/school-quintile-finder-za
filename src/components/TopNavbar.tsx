@@ -91,6 +91,7 @@ const TopNavbar = () => {
             </div>
           </div>
 
+          {/* Mobile nav */}
           {expanded && (
             <nav>
               <div className="px-1 py-8">
