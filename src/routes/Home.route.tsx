@@ -24,9 +24,9 @@ const Home = () => {
                 height="13"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
                 className="ml-2 text-gray-700 feather feather-sliders"
               >
                 <line x1="4" y1="21" x2="4" y2="14"></line>

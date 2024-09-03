@@ -42,8 +42,8 @@ const MobileDropdown = (props: {
                       <path
                         d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       ></path>
                     </svg>
                   ) : (
@@ -58,8 +58,8 @@ const MobileDropdown = (props: {
                       <path
                         d="M2 11L8.16086 5.3131C8.35239 5.1363 8.64761 5.1363 8.83914 5.3131L15 11"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
                       ></path>
                     </svg>
                   )}
