@@ -12,8 +12,8 @@ const Home = () => {
     <>
       <div className="max-w-3xl mx-auto">
         <Hero />
+        <SearchBar />
         <DataProvider>
-          <SearchBar />
           <div className="text-xs mt-5 flex justify-center items-center text-center mx-auto text-gray-900">
             <div>Filter by</div>
             <div>
