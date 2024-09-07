@@ -5,16 +5,16 @@ import SectorFilter from "../components/filters/SectorFilter";
 import Hero from "../components/Hero";
 import RenderSearchResults from "../components/RenderSearchResults";
 import SearchBar from "../components/SearchBar";
-import { DataProvider } from "../hooks/data-context.hook";
+import { DataProvider } from "../contexts/data-context.hook";
 
 const Home = () => {
   return (
     <>
       <div className="max-w-3xl mx-auto">
-        <Hero />
-        <SearchBar />
         <DataProvider>
-          <div className="text-xs mt-5 flex justify-center items-center text-center mx-auto text-gray-900">
+          <Hero />
+          <SearchBar />
+            <div className="text-xs mt-5 flex justify-center items-center text-center mx-auto text-gray-900">
             <div>Filter by</div>
             <div>
               <svg

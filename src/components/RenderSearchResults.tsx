@@ -1,4 +1,4 @@
-import { useDataContext } from "../hooks/data-context.hook";
+import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
 
 const RenderSearchResults = () => {
@@ -23,7 +23,8 @@ if (selectedSchool && isLoading) {
               {selectedSchool.name}
             </h3>
             <span className="mt-1 text-sm font-normal leading-6 italic text-pink-500">
-              Quintile: <span className="text-indigo-600">{selectedSchool.quintile}</span>
+              Quintile:
+              <span className="text-indigo-600">{selectedSchool.quintile}</span>
             </span>
           </div>
           <div className="px-5 py-3">
@@ -57,7 +58,7 @@ if (selectedSchool && isLoading) {
                   Fee Paying / No Fee Paying:
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {selectedSchool.no_fee_school}
+                  {selectedSchool.fee_paying}
                 </dd>
               </div>
               <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
@@ -65,7 +66,7 @@ if (selectedSchool && isLoading) {
                   Street Address:
                 </dt>
                 <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {selectedSchool.street_address}
+                  {selectedSchool.address}
                 </dd>
               </div>
             </dl>
@@ -74,7 +75,6 @@ if (selectedSchool && isLoading) {
       ) : null}
     </>
   );
-
 };
 
 export default RenderSearchResults;

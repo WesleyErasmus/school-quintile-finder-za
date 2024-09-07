@@ -1,0 +1,12 @@
+query SearchSchools($searchTerm: String!) @cached {
+  schools(where: { name: { _ilike: $searchTerm } }) {
+    id
+    name
+    quintile
+    province
+    phase
+    sector
+    address
+    fee_paying
+  }
+}
