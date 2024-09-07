@@ -19,7 +19,7 @@ const PhaseFilter = () => {
   return (
     <>
       <Dropdown
-        buttonName={"Quintiles"}
+        buttonName={"Phase"}
         filterOptions={filterOptions}
         activeIndex={quintileIndex}
       />

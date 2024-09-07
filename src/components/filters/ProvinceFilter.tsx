@@ -22,7 +22,7 @@ const ProvinceFilter = () => {
  return (
    <>
      <Dropdown
-       buttonName={"Quintiles"}
+       buttonName={"Province"}
        filterOptions={filterOptions}
        activeIndex={quintileIndex}
      />

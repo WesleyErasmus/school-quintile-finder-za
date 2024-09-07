@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-// *** NOTE *** STATE NEEDS TO BE ADDED
 const TopNavbar = () => {
   const [expanded, setExpanded] = useState(false);
   return (

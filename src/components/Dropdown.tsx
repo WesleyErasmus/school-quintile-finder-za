@@ -12,7 +12,6 @@ const Dropdown = (props: {
   activeIndex: number;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  //   const [isExpanded, setIsExpanded] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
 
   const toggleDropdown = () => {

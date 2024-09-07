@@ -4,11 +4,9 @@ import Loader from "./Loader";
 const RenderSearchResults = () => {
   const { selectedSchool, isLoading, setIsLoading } = useDataContext();
 
-if (selectedSchool && isLoading) {
+  if (selectedSchool && isLoading) {
     setIsLoading(false);
-}
-
-// Error for if data does not load: Add error handling with a button to refresh the page is no data is loading and another option to contact developer if the issue persists
+  }
 
   return (
     <>
