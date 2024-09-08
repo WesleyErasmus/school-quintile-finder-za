@@ -10,12 +10,12 @@ const SectorFilter = () => {
     { name: "Private Schools", filterFunction: placeholderFn },
   ];
 
-const quintileIndex = 0;
+const optionsIndex = 0;
 
   return (
     <>
       <Dropdown
-        activeIndex={quintileIndex}
+        activeIndex={optionsIndex}
         buttonName={"Sector"}
         filterOptions={filterOptions}
       />

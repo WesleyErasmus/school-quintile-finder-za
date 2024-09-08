@@ -3,6 +3,7 @@ import ProvinceFilter from "../components/filters/ProvinceFilter";
 import QuintileFilter from "../components/filters/QuintileFilter";
 import SectorFilter from "../components/filters/SectorFilter";
 import Hero from "../components/Hero";
+import RenderFilterResults from "../components/RenderFilterResults";
 import RenderSearchResults from "../components/RenderSearchResults";
 import SearchBar from "../components/SearchBar";
 import { DataProvider } from "../contexts/data-context.hook";
@@ -48,6 +49,7 @@ const Home = () => {
             <SectorFilter />
           </div>
           <RenderSearchResults />
+          <RenderFilterResults />
         </DataProvider>
       </div>
     </>

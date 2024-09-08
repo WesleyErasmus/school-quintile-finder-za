@@ -17,14 +17,14 @@ const ProvinceFilter = () => {
     { name: "Western Cape", filterFunction: placeholderFn },
   ];
 
- const quintileIndex = 0;
+ const optionsIndex = 0;
 
  return (
    <>
      <Dropdown
        buttonName={"Province"}
        filterOptions={filterOptions}
-       activeIndex={quintileIndex}
+       activeIndex={optionsIndex}
      />
    </>
  );

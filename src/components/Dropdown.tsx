@@ -1,10 +1,6 @@
 import { useState } from "react";
 import { useClickOutside } from "../hooks/handle-click-outside.hook";
-
-interface FilterOption {
-  name: string;
-  filterFunction: () => void;
-}
+import { FilterOption } from "../types/FilterOptions";
 
 const Dropdown = (props: {
   buttonName: string;
