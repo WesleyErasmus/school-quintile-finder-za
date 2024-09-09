@@ -1,6 +1,6 @@
 import Dropdown from "../Dropdown";
 import { gql, useQuery } from "@apollo/client";
-import FilterQuintiles from "../../graphql/queries/school-filter-queries.graphql";
+import FilterQuintiles from "../../graphql/queries/filter-by-quintile-query.graphql";
 import { useDataContext } from "../../contexts/data-context.hook";
 import { FilterOption } from "../../types/FilterOptions";
 import { useCallback } from "react";
@@ -10,11 +10,11 @@ const QuintileFilter = () => {
   const { selectedFilter, setSelectedFilter, setIsLoading, setFilteredData } =
     useDataContext();
 
-    const FILTER_QUINTILE_DATA = gql`
+    const FILTER_SCHOOLS_BY_QUINTILE = gql`
       ${FilterQuintiles}
     `;
 
- const { refetch, error } = useQuery(FILTER_QUINTILE_DATA, {
+ const { refetch, error } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
    variables: {
      selectedFilter: selectedFilter,
      skip: !selectedFilter,

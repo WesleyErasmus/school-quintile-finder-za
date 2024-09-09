@@ -1,0 +1,22 @@
+query FilterSector($selectedFilter: String!) @cached {
+  schools_aggregate(where: { sector: { _eq: $selectedFilter } }) {
+    aggregate {
+      count
+    }
+  }
+  schools(
+    where: { sector: { _eq: $selectedFilter } }
+    limit: 10
+    offset: 0
+    order_by: { name: asc, quintile: asc }
+  ) {
+    id
+    name
+    quintile
+    province
+    phase
+    sector
+    fee_paying
+    address
+  }
+}

@@ -1,0 +1,22 @@
+query FilterPhase($selectedFilter: String!) @cached {
+  schools_aggregate(where: { phase: { _ilike: $selectedFilter } }) {
+    aggregate {
+      count
+    }
+  }
+  schools(
+    where: { phase: { _ilike: $selectedFilter } }
+    limit: 10
+    offset: 0
+    order_by: { name: asc, quintile: asc }
+  ) {
+    id
+    name
+    quintile
+    province
+    phase
+    sector
+    fee_paying
+    address
+  }
+}

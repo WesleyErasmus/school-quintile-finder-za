@@ -1,0 +1,22 @@
+query FilterProvinces($selectedFilter: String!) @cached {
+  schools_aggregate(where: { province: { _eq: $selectedFilter } }) {
+    aggregate {
+      count
+    }
+  }
+  schools(
+    where: { province: { _eq: $selectedFilter } }
+    limit: 10
+    offset: 0
+    order_by: { name: asc, quintile: asc }
+  ) {
+    id
+    name
+    quintile
+    province
+    phase
+    sector
+    fee_paying
+    address
+  }
+}

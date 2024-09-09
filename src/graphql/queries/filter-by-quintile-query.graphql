@@ -21,7 +21,6 @@ query FilterQuintiles($selectedFilter: String!) @cached {
   }
 }
 
-# Province filter
 
 # Phase filter
 
