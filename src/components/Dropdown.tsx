@@ -82,12 +82,15 @@ const Dropdown = (props: {
             }`}
             aria-labelledby="dropdown-on-click"
           >
-            <ul className="py-2">
+            <ul className="pt-2">
               {props.filterOptions.map((option, index) => (
                 <li key={index}>
                   <a
-                    onClick={option.filterFunction}
-                    className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
+                    onClick={() => {
+                      option.filterFunction()
+                      closeDropdown()
+                    }}
+                    className="cursor-pointer block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
                   >
                     {option.name}
                   </a>
