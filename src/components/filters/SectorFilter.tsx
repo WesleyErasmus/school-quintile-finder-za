@@ -7,14 +7,18 @@ import { useCallback } from "react";
 
 
 const SectorFilter = () => {
-   const { selectedFilter, setSelectedFilter, setIsLoading, setFilteredData } =
-     useDataContext();
+   const {
+     selectedFilter,
+     setSelectedFilter,
+     setIsLoadingFilteredData,
+     setFilteredData,
+   } = useDataContext();
 
      const FILTER_SCHOOLS_BY_SECTOR = gql`
        ${FilterSector}
      `;
 
-    const { refetch, error } = useQuery(FILTER_SCHOOLS_BY_SECTOR, {
+    const { refetch } = useQuery(FILTER_SCHOOLS_BY_SECTOR, {
       variables: {
         selectedFilter: selectedFilter,
         skip: !selectedFilter,
@@ -23,7 +27,7 @@ const SectorFilter = () => {
 
      const handleSectorFilter = useCallback(
        (filter: string) => async () => {
-         setIsLoading(true);
+         setIsLoadingFilteredData(true);
          setSelectedFilter(filter);
 
          try {
@@ -38,10 +42,10 @@ const SectorFilter = () => {
            console.error("Error fetching data:", error);
            setFilteredData([]);
          } finally {
-           setIsLoading(false);
+           setIsLoadingFilteredData(false);
          }
        },
-       [refetch, setSelectedFilter, setFilteredData, setIsLoading]
+       [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
      );
 
   const filterOptions: FilterOption[] = [
@@ -50,8 +54,6 @@ const SectorFilter = () => {
   ];
 
 const optionsIndex = 0;
-
- if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>

@@ -6,14 +6,18 @@ import { FilterOption } from "../../types/FilterOptions";
 import { useCallback } from "react";
 
 const PhaseFilter = () => {
-  const { selectedFilter, setSelectedFilter, setIsLoading, setFilteredData } =
-    useDataContext();
+  const {
+    selectedFilter,
+    setSelectedFilter,
+    setIsLoadingFilteredData,
+    setFilteredData,
+  } = useDataContext();
 
   const FILTER_SCHOOLS_BY_PHASE = gql`
     ${FilterPhase}
   `;
 
-  const { refetch, error } = useQuery(FILTER_SCHOOLS_BY_PHASE, {
+  const { refetch } = useQuery(FILTER_SCHOOLS_BY_PHASE, {
     variables: {
       selectedFilter: `%${selectedFilter}%`,
       skip: !selectedFilter,
@@ -22,7 +26,7 @@ const PhaseFilter = () => {
 
   const handlePhaseFilter = useCallback(
     (filter: string) => async () => {
-      setIsLoading(true);
+      setIsLoadingFilteredData(true);
       setSelectedFilter(filter);
 
       try {
@@ -37,10 +41,10 @@ const PhaseFilter = () => {
         console.error("Error fetching data:", error);
         setFilteredData([]);
       } finally {
-        setIsLoading(false);
+        setIsLoadingFilteredData(false);
       }
     },
-    [refetch, setSelectedFilter, setFilteredData, setIsLoading]
+    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
   );
 
 
@@ -73,8 +77,6 @@ const PhaseFilter = () => {
   ];
 
   const optionsIndex = 0;
-
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>

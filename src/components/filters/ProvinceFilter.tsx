@@ -6,14 +6,18 @@ import { useCallback } from "react";
 import { FilterOption } from "../../types/FilterOptions";
 
 const ProvinceFilter = () => {
-  const { selectedFilter, setSelectedFilter, setIsLoading, setFilteredData } =
-    useDataContext();
+  const {
+    selectedFilter,
+    setSelectedFilter,
+    setIsLoadingFilteredData,
+    setFilteredData,
+  } = useDataContext();
 
   const FILTER_SCHOOLS_BY_PROVINCE = gql`
     ${FilterProvinces}
   `;
 
-  const { refetch, error } = useQuery(FILTER_SCHOOLS_BY_PROVINCE, {
+  const { refetch } = useQuery(FILTER_SCHOOLS_BY_PROVINCE, {
     variables: {
       selectedFilter: selectedFilter,
       skip: !selectedFilter,
@@ -22,7 +26,7 @@ const ProvinceFilter = () => {
 
   const handleProvinceFilter = useCallback(
     (filter: string) => async () => {
-      setIsLoading(true);
+      setIsLoadingFilteredData(true);
       setSelectedFilter(filter);
 
       try {
@@ -37,10 +41,10 @@ const ProvinceFilter = () => {
         console.error("Error fetching data", error);
         setFilteredData([]);
       } finally {
-        setIsLoading(false);
+        setIsLoadingFilteredData(false);
       }
     },
-    [refetch, setSelectedFilter, setFilteredData, setIsLoading]
+    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
   );
 
   const filterOptions: FilterOption[] = [
@@ -68,8 +72,6 @@ const ProvinceFilter = () => {
   ];
 
   const optionsIndex = 0;
-
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>

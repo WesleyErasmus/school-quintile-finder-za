@@ -7,14 +7,14 @@ import { useCallback } from "react";
 
 
 const QuintileFilter = () => {
-  const { selectedFilter, setSelectedFilter, setIsLoading, setFilteredData } =
+  const { selectedFilter, setSelectedFilter, setIsLoadingFilteredData, setFilteredData } =
     useDataContext();
 
     const FILTER_SCHOOLS_BY_QUINTILE = gql`
       ${FilterQuintiles}
     `;
 
- const { refetch, error } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
+ const { refetch } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
    variables: {
      selectedFilter: selectedFilter,
      skip: !selectedFilter,
@@ -24,7 +24,7 @@ const QuintileFilter = () => {
 
    const handleQuintileFilter = useCallback(
      (filter: string) => async () => {
-       setIsLoading(true);
+       setIsLoadingFilteredData(true);
        setSelectedFilter(filter);
 
        try {
@@ -39,10 +39,10 @@ const QuintileFilter = () => {
          console.error("Error fetching data:", error);
          setFilteredData([]);
        } finally {
-         setIsLoading(false);
+         setIsLoadingFilteredData(false);
        }
      },
-     [refetch, setSelectedFilter, setFilteredData, setIsLoading]
+     [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
    );
 
   const filterOptions: FilterOption[] = [
@@ -54,8 +54,6 @@ const QuintileFilter = () => {
   ];
 
   const optionsIndex = 0;
-
-  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <Dropdown
