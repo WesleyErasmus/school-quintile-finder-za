@@ -17,7 +17,7 @@ const SearchBar = () => {
   const [schools, setSchools] = useState<School[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [firstSuggestion, setFirstSuggestion] = useState<School | null>(null);
-  const { setSelectedSchool } = useDataContext();
+  const { setSelectedSchool, setFilteredData } = useDataContext();
 
   // APOLLO USEQUERY
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
@@ -48,6 +48,7 @@ const SearchBar = () => {
 
   const handleOnSelect = (item: School) => {
     setSelectedSchool(item);
+    setFilteredData(null)
   };
 
   const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useClickOutside } from "../hooks/handle-click-outside.hook";
 import { FilterOption } from "../types/FilterOptions";
+import { useDataContext } from "../contexts/data-context.hook";
 
 const Dropdown = (props: {
   buttonName: string;
@@ -9,6 +10,11 @@ const Dropdown = (props: {
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const {setSelectedSchool} = useDataContext()
+
+  const closeSelectedSchoolComponent = () => {
+    setSelectedSchool(null);
+  }
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -87,6 +93,7 @@ const Dropdown = (props: {
                 <li key={index}>
                   <a
                     onClick={() => {
+                      closeSelectedSchoolComponent()
                       option.filterFunction()
                       closeDropdown()
                     }}
