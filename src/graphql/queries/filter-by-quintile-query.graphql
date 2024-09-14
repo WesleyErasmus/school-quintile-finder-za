@@ -20,10 +20,3 @@ query FilterQuintiles($selectedFilter: String!) @cached {
     address
   }
 }
-
-
-# Phase filter
-
-# Sector filter
-
-# variable: 'selectedFilter'

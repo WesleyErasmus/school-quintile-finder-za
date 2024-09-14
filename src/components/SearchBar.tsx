@@ -22,7 +22,7 @@ const SearchBar = () => {
   // APOLLO USEQUERY
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
-    variables: { searchTerm: `%${searchTerm}%` },
+    variables: { searchTerm: `${searchTerm}%` },
   });
   console.log("Apollo data log ", data);
 
