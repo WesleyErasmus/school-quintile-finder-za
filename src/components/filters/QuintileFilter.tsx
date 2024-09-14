@@ -3,47 +3,74 @@ import { gql, useQuery } from "@apollo/client";
 import FilterQuintiles from "../../graphql/queries/filter-by-quintile-query.graphql";
 import { useDataContext } from "../../contexts/data-context.hook";
 import { FilterOption } from "../../types/FilterOptions";
-import { useCallback } from "react";
-
+import { useCallback, useEffect } from "react";
 
 const QuintileFilter = () => {
-  const { selectedFilter, setSelectedFilter, setIsLoadingFilteredData, setFilteredData } =
-    useDataContext();
+  const {
+    selectedFilter,
+    setSelectedFilter,
+    setIsLoadingFilteredData,
+    setFilteredData,
+    currentPage,
+    itemsPerPage,
+    setCurrentPage,
+    setTotalCount,
+  } = useDataContext();
 
-    const FILTER_SCHOOLS_BY_QUINTILE = gql`
-      ${FilterQuintiles}
-    `;
+  const FILTER_SCHOOLS_BY_QUINTILE = gql`
+    ${FilterQuintiles}
+  `;
 
- const { refetch } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
-   variables: {
-     selectedFilter: selectedFilter,
-     skip: !selectedFilter,
-   },
- });
+  const { refetch,data, loading } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
+    variables: {
+      selectedFilter: selectedFilter,
+      limit: itemsPerPage,
+      offset: (currentPage - 1) * itemsPerPage,
+    },
+    skip: !selectedFilter,
+  });
 
+   useEffect(() => {
+     if (data) {
+       setFilteredData(data.schools);
+       setTotalCount(data.schools_aggregate.aggregate.count);
+     }
+     setIsLoadingFilteredData(loading);
+   }, [
+     data,
+     loading,
+     setFilteredData,
+     setIsLoadingFilteredData,
+     setTotalCount,
+   ]);
 
-   const handleQuintileFilter = useCallback(
-     (filter: string) => async () => {
-       setIsLoadingFilteredData(true);
-       setSelectedFilter(filter);
+  const handleQuintileFilter = useCallback(
+    (filter: string) => async () => {
+      setIsLoadingFilteredData(loading);
+      setSelectedFilter(filter);
+      setCurrentPage(1);
 
-       try {
-         const { data } = await refetch({ selectedFilter: filter });
-         if (data && data.schools) {
-           setFilteredData(data.schools);
-         } else {
-           console.log("No data returned from query");
-           setFilteredData([]);
-         }
-       } catch (error) {
-         console.error("Error fetching data:", error);
-         setFilteredData([]);
-       } finally {
-         setIsLoadingFilteredData(false);
-       }
-     },
-     [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
-   );
+      try {
+        const { data } = await refetch({
+          selectedFilter: filter,
+          limit: itemsPerPage,
+          offset: 0,
+        });
+        if (data && data.schools) {
+          setFilteredData(data.schools);
+        } else {
+          console.log("No data returned from query");
+          setFilteredData([]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setFilteredData([]);
+      } finally {
+        setIsLoadingFilteredData(false);
+      }
+    },
+    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData, setCurrentPage, itemsPerPage, loading]
+  );
 
   const filterOptions: FilterOption[] = [
     { name: "Quintile 1", filterFunction: handleQuintileFilter("1") },

@@ -1,9 +1,23 @@
 import { School } from "../types/School";
 import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
+import Pagination from "./Pagination";
 
 const RenderFilterResults = () => {
-const { filteredData, isLoadingFilteredData } = useDataContext();
+const {
+  filteredData,
+  isLoadingFilteredData,
+  currentPage,
+  setCurrentPage,
+  itemsPerPage,
+  totalCount,
+} = useDataContext();
+  
+  const totalPages = Math.ceil(totalCount / itemsPerPage);
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+  }
 
   return (
     <>
@@ -27,7 +41,6 @@ const { filteredData, isLoadingFilteredData } = useDataContext();
                   <option value={10}>10</option>
                   <option value={25}>25</option>
                   <option value={50}>50</option>
-                  <option value={100}>100</option>
                 </select>
               </div>
             </div>
@@ -108,6 +121,11 @@ const { filteredData, isLoadingFilteredData } = useDataContext();
               </div>
             </div>
           </div>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            handlePageChange={handlePageChange}
+          />
         </section>
       ) : null}
     </>

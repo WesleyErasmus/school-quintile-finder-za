@@ -1,4 +1,4 @@
-query FilterQuintiles($selectedFilter: String!) @cached {
+query FilterQuintiles($selectedFilter: String!, $limit: Int!, $offset: Int!) @cached {
   schools_aggregate(where: { quintile: { _eq: $selectedFilter } }) {
     aggregate {
       count
@@ -6,8 +6,8 @@ query FilterQuintiles($selectedFilter: String!) @cached {
   }
   schools(
     where: { quintile: { _eq: $selectedFilter } }
-    limit: 10
-    offset: 0
+    limit: $limit
+    offset: $offset
     order_by: { name: asc }
   ) {
     id
