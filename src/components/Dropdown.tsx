@@ -83,7 +83,7 @@ const Dropdown = (props: {
             )}
           </button>
           <div
-            className={`dropdown-menu rounded-md shadow-lg bg-white absolute top-full left-1/2 transform -translate-x-1/2 w-44 ${
+            className={`z-50 dropdown-menu rounded-md shadow-lg bg-white absolute top-full left-1/2 transform -translate-x-1/2 w-44 ${
               isOpen ? "visible" : "hidden"
             }`}
             aria-labelledby="dropdown-on-click"

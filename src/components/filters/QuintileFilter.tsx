@@ -11,9 +11,6 @@ const QuintileFilter = () => {
     setSelectedFilter,
     setIsLoadingFilteredData,
     setFilteredData,
-    currentPage,
-    itemsPerPage,
-    setCurrentPage,
     setTotalCount,
   } = useDataContext();
 
@@ -24,8 +21,6 @@ const QuintileFilter = () => {
   const { refetch,data, loading } = useQuery(FILTER_SCHOOLS_BY_QUINTILE, {
     variables: {
       selectedFilter: selectedFilter,
-      limit: itemsPerPage,
-      offset: (currentPage - 1) * itemsPerPage,
     },
     skip: !selectedFilter,
   });
@@ -48,13 +43,10 @@ const QuintileFilter = () => {
     (filter: string) => async () => {
       setIsLoadingFilteredData(loading);
       setSelectedFilter(filter);
-      setCurrentPage(1);
 
       try {
         const { data } = await refetch({
           selectedFilter: filter,
-          limit: itemsPerPage,
-          offset: 0,
         });
         if (data && data.schools) {
           setFilteredData(data.schools);
@@ -69,7 +61,7 @@ const QuintileFilter = () => {
         setIsLoadingFilteredData(false);
       }
     },
-    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData, setCurrentPage, itemsPerPage, loading]
+    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData, loading]
   );
 
   const filterOptions: FilterOption[] = [
