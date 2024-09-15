@@ -8,15 +8,13 @@ import { DataProvider } from "../contexts/data-context.hook";
 const Home = () => {
   return (
     <>
-      <div className="max-w-3xl mx-auto">
-        <DataProvider>
-          <Hero />
-          <SearchBar />
-          <FilterDropdowns />
-          <RenderSearchResults />
-          <RenderFilterResults />
-        </DataProvider>
-      </div>
+      <DataProvider>
+        <Hero />
+        <SearchBar />
+        <FilterDropdowns />
+        <RenderSearchResults />
+        <RenderFilterResults />
+      </DataProvider>
     </>
   );
 };

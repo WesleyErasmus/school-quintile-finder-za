@@ -81,7 +81,10 @@ const SearchBar = () => {
 
   return (
     <>
-      <form className="relative mx-2" onKeyDown={handleKeyDown}>
+      <form
+        className="relative max-w-3xl mx-auto"
+        onKeyDown={handleKeyDown}
+      >
         <div className="absolute transition-all duration-1000 opacity-30 inset-0 bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200"></div>
         <div className="relative space-y-4 sm:flex sm:space-y-0 sm:items-end">
           <div className="flex-1">

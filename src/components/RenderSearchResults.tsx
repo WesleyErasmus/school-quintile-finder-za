@@ -15,7 +15,7 @@ const RenderSearchResults = () => {
           <Loader />
         </div>
       ) : selectedSchool ? (
-        <div className=" mt-12 mx-2 border border-gray-100 rounded-xl">
+        <div className=" mt-12 mx-auto border border-gray-100 rounded-xl max-w-3xl">
           <div className="px-5 py-4 bg-gray-100 rounded-t-xl">
             <h3 className="text-lg font-semibold leading-7 text-gray-900">
               {selectedSchool.name}

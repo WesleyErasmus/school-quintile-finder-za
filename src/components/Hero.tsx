@@ -1,7 +1,7 @@
 const PageHero = () => {
   return (
     <>
-      <div className="container mx-auto px-4">
+      <div className="container px-4 max-w-3xl mx-auto">
         <section className="relative py-12 sm:py-16 lg:pt-20 xl:pb-12">
           <div className="relative px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div className="max-w-3xl mx-auto text-center">
@@ -20,9 +20,8 @@ const PageHero = () => {
           </div>
         </section>
       </div>
-    
     </>
-  )
+  );
 }
 
 export default PageHero
