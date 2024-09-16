@@ -1,5 +1,5 @@
-query SearchSchools($searchTerm: String!) @cached {
-  schools(where: { name: { _ilike: $searchTerm } }, limit: 10) {
+query SearchSchools @cached {
+  schools {
     id
     name
     quintile

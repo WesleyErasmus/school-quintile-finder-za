@@ -87,7 +87,7 @@ const RenderFilterResults = () => {
                 {searchTerm ? (
                   <a
                     onClick={clearSearch}
-                    className="relative p-1 -left-8 text-gray-500 flex items center justify-center content-center rounded-full bg-gray-100 hover:bg-gray-200 active:ring-1 ring-black"
+                    className="relative p-1 -left-8 cursor-pointer text-gray-500 ring-black active:text-gray-300"
                   >
                     <svg
                       width="16"
@@ -99,9 +99,9 @@ const RenderFilterResults = () => {
                       <path
                         d="M6 18L18 6M6 6l12 12"
                         stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       />
                     </svg>
                   </a>

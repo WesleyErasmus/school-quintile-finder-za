@@ -21,7 +21,7 @@ const RenderSearchResults = () => {
               {selectedSchool.name}
             </h3>
             <span className="mt-1 text-sm font-normal leading-6 italic text-pink-500">
-              Quintile:
+              Quintile:{" "}
               <span className="text-indigo-600">{selectedSchool.quintile}</span>
             </span>
           </div>
