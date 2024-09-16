@@ -22,6 +22,10 @@ const RenderFilterResults = () => {
     setSearchTerm(event.target.value);
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+  };
+
   const goToBottom = () => {
     const goToBottom = document.getElementById("go-to-bottom");
     goToBottom?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -79,29 +83,53 @@ const RenderFilterResults = () => {
                   placeholder="Search filtered data here"
                   className="block w-full py-1.5 pr-5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 rtl:pr-11 rtl:pl-5 focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40"
                 />
+                {searchTerm ? (
+                  <a
+                    onClick={clearSearch}
+                    className="relative p-1 -left-8 text-gray-500 flex items center justify-center content-center rounded-full bg-gray-100 hover:bg-gray-200 active:ring-1 ring-black"
+                  >
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6 18L18 6M6 6l12 12"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </a>
+                ) : (
+                  ""
+                )}
               </div>
 
-              {/* <div className="flex items-center mt-4 gap-x-3">
-              <button className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-gray-900 rounded-lg sm:w-auto gap-x-2 hover:bg-gray-600">
-                <svg
-                  width="17"
-                  height="17"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M10 1.66667V12.5M10 12.5L5.83333 8.33333M10 12.5L14.1667 8.33333M2.5 13.3333V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.3333"
-                    stroke="currentColor"
-                    strokeWidth="1.67"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="flex items-center mt-4 gap-x-3">
+                <button className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-gray-900 rounded-lg sm:w-auto gap-x-2 hover:bg-gray-600">
+                  <svg
+                    width="17"
+                    height="17"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M10 1.66667V12.5M10 12.5L5.83333 8.33333M10 12.5L14.1667 8.33333M2.5 13.3333V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.3333"
+                      stroke="currentColor"
+                      strokeWidth="1.67"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
 
-                <span>Export to Excel</span>
-              </button>
-            </div> */}
+                  <span>Export to Excel</span>
+                </button>
+              </div>
             </div>
             <div className="flex flex-col mt-4">
               <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -112,7 +140,8 @@ const RenderFilterResults = () => {
                         <thead className="sticky top-0 bg-gray-50">
                           <tr>
                             {tableHeadings.map((heading, i) => (
-                              <th key={i}
+                              <th
+                                key={i}
                                 scope="col"
                                 className="px-4 py-3.5 text-sm text-left font-normal text-gray-800"
                               >
