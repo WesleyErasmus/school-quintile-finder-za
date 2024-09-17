@@ -12,8 +12,8 @@ const GET_SCHOOL_DATA = gql`
 
 const SearchBar = () => {
   // TOP LEVEL OF COMPONENT
-
-  const [firstSuggestion, setFirstSuggestion] = useState<School | null>(null);
+  const [searchString, setSearchString] = useState("");
+  const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
   const { setSelectedSchool, setFilteredData } = useDataContext();
 
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
@@ -21,21 +21,29 @@ const SearchBar = () => {
   });
   console.log("Apollo data log ", data);
 
-  const handleOnSearch = (_string: string, results: School[]) => {
+  const handleOnSearch = (string: string, results: School[]) => {
+    setSearchString(string);
     if (results.length > 0) {
-      setFirstSuggestion(results[0]);
+      setSuggestedItem(results[0]);
     }
   };
 
   const handleOnSelect = (item: School) => {
+    setSearchString("");
     setSelectedSchool(item);
+    setSuggestedItem(item);
     setFilteredData(null);
   };
 
+  const handleOnHover = (result: School) => {
+    setSuggestedItem(result);
+    console.log(result);
+  };
+
   const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
-    if (e.key === "Enter" && firstSuggestion) {
+    if (e.key === "Enter" && suggestedItem) {
       e.preventDefault();
-      handleOnSelect(firstSuggestion);
+      handleOnSelect(suggestedItem);
     }
   };
 
@@ -81,7 +89,13 @@ const SearchBar = () => {
                       "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                   }}
                   className="text-sm"
-                  items={data?.schools || []}
+                  onSearch={handleOnSearch}
+                  onSelect={handleOnSelect}
+                  onHover={handleOnHover}
+                  inputSearchString={searchString}
+                  items={
+                    searchString.trim().length > 0 ? data?.schools || [] : []
+                  }
                   fuseOptions={{
                     keys: ["name"],
                     threshold: 0.3,
@@ -89,12 +103,10 @@ const SearchBar = () => {
                     distance: 100,
                     minMatchCharLength: 3,
                   }}
-                  maxResults={10}
-                  inputDebounce={300}
-                  onSearch={handleOnSearch}
-                  onSelect={handleOnSelect}
-                  autoFocus
                   formatResult={formatResult}
+                  maxResults={7}
+                  inputDebounce={200}
+                  autoFocus
                   placeholder="Type here to search for a school"
                   showNoResultsText="No schools found"
                 />
