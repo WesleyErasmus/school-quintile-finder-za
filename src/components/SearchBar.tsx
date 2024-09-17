@@ -21,7 +21,7 @@ const SearchBar = () => {
   });
   console.log("Apollo data log ", data);
 
-  const handleOnSearch = (string: string, results: School[]) => {
+  const handleOnSearch = (_string: string, results: School[]) => {
     if (results.length > 0) {
       setFirstSuggestion(results[0]);
     }
@@ -42,7 +42,7 @@ const SearchBar = () => {
   const formatResult = (item: School) => (
     <>
       <span className="hidden">{item.id}</span>
-      <span style={{ display: "block", textAlign: "left" }}>
+      <span style={{ display: "block", textAlign: "left", cursor: "pointer" }}>
         {item.name}
 
         <span className="ml-1 italic inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
@@ -84,16 +84,19 @@ const SearchBar = () => {
                   items={data?.schools || []}
                   fuseOptions={{
                     keys: ["name"],
-                    threshold: 0.2,
+                    threshold: 0.3,
                     location: 0,
                     distance: 100,
                     minMatchCharLength: 3,
                   }}
+                  maxResults={10}
+                  inputDebounce={300}
                   onSearch={handleOnSearch}
                   onSelect={handleOnSelect}
                   autoFocus
                   formatResult={formatResult}
                   placeholder="Type here to search for a school"
+                  showNoResultsText="No schools found"
                 />
               </div>
             </div>
