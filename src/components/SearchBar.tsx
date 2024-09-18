@@ -37,13 +37,15 @@ const SearchBar = () => {
 
   const handleOnHover = (result: School) => {
     setSuggestedItem(result);
-    console.log(result);
   };
 
   const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
-    if (e.key === "Enter" && suggestedItem) {
+    if (e.key === "Enter") {
       e.preventDefault();
-      handleOnSelect(suggestedItem);
+
+      if (suggestedItem) {
+        handleOnSelect(suggestedItem);
+      }
     }
   };
 
