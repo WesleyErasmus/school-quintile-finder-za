@@ -6,9 +6,7 @@ query FilterSector($selectedFilter: String!) @cached {
   }
   schools(
     where: { sector: { _eq: $selectedFilter } }
-    limit: 10
-    offset: 0
-    order_by: { name: asc, quintile: asc }
+    order_by: { name: asc}
   ) {
     id
     name

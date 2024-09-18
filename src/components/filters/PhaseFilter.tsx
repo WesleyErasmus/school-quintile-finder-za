@@ -3,7 +3,6 @@ import { gql, useQuery } from "@apollo/client";
 import FilterPhase from "../../graphql/queries/filter-by-phase-query.graphql";
 import { useDataContext } from "../../contexts/data-context.hook";
 import { FilterOption } from "../../types/FilterOptions";
-import { useCallback } from "react";
 
 const PhaseFilter = () => {
   const {
@@ -11,6 +10,7 @@ const PhaseFilter = () => {
     setSelectedFilter,
     setIsLoadingFilteredData,
     setFilteredData,
+    setTotalCount,
   } = useDataContext();
 
   const FILTER_SCHOOLS_BY_PHASE = gql`
@@ -19,35 +19,31 @@ const PhaseFilter = () => {
 
   const { refetch } = useQuery(FILTER_SCHOOLS_BY_PHASE, {
     variables: {
-      selectedFilter: `%${selectedFilter}%`,
-      skip: !selectedFilter,
+      selectedFilter: selectedFilter,
     },
+    skip: !selectedFilter,
   });
 
-  const handlePhaseFilter = useCallback(
-    (filter: string) => async () => {
-      setIsLoadingFilteredData(true);
-      setSelectedFilter(filter);
+  const handlePhaseFilter = (filter: string) => async () => {
+    setIsLoadingFilteredData(true);
+    setSelectedFilter(filter);
 
-      try {
-        const { data } = await refetch({ selectedFilter: filter });
-        if (data && data.schools) {
-          setFilteredData(data.schools);
-        } else {
-          console.log("No data returned from query");
-          setFilteredData([]);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+    try {
+      const { data } = await refetch({ selectedFilter: filter });
+      if (data && data.schools) {
+        setFilteredData(data.schools);
+        setTotalCount(data.schools_aggregate.aggregate.count);
+      } else {
+        console.log("No data returned from query");
         setFilteredData([]);
-      } finally {
-        setIsLoadingFilteredData(false);
       }
-    },
-    [refetch, setSelectedFilter, setFilteredData, setIsLoadingFilteredData]
-  );
-
-
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setFilteredData([]);
+    } finally {
+      setIsLoadingFilteredData(false);
+    }
+  };
 
   const filterOptions: FilterOption[] = [
     {
