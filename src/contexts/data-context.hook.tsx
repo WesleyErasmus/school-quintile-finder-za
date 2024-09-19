@@ -12,10 +12,6 @@ interface DataContextType {
   setIsLoading: (loading: boolean) => void;
   isLoadingFilteredData: boolean;
   setIsLoadingFilteredData: (loading: boolean) => void;
-  currentPage: number;
-  setCurrentPage: (page: number) => void;
-  itemsPerPage: number;
-  setItemsPerPage: (number: number) => void;
   totalCount: number;
   setTotalCount: (count: number) => void;
 }
@@ -24,12 +20,10 @@ const DataContext = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
-  const [selectedFilter, setSelectedFilter] = useState("")
+  const [selectedFilter, setSelectedFilter] = useState("");
   const [filteredData, setFilteredData] = useState<School[] | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilteredData, setIsLoadingFilteredData] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
   const [totalCount, setTotalCount] = useState(0);
 
   return (
@@ -45,10 +39,6 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setIsLoadingFilteredData,
         isLoading,
         setIsLoading,
-        currentPage,
-        setCurrentPage,
-        itemsPerPage,
-        setItemsPerPage,
         totalCount,
         setTotalCount,
       }}

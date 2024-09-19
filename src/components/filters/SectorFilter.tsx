@@ -20,8 +20,8 @@ const SectorFilter = () => {
   const { refetch } = useQuery(FILTER_SCHOOLS_BY_SECTOR, {
     variables: {
       selectedFilter: selectedFilter,
-      skip: !selectedFilter,
     },
+    skip: !selectedFilter,
   });
 
   const handleSectorFilter = (filter: string) => async () => {

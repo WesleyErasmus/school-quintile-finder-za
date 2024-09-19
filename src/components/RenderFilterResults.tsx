@@ -1,15 +1,22 @@
 import { School } from "../types/School";
 import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
-import { useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import ExcelExport from "../export-to-excel/ExcelExport";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const RenderFilterResults = () => {
-  const { filteredData, isLoadingFilteredData, totalCount } = useDataContext();
+  const { filteredData, isLoadingFilteredData, totalCount, selectedFilter } =
+    useDataContext();
 
   const [searchTerm, setSearchTerm] = useState("");
+  const [displayedItems, setDisplayedItems] = useState(50);
 
-  const searchedData = useMemo(() => {
+  useEffect(() => {
+    setDisplayedItems(50);
+  }, [selectedFilter]);
+
+  const cachedFilteredData = useMemo(() => {
     if (!filteredData) return [];
 
     return filteredData?.filter(
@@ -19,22 +26,19 @@ const RenderFilterResults = () => {
     );
   }, [filteredData, searchTerm]);
 
+  const handleInfiniteScroll = useCallback(() => {
+    setDisplayedItems((prevItems) => prevItems + 50);
+  }, []);
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
+    setDisplayedItems(50);
   };
 
   const clearSearch = () => {
     setSearchTerm("");
+    setDisplayedItems(50);
   };
-
-  const goToBottom = () => {
-    const goToBottom = document.getElementById("go-to-bottom");
-    goToBottom?.scrollIntoView({ behavior: "smooth", block: "start" });
-  };
-
-  setTimeout(() => {
-    goToBottom();
-  }, 1000);
 
   const tableHeadings = [
     "School Name",
@@ -52,10 +56,7 @@ const RenderFilterResults = () => {
       ) : filteredData && filteredData.length > 0 ? (
         <section className="container mx-auto max-w-6xl mb-20">
           <div className="mx-5">
-            <h2
-              id="go-to-bottom"
-              className=" mt-8 text-center font-medium text-gray-700 "
-            >
+            <h2 className="mt-8 text-center font-medium text-gray-700">
               Showing {totalCount} Results
             </h2>
             <div className="sm:flex sm:items-end sm:justify-between">
@@ -109,59 +110,82 @@ const RenderFilterResults = () => {
                   ""
                 )}
               </div>
-              <ExcelExport data={filteredData} fileName={"quintileDataExport"} />
+              <ExcelExport
+                data={filteredData}
+                fileName={"quintileDataExport"}
+              />
             </div>
             <div className="flex flex-col mt-4">
               <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                  <div className="flex-1 overflow-hidden border border-gray-200 md:rounded-lg overflow-y-auto max-h-[75dvh]">
-                    {searchedData.length > 0 ? (
-                      <table className="min-w-full divide-y divide-gray-200 table-fixed px-5">
-                        <thead className="sticky top-0 bg-gray-50">
-                          <tr>
-                            {tableHeadings.map((heading, i) => (
-                              <th
-                                key={i}
-                                scope="col"
-                                className="px-4 py-3.5 text-sm text-left font-normal text-gray-800"
-                              >
-                                {heading}
-                              </th>
-                            ))}
-                          </tr>
-                        </thead>
-                        <tbody className="bg-white divide-y divide-gray-200">
-                          {searchedData?.map(
-                            (school: School, index: number) => (
-                              <tr key={index}>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.name}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.quintile}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.province}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.phase}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.sector}
-                                </td>
-                                <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
-                                  {school.fee_paying}
-                                </td>
-                              </tr>
-                            )
-                          )}
-                        </tbody>
-                      </table>
+                  <div
+                    className="flex-1 overflow-hidden border border-gray-200 md:rounded-lg overflow-y-auto max-h-[65dvh]"
+                    id="scrollableDiv"
+                  >
+                    {cachedFilteredData.length > 0 ? (
+                      <InfiniteScroll
+                        dataLength={displayedItems}
+                        next={handleInfiniteScroll}
+                        hasMore={displayedItems < cachedFilteredData.length}
+                        loader={
+                          <p className="p-4 text-center text-gray-500">
+                            Loading more schools...
+                          </p>
+                        }
+                        scrollableTarget="scrollableDiv"
+                        endMessage={
+                          <p className="p-4 text-center text-gray-500">
+                            No more results to show.
+                          </p>
+                        }
+                      >
+                        <table className="min-w-full divide-y divide-gray-200 table-fixed px-5">
+                          <thead className="sticky top-0 bg-gray-50">
+                            <tr>
+                              {tableHeadings.map((heading, i) => (
+                                <th
+                                  key={i}
+                                  scope="col"
+                                  className="px-4 py-3.5 text-sm text-left font-normal text-gray-800"
+                                >
+                                  {heading}
+                                </th>
+                              ))}
+                            </tr>
+                          </thead>
+                          <tbody className="bg-white divide-y divide-gray-200">
+                            {cachedFilteredData
+                              .slice(0, displayedItems)
+                              .map((school: School, index: number) => (
+                                <tr key={index}>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.name}
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.quintile}
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.province}
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.phase}
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.sector}
+                                  </td>
+                                  <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap">
+                                    {school.fee_paying}
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </InfiniteScroll>
                     ) : (
-                      <div className="p-4 text-center text-gray-500">
+                      <p className="p-4 text-center text-gray-500">
                         No matches found. Try a different filter or use the main
                         search bar.
-                      </div>
+                      </p>
                     )}
                   </div>
                 </div>
