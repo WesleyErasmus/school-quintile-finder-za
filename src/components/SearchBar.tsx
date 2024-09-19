@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
 import { School } from "../types/School";
@@ -11,7 +11,6 @@ const GET_SCHOOL_DATA = gql`
 `;
 
 const SearchBar = () => {
-  // TOP LEVEL OF COMPONENT
   const [searchString, setSearchString] = useState("");
   const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
   const { setSelectedSchool, setFilteredData } = useDataContext();
@@ -20,6 +19,19 @@ const SearchBar = () => {
     fetchPolicy: "cache-first",
   });
   console.log("Apollo data log ", data);
+
+
+  useEffect(() => {
+    if (data?.schools && searchString) {
+      const exactMatch = data.schools.find(
+        (school: School) =>
+          school.name.toLowerCase() === searchString.toLowerCase()
+      );
+      if (exactMatch) {
+        setSuggestedItem(exactMatch);
+      }
+    }
+  }, [searchString, data]);
 
   const handleOnSearch = (string: string, results: School[]) => {
     setSearchString(string);
