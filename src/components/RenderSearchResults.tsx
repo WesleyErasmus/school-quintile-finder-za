@@ -1,5 +1,6 @@
 import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
+import { MdArrowRight } from "react-icons/md";
 
 const RenderSearchResults = () => {
   const { selectedSchool, isLoading, setIsLoading } = useDataContext();
@@ -15,61 +16,70 @@ const RenderSearchResults = () => {
           <Loader />
         </div>
       ) : selectedSchool ? (
-        <div className=" mt-12 mx-auto border border-gray-100 rounded-xl max-w-3xl">
-          <div className="px-5 py-4 bg-gray-100 rounded-t-xl">
-            <h3 className="text-lg font-semibold leading-7 text-gray-900">
-              {selectedSchool.name}
-            </h3>
-            <span className="mt-1 text-sm font-normal leading-6 italic text-pink-500">
-              Quintile:{" "}
-              <span className="text-indigo-600">{selectedSchool.quintile}</span>
-            </span>
-          </div>
-          <div className="px-5 py-3">
-            <dl className="divide-y divide-gray-100">
-              <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-semibold leading-6 text-gray-900">
-                  Province:
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
-                  {selectedSchool.province}
-                </dd>
+        <article className="rounded-xl border border-1 p-4 border-gray-200">
+          <div className="flex justify-between">
+            <div className="flex items-center">
+              <div className="rounded-full bg-indigo-600 text-white w-9 h-9 mr-2 flex items-center justify-center content-center text-sm">
+                Q{selectedSchool.quintile}
               </div>
-              <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-semibold leading-6 text-gray-900">
-                  Sector:
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+              <h4 className="text-xl font-semibold">{selectedSchool.name}</h4>
+            </div>
+            <div className="flex items-center px-5 rounded-full bg-indigo-600 text-white text-xs">
+              Quintile {selectedSchool.quintile}
+            </div>
+          </div>
+
+          <div className="ml-7 px-5 text-sm">
+            <div className="-mt-1 mb-1 text-lg text-indigo-600 font-medium">
+              {selectedSchool.province}
+            </div>
+            <div className="flex items-center">
+              <span className="text-lg">
+                <MdArrowRight />{" "}
+              </span>
+              <p className="font-base">
+                Sector:{" "}
+                <span className="text-indigo-700 font-semibold">
                   {selectedSchool.sector}
-                </dd>
-              </div>
-              <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-semibold leading-6 text-gray-900">
-                  Phase:
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                </span>
+              </p>
+            </div>
+            <div className="flex items-center">
+              <span className="text-lg">
+                <MdArrowRight />{" "}
+              </span>
+              <p className="font-base">
+                Phase:{" "}
+                <span className="text-indigo-700 font-semibold">
                   {selectedSchool.phase}
-                </dd>
-              </div>
-              <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-semibold leading-6 text-gray-900">
-                  Fee Paying:
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                </span>
+              </p>
+            </div>
+            <div className="flex items-center">
+              <span className="text-lg">
+                <MdArrowRight />{" "}
+              </span>
+              <p className="font-base">
+                Fee paying:{" "}
+                <span className="text-indigo-700 font-semibold">
                   {selectedSchool.fee_paying}
-                </dd>
-              </div>
-              <div className="px-4 py-2 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt className="text-sm font-semibold leading-6 text-gray-900">
-                  Street Address:
-                </dt>
-                <dd className="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">
+                </span>
+              </p>
+            </div>
+            <div className="flex items-center">
+              <span className="text-lg">
+                <MdArrowRight />{" "}
+              </span>
+              <p className="font-base">
+                Address:{" "}
+                <span className="text-indigo-700 font-semibold">
                   {selectedSchool.address}
-                </dd>
-              </div>
-            </dl>
+                </span>
+              </p>
+            </div>
           </div>
-        </div>
+          <div className="border-b border-1 mt-5 mx-10 border-gray-200"></div>
+        </article>
       ) : null}
     </>
   );

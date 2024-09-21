@@ -1,8 +1,7 @@
-import FilterDropdowns from "../components/filters/FilterDropdowns";
+import SearchAndFilterSection from "../components/filters/SearchAndFilterSection";
 import Hero from "../components/Hero";
 import RenderFilterResults from "../components/RenderFilterResults";
 import RenderSearchResults from "../components/RenderSearchResults";
-import SearchBar from "../components/SearchBar";
 import { DataProvider } from "../contexts/data-context.hook";
 
 const Home = () => {
@@ -10,8 +9,7 @@ const Home = () => {
     <>
       <DataProvider>
         <Hero />
-        <SearchBar />
-        <FilterDropdowns />
+        <SearchAndFilterSection />
         <RenderSearchResults />
         <RenderFilterResults />
       </DataProvider>

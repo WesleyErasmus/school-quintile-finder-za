@@ -44,8 +44,8 @@ const Dropdown = (props: {
             onClick={toggleDropdown}
             id="dropdown-hover"
             type="button"
-            className="dropdown-toggle inline-flex justify-center items-center gap-2 px-2 py-1 text-xs font-medium text-gray-900 bg-white rounded-lg cursor-pointer text-center shadow-xs transition-all border border-neutral-300 hover:bg-gray-50 shadow-sm"
-            title="Display all schools in a single quintile group"
+            className="dropdown-toggle inline-flex justify-center items-center gap-2 px-3 py-[8px] text-xs font-medium text-gray-900 bg-white rounded-full cursor-pointer text-center shadow-xs transition-all hover:bg-gray-50 shadow-md border border-1 border-gray-150"
+            title="Display all schools in a selected filter group."
           >
             {props.buttonName}
             {!isOpen ? (

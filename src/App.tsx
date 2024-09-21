@@ -1,11 +1,13 @@
-import TopNavbar from "./components/TopNavbar";
+// import TopNavbar from "./components/TopNavbar";
 import Home from "./routes/Home.route";
 
 function App() {
   return (
     <>
-      <TopNavbar />
-      <Home />
+      {/* <TopNavbar /> */}
+      <div className="mx-auto max-w-[1040px]">
+        <Home />
+      </div>
     </>
   );
 }

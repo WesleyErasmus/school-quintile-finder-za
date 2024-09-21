@@ -20,7 +20,6 @@ const SearchBar = () => {
   });
   console.log("Apollo data log ", data);
 
-
   useEffect(() => {
     if (data?.schools && searchString) {
       const exactMatch = data.schools.find(
@@ -89,44 +88,34 @@ const SearchBar = () => {
           <SearchBarLoader />
         </div>
       ) : (
-        <form className="relative max-w-3xl mx-auto" onKeyDown={handleKeyDown}>
-          <div className="absolute transition-all duration-1000 opacity-30 inset-0 bg-gradient-to-r from-[#44BCFF] via-[#FF44EC] to-[#FF675E] rounded-xl blur-lg filter group-hover:opacity-100 group-hover:duration-200"></div>
-          <div className="relative space-y-4 sm:flex sm:space-y-0 sm:items-end">
-            <div className="flex-1">
-              <div>
-                <ReactSearchAutocomplete
-                  styling={{
-                    zIndex: 10,
-                    fontSize: "13px",
-                    color: "#4B5563",
-                    fontFamily:
-                      "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                  }}
-                  className="text-sm"
-                  onSearch={handleOnSearch}
-                  onSelect={handleOnSelect}
-                  onHover={handleOnHover}
-                  inputSearchString={searchString}
-                  items={
-                    searchString.trim().length > 0 ? data?.schools || [] : []
-                  }
-                  fuseOptions={{
-                    keys: ["name"],
-                    threshold: 0.3,
-                    location: 0,
-                    distance: 100,
-                    minMatchCharLength: 3,
-                  }}
-                  formatResult={formatResult}
-                  maxResults={7}
-                  inputDebounce={200}
-                  autoFocus
-                  placeholder="Type here to search for a school"
-                  showNoResultsText="No schools found"
-                />
-              </div>
-            </div>
-          </div>
+        <form onKeyDown={handleKeyDown}>
+          <ReactSearchAutocomplete
+            className="z-10 text-sm rounded-full"
+            styling={{
+              fontSize: "13px",
+              fontFamily:
+                "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+              boxShadow: "none",
+            }}
+            onSearch={handleOnSearch}
+            onSelect={handleOnSelect}
+            onHover={handleOnHover}
+            inputSearchString={searchString}
+            items={searchString.trim().length > 0 ? data?.schools || [] : []}
+            fuseOptions={{
+              keys: ["name"],
+              threshold: 0.3,
+              location: 0,
+              distance: 100,
+              minMatchCharLength: 3,
+            }}
+            formatResult={formatResult}
+            maxResults={7}
+            inputDebounce={200}
+            autoFocus
+            placeholder="Type here to search for a school"
+            showNoResultsText="No schools found"
+          />
         </form>
       )}
     </>
