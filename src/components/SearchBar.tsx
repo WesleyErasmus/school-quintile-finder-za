@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
 import { School } from "../types/School";
-import SearchSchools from "../graphql/queries/get-school-data.graphql";
+import SearchSchools from "../graphql/fetch-school-data.graphql";
 import { useDataContext } from "../contexts/data-context.hook";
 import SearchBarLoader from "./SearchBarLoader";
 
@@ -90,12 +90,13 @@ const SearchBar = () => {
       ) : (
         <form onKeyDown={handleKeyDown}>
           <ReactSearchAutocomplete
-            className="z-10 text-sm rounded-full"
+            className="z-10 text-sm rounded-xl"
             styling={{
               fontSize: "13px",
               fontFamily:
                 "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
               boxShadow: "none",
+              borderRadius: "0.75rem",
             }}
             onSearch={handleOnSearch}
             onSelect={handleOnSelect}

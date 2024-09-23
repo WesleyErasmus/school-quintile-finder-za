@@ -1,11 +1,9 @@
-// import TopNavbar from "./components/TopNavbar";
 import Home from "./routes/Home.route";
 
 function App() {
   return (
     <>
-      {/* <TopNavbar /> */}
-      <div className="mx-auto max-w-[1040px]">
+      <div className="mx-auto max-w-[1280px]">
         <Home />
       </div>
     </>

@@ -1,7 +1,7 @@
 const PageHero = () => {
   return (
     <>
-      <header className="mt-20 mb-10 mx-auto flex flex-wrap justify-between items-end max-w-[1040px] p-4 rounded-xl border border-1 border-gray-200">
+      <header className="mt-5 mb-10 mx-auto flex flex-wrap justify-between items-end max-w-[1280px] p-4 rounded-xl border border-1 border-gray-200">
         {/* Hero Text & Logo */}
         <div className="flex-initial max-w-[545px]">
           <h1 className="text-6xl font-semibold m-2">Quintile Finder SA</h1>
