@@ -88,7 +88,7 @@ const SearchBar = () => {
           <SearchBarLoader />
         </div>
       ) : (
-        <form onKeyDown={handleKeyDown}>
+        <form onKeyDown={handleKeyDown} className="min-w-[275px]">
           <ReactSearchAutocomplete
             className="z-10 text-sm rounded-xl"
             styling={{

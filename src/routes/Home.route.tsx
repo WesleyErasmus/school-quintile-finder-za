@@ -5,10 +5,12 @@ import { DataProvider } from "../contexts/data-context.hook";
 const Home = () => {
   return (
     <>
-      <DataProvider>
+      <div className="p-2">
         <Hero />
-        <SearchAndFilterSection />
-      </DataProvider>
+        <DataProvider>
+          <SearchAndFilterSection />
+        </DataProvider>
+      </div>
     </>
   );
 };

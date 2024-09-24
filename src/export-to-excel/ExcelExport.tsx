@@ -21,10 +21,10 @@ const ExcelExport = (props: ExcelExport) => {
   };
 
   return (
-    <div className="flex items-center mt-4 gap-x-3">
+    <div>
       <button
         onClick={exportToExcel}
-        className="flex items-center justify-center w-1/2 px-5 py-2 text-sm tracking-wide text-white transition-colors duration-200 bg-gray-900 rounded-lg sm:w-auto gap-x-2 hover:bg-gray-600"
+        className="flex items-center px-5 py-1.5 border border-1 border-gray-900 text-sm tracking-wide text-white bg-gray-900 rounded-lg gap-x-2 hover:bg-gray-600"
       >
         <svg
           width="17"

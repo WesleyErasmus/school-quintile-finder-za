@@ -16,7 +16,7 @@ const RenderSearchResults = () => {
           <Loader />
         </div>
       ) : selectedSchool ? (
-        <article className="rounded-xl border border-1 p-4 border-gray-200">
+        <div className="mt-4 rounded-xl border border-1 p-4 border-gray-200">
           <div className="flex justify-between">
             <div className="flex items-center">
               <div className="rounded-full bg-indigo-600 text-white w-9 h-9 mr-2 flex items-center justify-center content-center text-sm">
@@ -79,7 +79,7 @@ const RenderSearchResults = () => {
             </div>
           </div>
           <div className="border-b border-1 mt-5 mx-10 border-gray-200"></div>
-        </article>
+        </div>
       ) : null}
     </>
   );

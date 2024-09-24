@@ -1,51 +1,47 @@
+import InformationCard from "./InformationCard";
+
 const PageHero = () => {
   return (
     <>
-      <header className="mt-5 mb-10 mx-auto flex flex-wrap justify-between items-end max-w-[1280px] p-4 rounded-xl border border-1 border-gray-200">
-        {/* Hero Text & Logo */}
-        <div className="flex-initial max-w-[545px]">
-          <h1 className="text-6xl font-semibold m-2">Quintile Finder SA</h1>
-          <p className="text-base my-3 mx-5 text-gray-600">
-            A tool to help you access South African schools quintile data with
-            ease.
-          </p>
-        </div>
-        {/* Hero Cards */}
-        <div className="">
-          <article className="flex items-center justify-start py-4 px-3 mb-4 rounded-xl bg-white shadow-lg">
+      <div className="container max-w-[1230px] flex justify-end">
+        <header className="mt-10 mb-5 flex flex-wrap justify-between items-center w-full max-w-[976px]">
+          {/* Hero Text & Logo */}
+          <div className="flex items-center">
             <div>
               <img
+                className="w-[8rem] h-[8rem]"
                 src="../public/assets/nav-logo.png"
-                className="w-8 mr-4"
-                alt="Card icon"
+                alt="Nav Logo"
               />
             </div>
-            <div>
-              <h4 className="text-xs font-bold">What is a school quintile</h4>
-              <p className="text-[10px] text-gray-800">
-                Lorem ipsum dolor sit amet dolor sit amet.
+            <div className="flex-initial max-w-[445px]">
+              <h1 className="lg:text-5xl text-3xl font-bold m-2">
+                Quintile Finder SA
+              </h1>
+              <p className="text-base my-3 mx-3 text-gray-600">
+                A tool to help you access South African schools quintile
+                <span className="font-bold">
+                  {" "}
+                  data with ease.
+                </span>
               </p>
             </div>
-          </article>
-          <article className="flex items-center justify-start py-4 px-3 mb-4 rounded-xl bg-white shadow-lg">
-            <div>
-              <img
-                src="../public/assets/nav-logo.png"
-                className="w-8 mr-4"
-                alt="Card icon"
-              />
-            </div>
-            <div>
-              <h4 className="text-xs font-bold">
-                Quintile data required by gov
-              </h4>
-              <p className="text-[10px] text-gray-800">
-                Lorem ipsum, dolor sit amet consectetur.
-              </p>
-            </div>
-          </article>
-        </div>
-      </header>
+          </div>
+          {/* Hero Cards */}
+          <div className="flex sm:flex-row md:flex-col gap-y-2">
+            <InformationCard
+              cardImage={"../public/assets/what-is-image.png"}
+              title={"What is a school quintile"}
+              subtitle={"Lorem ipsum dolor sit amet dolor sit amet."}
+            />
+            <InformationCard
+              cardImage={"../public/assets/gov-logo-sm.png"}
+              title={"Quintile data required by gov"}
+              subtitle={"Lorem ipsum, dolor sit amet consectetur."}
+            />
+          </div>
+        </header>
+      </div>
     </>
   );
 }
