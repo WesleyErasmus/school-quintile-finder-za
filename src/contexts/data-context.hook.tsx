@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { School } from "../types/School";
+import { School } from "../types/SchoolTypes";
 
 interface DataContextType {
   selectedSchool: School | null;

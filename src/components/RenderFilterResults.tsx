@@ -1,4 +1,4 @@
-import { School } from "../types/School";
+import { School } from "../types/SchoolTypes";
 import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
 import { useCallback, useEffect, useMemo, useState } from "react";

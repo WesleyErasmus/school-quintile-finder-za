@@ -6,11 +6,11 @@ interface InformationCard {
 
 const InformationCard = (props: InformationCard) => {
   return (
-    <article className="flex items-center justify-start w-full py-4 px-3 rounded-xl bg-white border border-1 border-gray-200">
+    <article className="flex items-center justify-start w-full shadow-sm py-2 px-3 rounded-xl bg-white border border-1 border-gray-200">
       <div>
         <img
           src={props.cardImage}
-          className="w-8 mr-3"
+          className="w-14 mr-3"
           alt="Card Image"
         />
       </div>

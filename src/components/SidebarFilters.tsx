@@ -13,7 +13,12 @@ import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useDataContext } from "../contexts/data-context.hook";
 import FilterSchools from "../graphql/fetch-by-filter.graphql";
 import { gql, useQuery } from "@apollo/client";
-import { MdFilterListAlt } from "react-icons/md";
+import {
+  FilterKey,
+  Filters,
+  filterOptions,
+  GraphQLFilters,
+} from "../types/FilterTypes";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -24,7 +29,7 @@ export default function SidebarFilter() {
     useDataContext();
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [filters, setFilters] = useState({
+  const [filters, setFilters] = useState<Filters>({
     quintile: [],
     sector: [],
     province: [],
@@ -39,11 +44,15 @@ export default function SidebarFilter() {
     skip: true,
   });
 
-  const hasActiveFilters = (filters) => {
+  const hasActiveFilters = (filters: Filters) => {
     return Object.values(filters).some((filter) => filter.length > 0);
   };
 
-  const handleFilterChange = (filterType, value, isChecked) => {
+  const handleFilterChange = (
+    filterType: FilterKey,
+    value: string,
+    isChecked: boolean
+  ) => {
     setSelectedSchool(null);
     setFilters((prevFilters) => {
       const updatedFilters = { ...prevFilters };
@@ -64,7 +73,7 @@ export default function SidebarFilter() {
     const fetchFilteredData = async () => {
       setIsLoadingFilteredData(true);
       try {
-        const graphqlFilters = {};
+        const graphqlFilters: GraphQLFilters = {};
         Object.entries(filters).forEach(([key, values]) => {
           if (values.length > 0) {
             graphqlFilters[key] = { _in: values };
@@ -101,78 +110,78 @@ export default function SidebarFilter() {
     setTotalCount,
   ]);
 
-  const filterOptions = [
-    {
-      id: "quintile",
-      name: "Quintile",
-      options: [
-        { value: "1", label: "Quintile 1", checked: false },
-        { value: "2", label: "Quintile 2", checked: false },
-        { value: "3", label: "Quintile 3", checked: false },
-        { value: "4", label: "Quintile 4", checked: false },
-        { value: "5", label: "Quintile 5", checked: false },
-      ],
-    },
-    {
-      id: "province",
-      name: "Province",
-      options: [
-        { value: "Eastern Cape", label: "Eastern Cape", checked: false },
-        { value: "Free State", label: "Free State", checked: false },
-        { value: "Gauteng", label: "Gauteng", checked: false },
-        { value: "KwaZulu-Natal", label: "KwaZulu-Natal", checked: false },
-        { value: "Limpopo", label: "Limpopo", checked: false },
-        { value: "Mpumalanga", label: "Mpumalanga", checked: false },
-        { value: "Northern Cape", label: "Northern Cape", checked: false },
-        { value: "North-West", label: "North-West", checked: false },
-        { value: "Western Cape", label: "Western Cape", checked: false },
-      ],
-    },
-    {
-      id: "phase",
-      name: "Phase",
-      options: [
-        {
-          value: "Pre-Primary School",
-          label: "Pre-Primary Schools",
-          checked: false,
-        },
-        { value: "Primary School", label: "Primary Schools", checked: false },
-        {
-          value: "Intermediate Schools",
-          label: "Intermediate Schools",
-          checked: false,
-        },
-        {
-          value: "Secondary School",
-          label: "Secondary School",
-          checked: false,
-        },
-        {
-          value: "Combined School",
-          label: "Combined Schools",
-          checked: false,
-        },
-        {
-          value: "Specialized School",
-          label: "Specialized Schools",
-          checked: false,
-        },
-      ],
-    },
-    {
-      id: "sector",
-      name: "Sector",
-      options: [
-        { value: "Public", label: "Public Schools", checked: false },
-        {
-          value: "Independent",
-          label: "Independent Schools",
-          checked: false,
-        },
-      ],
-    },
-  ];
+  // const filterOptions = [
+  //   {
+  //     id: "quintile",
+  //     name: "Quintile",
+  //     options: [
+  //       { value: "1", label: "Quintile 1", checked: false },
+  //       { value: "2", label: "Quintile 2", checked: false },
+  //       { value: "3", label: "Quintile 3", checked: false },
+  //       { value: "4", label: "Quintile 4", checked: false },
+  //       { value: "5", label: "Quintile 5", checked: false },
+  //     ],
+  //   },
+  //   {
+  //     id: "province",
+  //     name: "Province",
+  //     options: [
+  //       { value: "Eastern Cape", label: "Eastern Cape", checked: false },
+  //       { value: "Free State", label: "Free State", checked: false },
+  //       { value: "Gauteng", label: "Gauteng", checked: false },
+  //       { value: "KwaZulu-Natal", label: "KwaZulu-Natal", checked: false },
+  //       { value: "Limpopo", label: "Limpopo", checked: false },
+  //       { value: "Mpumalanga", label: "Mpumalanga", checked: false },
+  //       { value: "Northern Cape", label: "Northern Cape", checked: false },
+  //       { value: "North-West", label: "North-West", checked: false },
+  //       { value: "Western Cape", label: "Western Cape", checked: false },
+  //     ],
+  //   },
+  //   {
+  //     id: "phase",
+  //     name: "Phase",
+  //     options: [
+  //       {
+  //         value: "Pre-Primary School",
+  //         label: "Pre-Primary Schools",
+  //         checked: false,
+  //       },
+  //       { value: "Primary School", label: "Primary Schools", checked: false },
+  //       {
+  //         value: "Intermediate Schools",
+  //         label: "Intermediate Schools",
+  //         checked: false,
+  //       },
+  //       {
+  //         value: "Secondary School",
+  //         label: "Secondary School",
+  //         checked: false,
+  //       },
+  //       {
+  //         value: "Combined School",
+  //         label: "Combined Schools",
+  //         checked: false,
+  //       },
+  //       {
+  //         value: "Specialized School",
+  //         label: "Specialized Schools",
+  //         checked: false,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     id: "sector",
+  //     name: "Sector",
+  //     options: [
+  //       { value: "Public", label: "Public Schools", checked: false },
+  //       {
+  //         value: "Independent",
+  //         label: "Independent Schools",
+  //         checked: false,
+  //       },
+  //     ],
+  //   },
+  // ];
 
   return (
     <>
@@ -270,11 +279,11 @@ export default function SidebarFilter() {
       <button
         type="button"
         onClick={() => setMobileFiltersOpen(true)}
-        className="flex items-center text-gray-600 rounded-full border border-1 border-gray-200 px-5 py-2 hover:bg-gray-100 mx-4 lg:hidden"
+        className="w-full text-sm text-white font-semibold tracking-wide rounded-xl bg-gray-800 border border-1 border-gray-200 px-5 py-3 hover:bg-gray-700 lg:hidden"
       >
-        <MdFilterListAlt className="w-5 h-5 mr-1" />
-        Filter
+        Select a Filter
       </button>
+
       <div className="hidden lg:block sticky mr-2 top-0">
         <div className="w-[230px] overflow-y-auto overflow-x-hidden h-[95dvh]">
           {/* Filters */}

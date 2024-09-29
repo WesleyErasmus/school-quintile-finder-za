@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
-import { School } from "../types/School";
+import { School } from "../types/SchoolTypes";
 import SearchSchools from "../graphql/fetch-school-data.graphql";
 import { useDataContext } from "../contexts/data-context.hook";
 import SearchBarLoader from "./SearchBarLoader";
@@ -71,10 +71,10 @@ const SearchBar = () => {
           Quintile:{" "}
           <span className="text-indigo-600 text-xs ml-1">{item.quintile}</span>
         </span>
-        <span className="ml-1 italic inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
+        {/* <span className="ml-1 italic inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
           {" "}
           {item.province}
-        </span>
+        </span> */}
       </span>
     </>
   );
@@ -82,44 +82,46 @@ const SearchBar = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <>
+    <div className="">
       {loading ? (
         <div>
           <SearchBarLoader />
         </div>
       ) : (
-        <form onKeyDown={handleKeyDown} className="min-w-[275px]">
-          <ReactSearchAutocomplete
-            className="z-10 text-sm rounded-xl"
-            styling={{
-              fontSize: "13px",
-              fontFamily:
-                "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-              boxShadow: "none",
-              borderRadius: "0.75rem",
-            }}
-            onSearch={handleOnSearch}
-            onSelect={handleOnSelect}
-            onHover={handleOnHover}
-            inputSearchString={searchString}
-            items={searchString.trim().length > 0 ? data?.schools || [] : []}
-            fuseOptions={{
-              keys: ["name"],
-              threshold: 0.3,
-              location: 0,
-              distance: 100,
-              minMatchCharLength: 3,
-            }}
-            formatResult={formatResult}
-            maxResults={7}
-            inputDebounce={200}
-            autoFocus
-            placeholder="Type here to search for a school"
-            showNoResultsText="No schools found"
-          />
-        </form>
+        <div>
+          {/* <form onKeyDown={handleKeyDown} className="min-w-[275px]"> */}
+          <form onKeyDown={handleKeyDown} className="min-w-[275px]">
+            <ReactSearchAutocomplete
+              className="z-10 text-sm rounded-xl"
+              styling={{
+                fontSize: "13px",
+                fontFamily:
+                  "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+                boxShadow: "none",
+                borderRadius: "0.75rem",
+              }}
+              onSearch={handleOnSearch}
+              onSelect={handleOnSelect}
+              onHover={handleOnHover}
+              inputSearchString={searchString}
+              items={searchString.trim().length > 0 ? data?.schools || [] : []}
+              fuseOptions={{
+                keys: ["name"],
+                threshold: 0.3,
+                location: 0,
+                distance: 100,
+                minMatchCharLength: 3,
+              }}
+              formatResult={formatResult}
+              maxResults={7}
+              inputDebounce={200}
+              placeholder="Type here to search for a school"
+              showNoResultsText="No schools found"
+            />
+          </form>
+        </div>
       )}
-    </>
+    </div>
   );
 };
 
