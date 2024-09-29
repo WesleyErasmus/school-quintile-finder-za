@@ -5,7 +5,7 @@ import { DataProvider } from "../contexts/data-context.hook";
 const Home = () => {
   return (
     <>
-      <div className="p-2">
+      <div className="p-4">
         <Hero />
         <DataProvider>
           <SearchAndFilterSection />

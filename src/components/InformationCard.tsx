@@ -6,17 +6,17 @@ interface InformationCard {
 
 const InformationCard = (props: InformationCard) => {
   return (
-    <article className="flex items-center justify-start py-4 px-3 rounded-xl bg-white border border-1 border-gray-200">
+    <article className="flex items-center justify-start w-full py-4 px-3 rounded-xl bg-white border border-1 border-gray-200">
       <div>
         <img
           src={props.cardImage}
-          className="w-8 mr-4"
+          className="w-8 mr-3"
           alt="Card Image"
         />
       </div>
       <div>
-        <h4 className="text-xs font-bold">{props.title}</h4>
-        <p className="text-[10px] text-gray-800">
+        <h4 className="text-sm font-bold">{props.title}</h4>
+        <p className="text-xs font-medium text-gray-600">
           {props.subtitle}
         </p>
       </div>
