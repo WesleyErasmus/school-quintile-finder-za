@@ -92,13 +92,15 @@ const SearchBar = () => {
           {/* <form onKeyDown={handleKeyDown} className="min-w-[275px]"> */}
           <form onKeyDown={handleKeyDown} className="min-w-[275px]">
             <ReactSearchAutocomplete
-              className="z-10 text-sm rounded-xl"
+              className="z-10 text-sm rounded-xl border border-1 border-gray-300"
               styling={{
                 fontSize: "13px",
                 fontFamily:
                   "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                 boxShadow: "none",
                 borderRadius: "0.75rem",
+                border: "none",
+                placeholderColor: "#000000",
               }}
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}

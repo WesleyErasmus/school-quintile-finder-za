@@ -7,15 +7,18 @@ import SidebarFilters from "../SidebarFilters";
 const SearchAndFilterSection = () => {
   return (
     <div className="mb-[100px]">
-      <section className="bg-green-100 pb-16 p-4">
+      <section className="pb-16 p-4">
         <div className="md:hidden pt-16 sm:mt-0">
-          <h1 className="text-2xl font-bold">Search for Schools</h1>
+          <span className="inline-flex items-center rounded-lg bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10">
+            Search and Filter
+         
+          </span>
+          <h1 className="mt-6 text-3xl font-extrabold">Search for Schools</h1>
           <p className="text-sm mt-6 text-gray-600">
-            Use the below search bar to search for schools and then select the
-            school to display the school data.
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Possimus, repellendus.
           </p>
         </div>
-        <div className="flex flex-col md:flex-row-reverse md:items-start gap-2 mt-8">
+        <div className="flex flex-col md:flex-row-reverse md:items-start gap-4 mt-8">
           <div className="w-full">
             <SearchBar />
           </div>
