@@ -6,18 +6,19 @@ const PageHero = () => {
       <div className="">
         <div className="p-4 flex items-center">
           <img
-            className="w-[125px] h-auto"
-            src="../../public/assets/logo-1-t_1.png"
+            className="w-[135px] h-auto"
+            // src="https://i.postimg.cc/6q9r1RDx/header-logo.png"
+            src="../../public/assets/header-logo-6.png"
             alt="Logo"
           />
         </div>
-        <div className="p-4 pt-16 max-w-[1230px] flex justify-end">
+        <div className="px-4 pt-16 max-w-[1230px] flex justify-end">
           <header className="mb-5 flex flex-wrap justify-between items-center w-full max-w-[960px]">
             {/* Hero Text & Logo */}
 
             {/* Badge */}
             <span className="inline-flex items-center rounded-lg bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10">
-              Simplifying your quintile search
+              Simplify your quintile search
             </span>
             <div className="mt-8 flex items-center">
               <div className="flex-initial max-w-[445px]">

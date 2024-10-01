@@ -1,3 +1,4 @@
+import '../styles/search-bar.css'
 import { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
@@ -63,19 +64,24 @@ const SearchBar = () => {
   const formatResult = (item: School) => (
     <>
       <span className="hidden">{item.id}</span>
-      <span style={{ display: "block", textAlign: "left", cursor: "pointer" }}>
-        {item.name}
-
-        <span className="ml-1 italic inline-flex items-center rounded-md bg-indigo-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
-          {" "}
-          Quintile:{" "}
-          <span className="text-indigo-600 text-xs ml-1">{item.quintile}</span>
-        </span>
-        {/* <span className="ml-1 italic inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-normal text-pink-500 ring-1 ring-inset ring-blue-700/10">
-          {" "}
-          {item.province}
-        </span> */}
-      </span>
+      <div>
+        <div>
+          <p className="font-normal text-gray-900">{item.name}</p>
+        </div>
+        <div>
+          <span className="inline-flex items-center rounded-lg bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10">
+            Quintile level {item.quintile}{" "}
+            <svg
+              viewBox="0 0 2 2"
+              aria-hidden="true"
+              className="mx-2 inline h-0.5 w-0.5 fill-current"
+            >
+              <circle r={1} cx={1} cy={1} />
+            </svg>{" "}
+            {item.province}
+          </span>
+        </div>
+      </div>
     </>
   );
 
@@ -89,18 +95,15 @@ const SearchBar = () => {
         </div>
       ) : (
         <div>
-          {/* <form onKeyDown={handleKeyDown} className="min-w-[275px]"> */}
           <form onKeyDown={handleKeyDown} className="min-w-[275px]">
             <ReactSearchAutocomplete
-              className="z-10 text-sm rounded-xl border border-1 border-gray-300"
+              className="search-bar-input z-10 text-sm text-gray-900 rounded-xl"
               styling={{
                 fontSize: "13px",
                 fontFamily:
                   "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                boxShadow: "none",
                 borderRadius: "0.75rem",
-                border: "none",
-                placeholderColor: "#000000",
+                // placeholderColor: "#000000",
               }}
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}

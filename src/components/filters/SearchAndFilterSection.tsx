@@ -7,7 +7,7 @@ import SidebarFilters from "../SidebarFilters";
 const SearchAndFilterSection = () => {
   return (
     <div className="mb-[100px]">
-      <section className="pb-16 p-4">
+      <section className="pb-16 px-4">
         <div className="md:hidden pt-16 sm:mt-0">
           <span className="inline-flex items-center rounded-lg bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10">
             Search and Filter
