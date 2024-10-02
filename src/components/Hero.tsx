@@ -6,9 +6,9 @@ const PageHero = () => {
       <div className="">
         <div className="p-4 flex items-center">
           <img
-            className="w-[135px] h-auto"
+            className="w-[185px] h-auto"
             // src="https://i.postimg.cc/6q9r1RDx/header-logo.png"
-            src="../../public/assets/header-logo-6.png"
+            src="./assets/header-logo-4.png"
             alt="Logo"
           />
         </div>
