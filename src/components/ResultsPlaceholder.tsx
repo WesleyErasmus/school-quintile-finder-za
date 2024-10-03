@@ -1,15 +1,15 @@
+import { BuildingLibraryIcon } from "@heroicons/react/24/outline";
+
 const ResultsPlaceholder = () => {
   return (
-    <div className="m-4 bg-gradient-to-r from-indigo-50 from-10% via-indigo-50 via-50% to-indigo-100 to-90% shadow-sm flex rounded-xl py-8 px-4 max-w-xl flex-col items-start justify-between">
-      <div className="group relative">
-        {/* <div className=" left-0 top-0 flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
-            T
-          </div> */}
-        <h3 className="flex mb-4 text-lg font-semibold leading-6 text-indigo-500">
-          <div>
-            <span className="absolute inset-0" />
-            Your search and filter results will display here
-          </div>
+    <div className="m-4 bg-gradient-to-r from-orange-100 from-10% via-orange-50 via-30% to-yellow-0 to-90% shadow-sm rounded-xl py-8 px-4 max-w-xl border border-1 border-yellow-100 text-center flex items-center flex-col">
+      {/* Icon */}
+      <div className=" left-0 top-0 flex h-10 w-10 items-center justify-center shadow-lg shadow-orange-200 p-2 rounded-full mb-4 bg-orange-500 text-white opacity-30">
+        <BuildingLibraryIcon />
+      </div>
+      <div>
+        <h3 className="mb-4 text-lg font-semibold leading-6 text-gray-600">
+          Your search and filter results will display here
         </h3>
         <p className="mt-3 text-xs leading-6 text-gray-500">
           Try using the search bar to find a specific school that you are
@@ -18,11 +18,6 @@ const ResultsPlaceholder = () => {
           search through and export
         </p>
       </div>
-      {/* <div className="relative mt-3 flex items-center gap-x-4">
-        <button className="text-indigo-600 font-semibold">
-          Learn more {`->`}
-        </button>
-      </div> */}
     </div>
   );
 }
