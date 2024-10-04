@@ -5,7 +5,7 @@ import { useQuery, gql } from "@apollo/client";
 import { School } from "../types/SchoolTypes";
 import SearchSchools from "../graphql/fetch-school-data.graphql";
 import { useDataContext } from "../contexts/data-context.hook";
-import SearchBarLoader from "./SearchBarLoader";
+import LoaderSearchBar from "./LoaderSearchBar";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -91,20 +91,23 @@ const SearchBar = () => {
     <div className="">
       {loading ? (
         <div>
-          <SearchBarLoader />
+          <LoaderSearchBar />
         </div>
       ) : (
         <div>
           <form onKeyDown={handleKeyDown} className="min-w-[275px]">
             <ReactSearchAutocomplete
-              className="search-bar-input z-10 text-sm text-gray-900 rounded-xl"
+              className="search-bar-input z-10 font-medium text-sm text-gray-900 rounded-xl"
               styling={{
-                fontSize: "13px",
+                fontSize: "0.875rem",
                 fontFamily:
                   "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                 borderRadius: "0.75rem",
-                // placeholderColor: "#000000",
+                placeholderColor: "#1f2937",
+                border: "2px solid #4f46e5",
+                boxShadow: "#a5b4fc 0px 2px 10px 2px",
               }}
+              // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
               onSearch={handleOnSearch}
               onSelect={handleOnSelect}
               onHover={handleOnHover}
@@ -120,7 +123,7 @@ const SearchBar = () => {
               formatResult={formatResult}
               maxResults={7}
               inputDebounce={200}
-              placeholder="Type here to search for a school"
+              placeholder="Search by school name for quintile data"
               showNoResultsText="No schools found"
             />
           </form>

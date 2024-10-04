@@ -1,20 +1,21 @@
 import { School } from "../types/SchoolTypes";
 import { useDataContext } from "../contexts/data-context.hook";
-import Loader from "./Loader";
+// import Loader from "./Loader";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ExcelExport from "../export-to-excel/ExcelExport";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
+// import LoaderFullPage from "./LoaderFullPage";
 
 const RenderFilterResults = () => {
-  const { filteredData, isLoadingFilteredData, totalCount, selectedFilter } =
-    useDataContext();
+  const { filteredData, totalCount, selectedFilter } = useDataContext();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
 
-useEffect(() => {
-  setDisplayedItems(50);
-}, [selectedFilter, filteredData]);
+  useEffect(() => {
+    setDisplayedItems(50);
+  }, [selectedFilter, filteredData]);
 
   const cachedFilteredData = useMemo(() => {
     if (!filteredData) return [];
@@ -42,119 +43,78 @@ useEffect(() => {
 
   return (
     <>
-      {isLoadingFilteredData ? (
-        <Loader />
-      ) : filteredData && filteredData.length > 0 ? (
-        <section className="container">
-          <h2 className="mt-5 text-center font-medium text-gray-700">
-            Showing {totalCount} Results
-          </h2>
-          <div className="sticky top-0 bg-white">
+      {filteredData && filteredData.length > 0 ? (
+        <section className="mt-16">
+          <h1 className="px-2 pt-16 text-3xl font-extrabold bg-gradient-to-b from-indigo-100 from-10% via-indigo-50 via-50% to-indigo-50 to-90%">
+            <span className="text-indigo-600">Filter</span> Results
+          </h1>
+          <div className="z-40 pt-6 sticky top-[70px] bg-gradient-to-t from-indigo-100 from-10% via-indigo-50 via-50% to-indigo-50 to-90% shadow-sm">
+            {/* Banner */}
+            <div className="pb-2 px-2 pt-2 flex flex-wrap items-center justify-between gap-x-4">
+              <p className="text-md leading-6 text-gray-900">
+                <strong className="font-semibold text-indigo-600">
+                  {totalCount}
+                  <span className="text-gray-900 font-medium">
+                    <svg
+                      viewBox="0 0 2 2"
+                      aria-hidden="true"
+                      className="mx-2 inline h-0.5 w-0.5 fill-current"
+                    >
+                      <circle r={1} cx={1} cy={1} />
+                    </svg>
+                    Results
+                  </span>
+                </strong>
+              </p>
+              <div className="flex gap-2">
+                <a
+                  href="#"
+                  className="flex-none rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm"
+                >
+                  Filters
+                </a>
+                <a
+                  href="#"
+                  className="flex-none rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm"
+                >
+                  Clear Filters
+                </a>
+              </div>
+            </div>
             {/* Search & Export button container */}
-            <div className="sm:flex sm:items-end pb-1 sm:justify-start lg:justify-between w-full">
-              <div className="relative flex items-center mt-4 md:mt-0">
+            <div className="flex items-end justify-between gap-4 px-2 mt-2 bg-white py-2">
+              {/* Search bar */}
+              <div className="relative w-full flex items-center">
                 <span className="absolute">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-5 h-5 mx-3 text-gray-400"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                    />
-                  </svg>
+                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-400" />
                 </span>
 
                 <input
                   value={searchTerm}
                   onChange={handleSearch}
                   type="text"
-                  placeholder="Search filtered data here"
-                  className="block w-full py-1.5 pr-5 text-sm text-gray-700 bg-white border border-gray-200 rounded-lg md:w-80 placeholder-gray-400/70 pl-11 focus:border-gray-400 focus:ring-gray-300 focus:outline-none focus:ring focus:ring-opacity-40 max-w-[275px]"
+                  placeholder="Search results by school name"
+                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-700 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-indigo-600 sm:max-w-[295px]"
                 />
                 {searchTerm ? (
                   <a
                     onClick={clearSearch}
-                    className="relative p-1 -left-8 cursor-pointer text-gray-500 ring-black active:text-gray-300"
+                    className="relative p-1 -left-8 cursor-pointer text-gray-400 active:ring-1 active:ring-gray-900 rounded-full"
                   >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M6 18L18 6M6 6l12 12"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
+                    <XMarkIcon aria-hidden="true" className="h-5 w-5" />
                   </a>
                 ) : (
                   ""
                 )}
               </div>
+              {/* End of search bar */}
               <ExcelExport
                 data={filteredData}
                 fileName={"quintileDataExport"}
               />
             </div>
-            <div className="overflow-hidden overflow-y-auto min-w-[788px]">
-              <thead className="table-fixed block w-full bg-gray-200">
-                <tr>
-                  <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 min-w-[205px]">
-                    School Name
-                  </th>
-                  <th className="px-4 py-3.5 text-sm text-center font-normal whitespace-nowrap text-gray-800 w-1/5">
-                    Quintile
-                  </th>
-                  <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                    Province
-                  </th>
-                  <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                    Phase
-                  </th>
-                  <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                    Sector
-                  </th>
-                  <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                    Fee Paying
-                  </th>
-                </tr>
-              </thead>
-            </div>
           </div>
-          <div className="overflow-hidden border border-gray-200 overflow-y-auto min-w-[788px]">
-            {/* <thead className="table-fixed block w-full sticky top-0 bg-gray-50">
-              <tr>
-                <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 min-w-[205px]">
-                  School Name
-                </th>
-                <th className="px-4 py-3.5 text-sm text-center font-normal whitespace-nowrap text-gray-800 w-1/5">
-                  Quintile
-                </th>
-                <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                  Province
-                </th>
-                <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                  Phase
-                </th>
-                <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                  Sector
-                </th>
-                <th className="px-4 py-3.5 text-sm text-left font-normal whitespace-nowrap text-gray-800 w-1/5">
-                  Fee Paying
-                </th>
-              </tr>
-            </thead> */}
+          <div className="z-10">
             {cachedFilteredData.length > 0 ? (
               <InfiniteScroll
                 dataLength={displayedItems}
@@ -171,28 +131,50 @@ useEffect(() => {
                   </p>
                 }
               >
-                <table className="table-fixed overflow-hidden w-full">
-                  <tbody className="bg-white divide-y divide-gray-200">
+                <table className="table-auto w-full">
+                  <thead className="border-b border-gray-400 bg-white">
+                    <tr>
+                      <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                        School
+                      </th>
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                        Quintile
+                      </th>
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                        Province
+                      </th>
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                        Phase
+                      </th>
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                        Sector
+                      </th>
+                      <th className="px-4 py-3 text-sm text-left font-semibold text-nowrap text-gray-600">
+                        Fee Paying
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="bg-white divide-y divide-gray-100">
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index}>
-                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-wrap w-[205px]">
+                        <tr key={index} className="odd:bg-indigo-50">
+                          <td className="pl-5 pr-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
                             {school.name}
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-500 text-center whitespace-nowrap w-1/5">
+                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
                             {school.quintile}
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-wrap w-1/5">
+                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
                             {school.province}
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-wrap min-w-[108px] w-1/5">
+                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
                             {school.phase}
                           </td>
-                          <td className="px-3.5 text-sm text-gray-500 whitespace-nowrap w-1/5">
-                            {school.sector}
+                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
+                            {school.sector} School
                           </td>
-                          <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap w-1/5">
+                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
                             {school.fee_paying}
                           </td>
                         </tr>

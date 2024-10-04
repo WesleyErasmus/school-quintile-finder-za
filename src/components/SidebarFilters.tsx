@@ -180,7 +180,7 @@ export default function SidebarFilter() {
                       </DisclosureButton>
                     </h3>
                     <DisclosurePanel className="pt-6">
-                      <div className="space-y-6">
+                      <div className="space-y-4 sm:space-y-6">
                         {section.options.map((option, optionIdx) => (
                           <div key={option.value} className="flex items-center">
                             <input
@@ -203,7 +203,7 @@ export default function SidebarFilter() {
                             />
                             <label
                               htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                              className="ml-3 min-w-0 flex-1 text-sm text-gray-900"
+                              className="ml-3 min-w-0 flex-1 text-gray-900"
                             >
                               {option.label}
                             </label>
@@ -217,14 +217,14 @@ export default function SidebarFilter() {
               <div className="sticky bottom-0 border-t border-1 border-slate-300 py-6 px-4 flex justify-between gap-4 bg-white">
                 <button
                   onClick={clearFilters}
-                  className="w-1/2 text-xs  font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2"
+                  className="w-1/2 text-xs  font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2 active:ring-1 active:ring-gray-900"
                 >
                   CLEAR FILTERS
                 </button>
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="w-1/2 text-xs font-medium tracking-wide rounded-lg text-white bg-indigo-600 px-4 py-2"
+                  className="w-1/2 text-xs font-medium tracking-wide rounded-lg text-white bg-indigo-600 px-4 py-2 active:ring-1 active:ring-indigo-900"
                 >
                   DONE
                 </button>
@@ -241,14 +241,15 @@ export default function SidebarFilter() {
         onClick={() => setMobileFiltersOpen(true)}
         className="w-full text-sm text-white font-semibold tracking-wide rounded-xl bg-indigo-600 border border-1 border-gray-200 shadow-sm px-5 py-3 hover:bg-indigo-500 lg:hidden"
       >
-        Select a Filter
+        Generate Custom Data Table
       </button>
 
       {/* Desktop filters */}
       <div className="hidden lg:block sticky mr-2 top-0">
         <div className="w-[230px] overflow-y-auto overflow-x-hidden h-[95dvh]">
           {/* Filters */}
-          <form className="px-3 border-r border-b border-1 border-gray-200">
+          <form className="px-3 border-r border-1 border-gray-200">
+            <h1 className="py-4 border-b border-gray-400 font-semibold">Filter Options</h1>
             {filterOptions.map((section) => (
               <Disclosure
                 key={section.id}
@@ -282,7 +283,7 @@ export default function SidebarFilter() {
                           id={`filter-${section.id}-${optionIdx}`}
                           name={`${section.id}[]`}
                           type="checkbox"
-                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500"
                           onChange={(e) =>
                             handleFilterChange(
                               section.id,
@@ -294,7 +295,7 @@ export default function SidebarFilter() {
                         />
                         <label
                           htmlFor={`filter-${section.id}-${optionIdx}`}
-                          className="ml-3 text-sm text-gray-600"
+                          className="ml-3 text-sm text-gray-900"
                         >
                           {option.label}
                         </label>

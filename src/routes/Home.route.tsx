@@ -1,16 +1,16 @@
 import SearchAndFilterSection from "../components/filters/SearchAndFilterSection";
 import Hero from "../components/Hero";
+import LoaderFullPage from "../components/LoaderFullPage";
 import { DataProvider } from "../contexts/data-context.hook";
 
 const Home = () => {
   return (
     <>
-      <div className="">
+      <DataProvider>
+        <LoaderFullPage />
         <Hero />
-        <DataProvider>
-          <SearchAndFilterSection />
-        </DataProvider>
-      </div>
+        <SearchAndFilterSection />
+      </DataProvider>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver'
+import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 
 interface ExcelExport {
   data: Array<object>;
@@ -21,30 +22,14 @@ const ExcelExport = (props: ExcelExport) => {
   };
 
   return (
-    <div>
       <button
         onClick={exportToExcel}
-        className="flex items-center px-5 py-1.5 border border-1 border-gray-900 text-sm tracking-wide text-white bg-gray-900 rounded-lg gap-x-2 hover:bg-gray-600"
+        className="flex items-center p-3 h-10 text-sm bg-indigo-600 rounded-lg gap-x-2 hover:bg-indigo-500 text-white active:ring-1 active:ring-gray-900"
       >
-        <svg
-          width="17"
-          height="17"
-          viewBox="0 0 20 20"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M10 1.66667V12.5M10 12.5L5.83333 8.33333M10 12.5L14.1667 8.33333M2.5 13.3333V15.8333C2.5 16.2754 2.67559 16.6993 2.98816 17.0118C3.30072 17.3244 3.72464 17.5 4.16667 17.5H15.8333C16.2754 17.5 16.6993 17.3244 17.0118 17.0118C17.3244 16.6993 17.5 16.2754 17.5 15.8333V13.3333"
-            stroke="currentColor"
-            strokeWidth="1.67"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
+       <ArrowDownTrayIcon className="w-6 h-6 text-white" />
 
-        <span>Export to Excel</span>
+        <span className="hidden">Export to Excel</span>
       </button>
-    </div>
   );
 
 };
