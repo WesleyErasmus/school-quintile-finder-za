@@ -24,7 +24,7 @@ const RenderSearchResults = () => {
         </div>
       ) : selectedSchool ? (
         // Card container
-        <div className="m-4 border border-1 rounded-lg border-indigo-100 shadow-sm bg-gradient-to-b from-indigo-50 from-10% via-white via-50% to-white to-90%">
+        <div className="m-4 rounded-lg border-l-8 border-l-indigo-600 ring-1 ring-inset ring-indigo-600/20">
           {/* Card head with color */}
           <div className="px-4 pt-6 rounded-t-xl">
             <p>
@@ -75,7 +75,9 @@ const RenderSearchResults = () => {
                 />
               </div>
               <div className="ml-3">
-                <p className="leading-6 text-sm font-medium text-gray-600">Phase</p>
+                <p className="leading-6 text-sm font-medium text-gray-600">
+                  Phase
+                </p>
                 <h4 className="text-gray-900 text-sm font-bold">
                   {selectedSchool.phase}
                 </h4>

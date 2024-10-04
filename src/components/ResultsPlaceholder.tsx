@@ -1,11 +1,12 @@
-import { BuildingLibraryIcon } from "@heroicons/react/24/outline";
-
+import { DocumentMagnifyingGlassIcon } from "@heroicons/react/24/solid";
+// BuildingLibraryIcon
 const ResultsPlaceholder = () => {
   return (
-    <div className="m-4 bg-gradient-to-r from-orange-100 from-10% via-orange-50 via-30% to-yellow-0 to-90% shadow-sm rounded-xl py-8 px-4 max-w-xl border border-1 border-yellow-100 text-center flex items-center flex-col">
+    <div className="m-4 bg-gradient-to-r from-gray-100 from-10% via-gray-50 via-30% to-white to-90% shadow-sm rounded-xl py-8 px-4 max-w-xl border border-1 border-gray-100 text-center flex items-center flex-col">
       {/* Icon */}
-      <div className=" left-0 top-0 flex h-10 w-10 items-center justify-center shadow-lg shadow-orange-200 p-2 rounded-full mb-4 bg-orange-500 text-white opacity-30">
-        <BuildingLibraryIcon />
+      <div className=" left-0 top-0 flex h-10 w-10 items-center justify-center shadow-sm shadow-orange-200 p-2 rounded-full mb-4 bg-orange-500 text-white ">
+        {/* <BuildingLibraryIcon /> */}
+        <DocumentMagnifyingGlassIcon />
       </div>
       <div>
         <h3 className="mb-4 text-lg font-semibold leading-6 text-gray-600">
