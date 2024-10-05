@@ -1,11 +1,9 @@
 import { School } from "../types/SchoolTypes";
 import { useDataContext } from "../contexts/data-context.hook";
-// import Loader from "./Loader";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ExcelExport from "../export-to-excel/ExcelExport";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
-// import LoaderFullPage from "./LoaderFullPage";
 
 const RenderFilterResults = () => {
   const { filteredData, totalCount, selectedFilter } = useDataContext();

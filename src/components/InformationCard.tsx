@@ -3,11 +3,11 @@ import { AcademicCapIcon, HomeModernIcon} from "@heroicons/react/24/outline";
 const InformationCard = () => {
   return (
     <div>
-      <div className="bg-white pt-16 px-2">
+      <div className="pt-16 px-2">
         <div className="mx-auto grid max-w-2xl grid-cols-1 gap-5 lg:grid-cols-3">
-          <article className="bg-gradient-to-r from-indigo-50 from-10% via-indigo-50 via-50% to-indigo-100 to-90% shadow-sm flex rounded-xl p-4 max-w-xl flex-col items-start justify-between">
+          <article className="bg-gradient-to-r from-primary-50 from-10% via-primary-50 via-50% to-primary-100 to-90% shadow-sm flex rounded-xl p-4 max-w-xl flex-col items-start justify-between">
             <div className="group relative">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
                 <AcademicCapIcon
                   aria-hidden="true"
                   className="h-7 w-7 text-white"
@@ -24,14 +24,14 @@ const InformationCard = () => {
               </p>
             </div>
             <div className="relative mt-3 flex items-center gap-x-4">
-              <button className="text-indigo-600 font-semibold">
+              <button className="text-primary-600 font-semibold">
                 Learn more {`->`}
               </button>
             </div>
           </article>
-          <article className="bg-gradient-to-r from-indigo-50 from-10% via-indigo-50 via-50% to-indigo-100 to-90% shadow-sm rounded-lg p-4 flex max-w-xl flex-col items-start justify-between">
+          <article className="bg-gradient-to-r from-primary-50 from-10% via-primary-50 via-50% to-primary-100 to-90% shadow-sm rounded-lg p-4 flex max-w-xl flex-col items-start justify-between">
             <div className="group relative">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-600">
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
                 <HomeModernIcon
                   aria-hidden="true"
                   className="h-6 w-6 text-white"
@@ -48,7 +48,7 @@ const InformationCard = () => {
               </p>
             </div>
             <div className="relative mt-3 flex items-center gap-x-4">
-              <button className="text-indigo-600 font-semibold">
+              <button className="text-primary-600 font-semibold">
                 Learn more {`->`}
               </button>
             </div>

@@ -2,10 +2,11 @@ import { EnvelopeIcon } from "@heroicons/react/24/solid";
 
 const Footer = () => {
   return (
-    <div className="relative bottom-0 bg-gray-100 px-2 pb-6 pt-10">
+    // <div className="relative bottom-0 bg-gradient-to-t from-slate-50 from-20% via-slate-200 via-50% to-slate-50 to-90% px-2 pb-6 pt-10 border-t border-gray-200">
+    <div className="relative bottom-0  px-2 pb-6 pt-10">
       <div>
-        <h3 className="text-xl font-bold">Contact or Report an Issue</h3>
-        <p className="mt-2 leading-6 text-gray-700 ">
+        <h3 className="text-2xl font-extrabold">Contact or Report an Issue</h3>
+        <p className="text-sm mt-2 text-gray-700 tracking-wide leading-5 mb-4">
           Report an issue or a missing school. Get in touch.
         </p>
         <input
@@ -23,7 +24,7 @@ const Footer = () => {
         ></textarea>
 
         <div className="flex justify-end">
-          <button className="flex w-full items-center justify-center gap-x-4 bg-gray-900 relative mt-2 px-6 py-2 rounded-lg  text-white hover:bg-gray-800 tracking-wide active:ring-1 active:ring-offset-1 active:ring-gray-900">
+          <button className="flex w-full items-center justify-center gap-x-4 bg-slate-900 relative mt-2 px-6 py-2 rounded-lg  text-white hover:bg-gray-800 tracking-wide active:ring-1 active:ring-offset-1 active:ring-gray-900">
             <EnvelopeIcon className="w-5 h-5" />
             Message
           </button>

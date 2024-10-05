@@ -1,4 +1,4 @@
-import '../styles/search-bar.css'
+import "../styles/search-bar.css";
 import { useEffect, useState } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
@@ -6,6 +6,9 @@ import { School } from "../types/SchoolTypes";
 import SearchSchools from "../graphql/fetch-school-data.graphql";
 import { useDataContext } from "../contexts/data-context.hook";
 import LoaderSearchBar from "./LoaderSearchBar";
+import Alert from "./Alert";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -95,38 +98,76 @@ const SearchBar = () => {
         </div>
       ) : (
         <div>
-          <form onKeyDown={handleKeyDown} className="min-w-[275px]">
-            <ReactSearchAutocomplete
-              className="search-bar-input z-10 font-medium text-sm text-gray-900 rounded-xl"
-              styling={{
-                fontSize: "0.875rem",
-                fontFamily:
-                  "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                borderRadius: "0.75rem",
-                placeholderColor: "#1f2937",
-                // border: "1px solid #4f46e5",
-                boxShadow: "#a5b4fc 0px 2px 10px 2px",
-              }}
-              // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
-              onSearch={handleOnSearch}
-              onSelect={handleOnSelect}
-              onHover={handleOnHover}
-              inputSearchString={searchString}
-              items={searchString.trim().length > 0 ? data?.schools || [] : []}
-              fuseOptions={{
-                keys: ["name"],
-                threshold: 0.3,
-                location: 0,
-                distance: 100,
-                minMatchCharLength: 3,
-              }}
-              formatResult={formatResult}
-              maxResults={7}
-              inputDebounce={200}
-              placeholder="Search by school name for quintile data"
-              showNoResultsText="No schools found"
-            />
+          <div className="md:hidden mb-4 mx-1 pt-16">
+            {/* badge */}
+            <span className="inline-flex items-center rounded-lg bg-tertiary-50 px-2 py-1 text-xs font-medium text-tertiary-600 ring-1 ring-inset ring-tertiary-500/10">
+              Search and Filter
+            </span>
+            {/* title */}
+            <h1 className="mt-4 text-3xl font-extrabold">
+              Search<span className="text-tertiary-600"> School Quintile Data</span>
+            </h1>
+            {/* subtitle */}
+            <p className="text-sm mt-2 tracking-wide leading-5 text-gray-600">
+              Discover
+              <span className="">
+                {" "}
+                Quintile level Province Sector Phase Address data
+              </span>
+            </p>
+          </div>
+          <form onKeyDown={handleKeyDown} className=" mt-4 mb-2 min-w-[275px]">
+            <div className="relative">
+              <div className="">
+                <span className="z-20 absolute mt-3">
+                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-tertiary-900" />
+                </span>
+              </div>
+              <ReactSearchAutocomplete
+                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-xl focus-within:ring-2 focus-within:ring-tertiary-600 focus-within:ring-offset-2"
+                styling={{
+                  border: "1px solid #0284c7",
+                  fontSize: "0.90rem",
+                  fontFamily:
+                    "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
+                  borderRadius: "0.75rem",
+                  placeholderColor: "",
+                }}
+                onSearch={handleOnSearch}
+                showIcon={false}
+                onSelect={handleOnSelect}
+                onHover={handleOnHover}
+                inputSearchString={searchString}
+                items={
+                  searchString.trim().length > 0 ? data?.schools || [] : []
+                }
+                fuseOptions={{
+                  keys: ["name"],
+                  threshold: 0.3,
+                  location: 0,
+                  distance: 100,
+                  minMatchCharLength: 3,
+                }}
+                formatResult={formatResult}
+                maxResults={7}
+                inputDebounce={200}
+                placeholder="Search by school name for quintile data"
+                showNoResultsText="No schools found"
+              />
+            </div>
           </form>
+
+          <Alert
+            icon={
+              <InformationCircleIcon
+                aria-hidden="true"
+                className="h-6 w-6 text-sky-600"
+              />
+            }
+            message={
+              "Use the search bar to easily find the South African school you are looking for."
+            }
+          />
         </div>
       )}
     </div>

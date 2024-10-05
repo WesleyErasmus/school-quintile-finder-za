@@ -239,7 +239,7 @@ export default function SidebarFilterOptions() {
       <button
         type="button"
         onClick={() => setMobileFiltersOpen(true)}
-        className="w-full text-sm text-white font-semibold tracking-wide rounded-xl bg-indigo-600 border border-1 border-gray-200 shadow-sm px-5 py-3 hover:bg-indigo-500 lg:hidden"
+        className="w-full text-lg text-white font-bold tracking-wide rounded-xl bg-gradient-to-b from-indigo-700 from-10% via-indigo-600 via-50% to-indigo-700 to-90% shadow-sm px-8 py-4 opacity-95 hover:opacity-100 hover:ring-2 hover:ring-indigo-600 hover:ring-offset-2 lg:hidden"
       >
         Generate Custom Data Table
       </button>
