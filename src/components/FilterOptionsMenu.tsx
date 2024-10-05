@@ -24,7 +24,7 @@ const FILTER_SCHOOLS = gql`
   ${FilterSchools}
 `;
 
-export default function SidebarFilter() {
+export default function SidebarFilterOptions() {
   const {
     setFilteredData,
     setTotalCount,
@@ -249,7 +249,9 @@ export default function SidebarFilter() {
         <div className="w-[230px] overflow-y-auto overflow-x-hidden h-[95dvh]">
           {/* Filters */}
           <form className="px-3 border-r border-1 border-gray-200">
-            <h1 className="py-4 border-b border-gray-400 font-semibold">Filter Options</h1>
+            <h1 className="py-4 border-b border-gray-400 font-semibold">
+              Filter Options
+            </h1>
             {filterOptions.map((section) => (
               <Disclosure
                 key={section.id}

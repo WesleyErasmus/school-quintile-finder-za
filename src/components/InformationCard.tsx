@@ -20,9 +20,7 @@ const InformationCard = () => {
                 </div>
               </h3>
               <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non hic
-                provident unde eligendi ipsum consectetur voluptas requieste
-                skotte mpatchi cupiditate, nobis tempora facere.
+                This article outlines the the various DHET and CHE data requirements for reporting. Find out what data you need to be storing and reporting on.
               </p>
             </div>
             <div className="relative mt-3 flex items-center gap-x-4">
@@ -46,9 +44,7 @@ const InformationCard = () => {
                 </div>
               </h3>
               <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Non hic
-                provident unde eligendi ipsum consectetur voluptas cupiditate,
-                nobis tempora facere.
+                Get a better understanding of a school quintile level is and how the different quintile levels are categorized. How quintile levels apply to public and private schools.
               </p>
             </div>
             <div className="relative mt-3 flex items-center gap-x-4">

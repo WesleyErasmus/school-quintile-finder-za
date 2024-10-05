@@ -104,7 +104,7 @@ const SearchBar = () => {
                   "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                 borderRadius: "0.75rem",
                 placeholderColor: "#1f2937",
-                border: "2px solid #4f46e5",
+                // border: "1px solid #4f46e5",
                 boxShadow: "#a5b4fc 0px 2px 10px 2px",
               }}
               // box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
