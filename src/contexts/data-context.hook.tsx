@@ -1,5 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { School } from "../types/SchoolTypes";
+import { Filters } from '../types/FilterTypes'
 
 interface DataContextType {
   selectedSchool: School | null;
@@ -14,6 +15,10 @@ interface DataContextType {
   setIsLoadingFilteredData: (loading: boolean) => void;
   totalCount: number;
   setTotalCount: (count: number) => void;
+  filters: Filters;
+  setFilters: React.Dispatch<React.SetStateAction<Filters>>;
+  mobileFiltersOpen: boolean;
+  setMobileFiltersOpen: (boolean: boolean) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -25,6 +30,13 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilteredData, setIsLoadingFilteredData] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
+  const [filters, setFilters] = useState<Filters>({
+    quintile: [],
+    sector: [],
+    province: [],
+    phase: [],
+  });
+    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   return (
     <DataContext.Provider
@@ -41,6 +53,10 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setIsLoading,
         totalCount,
         setTotalCount,
+        filters,
+        setFilters,
+        mobileFiltersOpen,
+        setMobileFiltersOpen,
       }}
     >
       {children}

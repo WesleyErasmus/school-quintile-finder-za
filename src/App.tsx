@@ -5,7 +5,8 @@ import Home from "./routes/Home.route";
 function App() {
   return (
     <>
-      <div className="mx-auto max-w-[1230px]">
+      {/* <div className="mx-auto max-w-[1230px]"> */}
+      <div>
         <TopNavbar />
         <Home />
         <Footer />

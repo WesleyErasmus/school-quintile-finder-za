@@ -6,7 +6,15 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
 
 const RenderFilterResults = () => {
-  const { filteredData, totalCount, selectedFilter } = useDataContext();
+  const {
+    filteredData,
+    totalCount,
+    selectedFilter,
+    setFilteredData,
+    setFilters,
+    mobileFiltersOpen,
+    setMobileFiltersOpen,
+  } = useDataContext();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
@@ -39,48 +47,48 @@ const RenderFilterResults = () => {
     setDisplayedItems(50);
   };
 
+  const clearFilters = () => {
+    setFilteredData(null);
+    setFilters({
+      quintile: [],
+      sector: [],
+      province: [],
+      phase: [],
+    });
+  };
+
   return (
     <>
       {filteredData && filteredData.length > 0 ? (
         <section className="mt-16">
-          <h1 className="px-2 pt-16 text-3xl font-extrabold bg-gradient-to-b from-indigo-100 from-10% via-indigo-50 via-50% to-indigo-50 to-90%">
-            <span className="text-indigo-600">Filter</span> Results
+          <h1 className="px-3 mb-8 text-3xl font-extrabold bg-">
+            <span className="">Filter</span> Results
           </h1>
-          <div className="z-40 pt-6 sticky top-[70px] bg-gradient-to-t from-indigo-100 from-10% via-indigo-50 via-50% to-indigo-50 to-90% shadow-sm">
+          <div className="z-40 px-3 sticky top-[70px] shadow-sm bg-slate-50">
             {/* Banner */}
-            <div className="pb-2 px-2 pt-2 flex flex-wrap items-center justify-between gap-x-4">
-              <p className="text-md leading-6 text-gray-900">
-                <strong className="font-semibold text-indigo-600">
-                  {totalCount}
-                  <span className="text-gray-900 font-medium">
-                    <svg
-                      viewBox="0 0 2 2"
-                      aria-hidden="true"
-                      className="mx-2 inline h-0.5 w-0.5 fill-current"
-                    >
-                      <circle r={1} cx={1} cy={1} />
-                    </svg>
-                    Results
-                  </span>
+            <div className="flex flex-wrap items-center justify-between gap-x-4">
+              <p className="text-sm leading-6 text-gray-900">
+                <strong className="font-semibold ">
+                  {totalCount} <span className="text-gray-900">Results</span>
                 </strong>
               </p>
               <div className="flex gap-2">
-                <a
-                  href="#"
-                  className="flex-none rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm"
+                <button
+                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+                  className="flex-none rounded-full bg-secondary-600 px-3 py-1 text-sm font-medium text-white shadow-sm"
                 >
                   Filters
-                </a>
-                <a
-                  href="#"
-                  className="flex-none rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm"
+                </button>
+                <button
+                  onClick={clearFilters}
+                  className="flex-none rounded-full bg-secondary-600 px-3 py-1 text-sm font-medium text-white shadow-sm"
                 >
                   Clear Filters
-                </a>
+                </button>
               </div>
             </div>
             {/* Search & Export button container */}
-            <div className="flex items-end justify-between gap-4 px-2 mt-2 bg-white py-2">
+            <div className="flex items-end justify-between gap-4 mt-2 bg-white py-2">
               {/* Search bar */}
               <div className="relative w-full flex items-center">
                 <span className="absolute">
@@ -92,15 +100,15 @@ const RenderFilterResults = () => {
                   onChange={handleSearch}
                   type="text"
                   placeholder="Search results by school name"
-                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-700 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-indigo-600 sm:max-w-[295px]"
+                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-700 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-secondary-600 sm:max-w-[295px]"
                 />
                 {searchTerm ? (
-                  <a
+                  <button
                     onClick={clearSearch}
                     className="relative p-1 -left-8 cursor-pointer text-gray-400 active:ring-1 active:ring-gray-900 rounded-full"
                   >
                     <XMarkIcon aria-hidden="true" className="h-5 w-5" />
-                  </a>
+                  </button>
                 ) : (
                   ""
                 )}
@@ -156,7 +164,7 @@ const RenderFilterResults = () => {
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index} className="odd:bg-indigo-50">
+                        <tr key={index} className="odd:bg-secondary-50">
                           <td className="pl-5 pr-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
                             {school.name}
                           </td>

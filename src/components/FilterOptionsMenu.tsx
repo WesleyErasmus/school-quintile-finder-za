@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -8,6 +8,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
+import { CloudArrowDownIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useDataContext } from "../contexts/data-context.hook";
@@ -19,6 +20,7 @@ import {
   filterOptions,
   GraphQLFilters,
 } from "../types/FilterTypes";
+import Alert from "./Alert";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -30,15 +32,11 @@ export default function SidebarFilterOptions() {
     setTotalCount,
     setIsLoadingFilteredData,
     setSelectedSchool,
+    filters,
+    setFilters,
+    mobileFiltersOpen,
+    setMobileFiltersOpen,
   } = useDataContext();
-
-  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-  const [filters, setFilters] = useState<Filters>({
-    quintile: [],
-    sector: [],
-    province: [],
-    phase: [],
-  });
 
   const { refetch } = useQuery(FILTER_SCHOOLS, {
     fetchPolicy: "cache-first",
@@ -58,7 +56,7 @@ export default function SidebarFilterOptions() {
     isChecked: boolean
   ) => {
     setSelectedSchool(null);
-    setFilters((prevFilters) => {
+    setFilters((prevFilters: Filters) => {
       const updatedFilters = { ...prevFilters };
       if (isChecked) {
         updatedFilters[filterType] = [...updatedFilters[filterType], value];
@@ -189,7 +187,7 @@ export default function SidebarFilterOptions() {
                               id={`filter-mobile-${section.id}-${optionIdx}`}
                               name={`${section.id}[]`}
                               type="checkbox"
-                              className="h-4 w-4 rounded border-gray-500 text-indigo-600 focus:ring-indigo-500"
+                              className="h-4 w-4 rounded border-gray-500 text-primary-600 focus:ring-primary-500"
                               onChange={(e) =>
                                 handleFilterChange(
                                   section.id,
@@ -219,14 +217,14 @@ export default function SidebarFilterOptions() {
                   onClick={clearFilters}
                   className="w-1/2 text-xs  font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2 active:ring-1 active:ring-gray-900"
                 >
-                  CLEAR FILTERS
+                  Clear Filters
                 </button>
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="w-1/2 text-xs font-medium tracking-wide rounded-lg text-white bg-indigo-600 px-4 py-2 active:ring-1 active:ring-indigo-900"
+                  className="w-1/2 text-xs font-medium tracking-wide rounded-lg text-white bg-primary-600 px-4 py-2 active:ring-1 active:ring-primary-900"
                 >
-                  DONE
+                  Done
                 </button>
               </div>
             </div>
@@ -235,20 +233,48 @@ export default function SidebarFilterOptions() {
       </Dialog>
       {/* End of mobile */}
 
-      {/* Search bar & Mobile filter button */}
-      <button
-        type="button"
-        onClick={() => setMobileFiltersOpen(true)}
-        className="w-full text-lg text-white font-bold tracking-wide rounded-xl bg-gradient-to-b from-indigo-700 from-10% via-indigo-600 via-50% to-indigo-700 to-90% shadow-sm px-8 py-4 opacity-95 hover:opacity-100 hover:ring-2 hover:ring-indigo-600 hover:ring-offset-2 lg:hidden"
-      >
-        Generate Custom Data Table
-      </button>
+      {/* Mobile filter button */}
+      <div className="relative h-full w-full ">
+        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        <div className="lg:hidden relative px-3 pt-8 pb-16">
+          {/* badge */}
+          <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+            Filter and Export
+          </span>
+          <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
+            Filter{" "}
+            <span className="text-primary-600">SA Schools Database</span>
+          </h1>
+          <p className="text-sm mt-2 text-gray-600 tracking-wide leading-5 mb-4">
+            Select filters to create the a searchable and downloadable data
+            table of according to your specific needs.
+          </p>
+          <button
+            type="button"
+            onClick={() => setMobileFiltersOpen(true)}
+            className="w-full mb-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 hover:bg-primary-700 hover:ring-2 hover:ring-primary-600 hover:ring-offset-2 shadow-sm"
+          >
+            Generate Custom Data Table
+          </button>
+          <Alert
+            icon={
+              <CloudArrowDownIcon
+                aria-hidden="true"
+                className="h-6 w-6 text-sky-600"
+              />
+            }
+            message={
+              "Use the Generate Custom Data Table button to create a table by using the filters. Easily search through the data and export to Excel."
+            }
+          />
+        </div>
+      </div>
 
       {/* Desktop filters */}
       <div className="hidden lg:block sticky mr-2 top-0">
-        <div className="w-[230px] overflow-y-auto overflow-x-hidden h-[95dvh]">
+        <div className="w-[230px] overflow-y-auto bg-white bg-opacity-45 overflow-x-hidden h-[95dvh]">
           {/* Filters */}
-          <form className="px-3 border-r border-1 border-gray-200">
+          <form className="px-3 border-r border-1 border-slate-20">
             <h1 className="py-4 border-b border-gray-400 font-semibold">
               Filter Options
             </h1>
@@ -259,7 +285,7 @@ export default function SidebarFilterOptions() {
                 className="border-b border-gray-200 py-6"
               >
                 <h3 className="-my-3 flow-root">
-                  <DisclosureButton className="group flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                  <DisclosureButton className="group flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
                     <span className="font-medium text-gray-900">
                       {section.name}
                     </span>
@@ -285,7 +311,7 @@ export default function SidebarFilterOptions() {
                           id={`filter-${section.id}-${optionIdx}`}
                           name={`${section.id}[]`}
                           type="checkbox"
-                          className="h-4 w-4 rounded border-gray-400 text-indigo-600 focus:ring-indigo-500"
+                          className="h-4 w-4 rounded border-gray-400 text-primary-600 focus:ring-primary-500"
                           onChange={(e) =>
                             handleFilterChange(
                               section.id,

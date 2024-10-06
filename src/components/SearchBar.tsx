@@ -9,6 +9,7 @@ import LoaderSearchBar from "./LoaderSearchBar";
 import Alert from "./Alert";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import RenderSearchResults from "./RenderSearchResults";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -17,7 +18,7 @@ const GET_SCHOOL_DATA = gql`
 const SearchBar = () => {
   const [searchString, setSearchString] = useState("");
   const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
-  const { setSelectedSchool, setFilteredData } = useDataContext();
+  const { selectedSchool, setSelectedSchool, setFilteredData } = useDataContext();
 
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
@@ -72,7 +73,7 @@ const SearchBar = () => {
           <p className="font-normal text-gray-900">{item.name}</p>
         </div>
         <div>
-          <span className="inline-flex items-center rounded-lg bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-600 ring-1 ring-inset ring-indigo-500/10">
+          <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
             Quintile level {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
@@ -91,46 +92,43 @@ const SearchBar = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="">
+    <div className="py-8">
       {loading ? (
         <div>
           <LoaderSearchBar />
         </div>
       ) : (
-        <div>
-          <div className="md:hidden mb-4 mx-1 pt-16">
+        <div className="px-3">
+          <div>
             {/* badge */}
-            <span className="inline-flex items-center rounded-lg bg-tertiary-50 px-2 py-1 text-xs font-medium text-tertiary-600 ring-1 ring-inset ring-tertiary-500/10">
-              Search and Filter
+            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+              Search for Schools
             </span>
             {/* title */}
-            <h1 className="mt-4 text-3xl font-extrabold">
-              Search<span className="text-tertiary-600"> School Quintile Data</span>
+            <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
+              Search for
+              <span className="text-primary-600"> School Quintile Data</span>
             </h1>
             {/* subtitle */}
             <p className="text-sm mt-2 tracking-wide leading-5 text-gray-600">
-              Discover
-              <span className="">
-                {" "}
-                Quintile level Province Sector Phase Address data
-              </span>
+              Discover Quintile level Province Sector Phase Address data
             </p>
           </div>
-          <form onKeyDown={handleKeyDown} className=" mt-4 mb-2 min-w-[275px]">
+          <form onKeyDown={handleKeyDown} className="mt-8 mb-4 min-w-[275px]">
             <div className="relative">
-              <div className="">
+              <div>
                 <span className="z-20 absolute mt-3">
-                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-tertiary-900" />
+                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
               </div>
               <ReactSearchAutocomplete
-                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-xl focus-within:ring-2 focus-within:ring-tertiary-600 focus-within:ring-offset-2"
+                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-lg focus-within:ring-1 focus-within:ring-gray-500 focus-within:ring-offset-2 shadow-sm"
                 styling={{
-                  border: "1px solid #0284c7",
+                  // border: "1px solid #1e1b4b",
                   fontSize: "0.90rem",
                   fontFamily:
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                  borderRadius: "0.75rem",
+                  borderRadius: "0.5rem",
                   placeholderColor: "",
                 }}
                 onSearch={handleOnSearch}
@@ -156,18 +154,20 @@ const SearchBar = () => {
               />
             </div>
           </form>
-
-          <Alert
-            icon={
-              <InformationCircleIcon
-                aria-hidden="true"
-                className="h-6 w-6 text-sky-600"
-              />
-            }
-            message={
-              "Use the search bar to easily find the South African school you are looking for."
-            }
-          />
+          {!selectedSchool && (
+            <Alert
+              icon={
+                <InformationCircleIcon
+                  aria-hidden="true"
+                  className="h-6 w-6 text-sky-600"
+                />
+              }
+              message={
+                "Use the search bar to easily find the South African school you are looking for"
+              }
+            />
+          )}
+          <RenderSearchResults />
         </div>
       )}
     </div>

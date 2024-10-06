@@ -24,7 +24,7 @@ const ExcelExport = (props: ExcelExport) => {
   return (
       <button
         onClick={exportToExcel}
-        className="flex items-center p-3 h-10 text-sm bg-indigo-600 rounded-lg gap-x-2 hover:bg-indigo-500 text-white active:ring-1 active:ring-gray-900"
+        className="flex items-center p-3 h-10 text-sm bg-slate-600 rounded-xl gap-x-2 hover:bg-slate-700 text-white active:ring-1 active:ring-gray-900"
       >
        <ArrowDownTrayIcon className="w-6 h-6 text-white" />
 
