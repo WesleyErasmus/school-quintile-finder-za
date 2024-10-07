@@ -17,18 +17,18 @@ const InformationCard = (props: InformationCard) => {
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
                 {props.icon}
               </div>
-              <h3 className="flex mt-6 text-lg font-semibold leading-6 text-gray-900 group-hover:text-gray-600">
+              <h3 className="flex mt-6 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600">
                 <div>
                   <span className="absolute inset-0" />
                   {props.title}
                 </div>
               </h3>
-              <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-600">
+              <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-700">
                 {props.subtitle}
               </p>
             </div>
             <div className="relative mt-3 flex items-center gap-x-4">
-              <button className="text-primary-600 font-semibold">
+              <button className="text-primary-600 font-bold">
                {props.buttonText}
               </button>
             </div>

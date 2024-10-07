@@ -74,7 +74,7 @@ const SearchBar = () => {
         </div>
         <div>
           <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
-            Quintile level {item.quintile}{" "}
+            Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
               aria-hidden="true"
@@ -122,7 +122,7 @@ const SearchBar = () => {
                 </span>
               </div>
               <ReactSearchAutocomplete
-                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-lg focus-within:ring-1 focus-within:ring-gray-500 focus-within:ring-offset-2 shadow-sm"
+                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 shadow-sm"
                 styling={{
                   // border: "1px solid #1e1b4b",
                   fontSize: "0.90rem",
@@ -159,7 +159,7 @@ const SearchBar = () => {
               icon={
                 <InformationCircleIcon
                   aria-hidden="true"
-                  className="h-6 w-6 text-sky-600"
+                  className="h-6 w-6 text-blue-400"
                 />
               }
               message={

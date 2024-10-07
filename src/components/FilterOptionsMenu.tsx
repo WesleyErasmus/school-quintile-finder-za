@@ -8,7 +8,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { CloudArrowDownIcon } from "@heroicons/react/24/solid";
+import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useDataContext } from "../contexts/data-context.hook";
@@ -34,6 +34,7 @@ export default function SidebarFilterOptions() {
     setSelectedSchool,
     filters,
     setFilters,
+    filteredData,
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
@@ -235,15 +236,14 @@ export default function SidebarFilterOptions() {
 
       {/* Mobile filter button */}
       <div className="relative h-full w-full ">
-        <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+        {/* <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div> */}
         <div className="lg:hidden relative px-3 pt-8 pb-16">
           {/* badge */}
-          <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+          <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
             Filter and Export
           </span>
           <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
-            Filter{" "}
-            <span className="text-primary-600">SA Schools Database</span>
+            Filter <span className="text-primary-600">SA Schools Database</span>
           </h1>
           <p className="text-sm mt-2 text-gray-600 tracking-wide leading-5 mb-4">
             Select filters to create the a searchable and downloadable data
@@ -256,17 +256,19 @@ export default function SidebarFilterOptions() {
           >
             Generate Custom Data Table
           </button>
-          <Alert
-            icon={
-              <CloudArrowDownIcon
-                aria-hidden="true"
-                className="h-6 w-6 text-sky-600"
-              />
-            }
-            message={
-              "Use the Generate Custom Data Table button to create a table by using the filters. Easily search through the data and export to Excel."
-            }
-          />
+          {!filteredData && (
+            <Alert
+              icon={
+                <InformationCircleIcon
+                  aria-hidden="true"
+                  className="h-6 w-6 text-blue-400"
+                />
+              }
+              message={
+                "Use the Generate Custom Data Table button to create a table by using the filters. Easily search through the data and export to Excel."
+              }
+            />
+          )}
         </div>
       </div>
 

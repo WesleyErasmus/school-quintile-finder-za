@@ -13,7 +13,7 @@ const PageHero = () => {
       <div className="mx-auto max-w-[1230px] w-full">
         <div className="px-4 flex justify-end">
           <header className=" flex flex-wrap justify-between items-center w-full max-w-[960px]">
-            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10 ">
+            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10 ">
               Simplify Your Quintile Search
             </span>
             <div className="mt-8 flex items-center">

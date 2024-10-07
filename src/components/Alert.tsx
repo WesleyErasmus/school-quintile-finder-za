@@ -6,7 +6,7 @@ interface Alert {
 }
 const Alert = (props: Alert) => {
   return (
-    <div className="bg-sky-50 border border-1 border-sky-600/10 rounded-lg p-2 flex items-center flex-col text-sky-600">
+    <div className="bg-blue-50 rounded-lg p-2 flex items-center flex-col text-sky-600">
       <div className="flex items-start">
         <div className="mr-2">{props.icon}</div>
         <div>

@@ -1,4 +1,4 @@
-input[type='text']:focus {
+.search-bar-input input[type='text']:focus {
     outline: none;
     outline-offset: none;
     --tw-ring-inset: none;
@@ -11,6 +11,6 @@ input[type='text']:focus {
     border-color: none;
 }
 
-input[type='text'] {
+.search-bar-input input[type='text'] {
 padding-left: 2.4rem !important;
 }
