@@ -18,7 +18,12 @@ const GET_SCHOOL_DATA = gql`
 const SearchBar = () => {
   const [searchString, setSearchString] = useState("");
   const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
-  const { selectedSchool, setSelectedSchool, setFilteredData } = useDataContext();
+  const {
+    selectedSchool,
+    setSelectedSchool,
+    setFilteredData,
+    setFilters,
+  } = useDataContext();
 
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
@@ -49,6 +54,13 @@ const SearchBar = () => {
     setSelectedSchool(item);
     setSuggestedItem(item);
     setFilteredData(null);
+     setFilters({
+       quintile: [],
+       sector: [],
+       province: [],
+       phase: [],
+     });
+
   };
 
   const handleOnHover = (result: School) => {
@@ -68,12 +80,13 @@ const SearchBar = () => {
   const formatResult = (item: School) => (
     <>
       <span className="hidden">{item.id}</span>
-      <div>
+      <div className="border-b border-gray-200 mr-3">
         <div>
-          <p className="font-normal text-gray-900">{item.name}</p>
+          <p className="font-medium text-gray-900">{item.name}</p>
         </div>
         <div>
-          <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+          {/* <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs text-primary-600 ring-1 ring-inset ring-primary-500/10"> */}
+          <div className="inline-flex items-center pt-2 pb-3 text-sm text-gray-500">
             Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
@@ -83,7 +96,7 @@ const SearchBar = () => {
               <circle r={1} cx={1} cy={1} />
             </svg>{" "}
             {item.province}
-          </span>
+          </div>
         </div>
       </div>
     </>
@@ -94,7 +107,7 @@ const SearchBar = () => {
   return (
     <div className="py-8">
       {loading ? (
-        <div>
+        <div className="mx-4">
           <LoaderSearchBar />
         </div>
       ) : (
@@ -117,14 +130,15 @@ const SearchBar = () => {
           <form onKeyDown={handleKeyDown} className="mt-8 mb-4 min-w-[275px]">
             <div className="relative">
               <div>
-                <span className="z-20 absolute mt-3">
+                <span className="z-40 absolute mt-3">
                   <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
               </div>
               <ReactSearchAutocomplete
-                className="search-bar-input z-10 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 shadow-sm"
+                // className="search-bar-input z-30 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 shadow-sm hover:ring-2 hover:ring-primary-600 hover:ring-offset-2"
+                className="search-bar-input z-30 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 hover:ring-2 hover:ring-primary-600 hover:ring-offset-2"
                 styling={{
-                  // border: "1px solid #1e1b4b",
+                  border: "1px solid #9ca3af",
                   fontSize: "0.90rem",
                   fontFamily:
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",

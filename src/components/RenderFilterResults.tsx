@@ -3,12 +3,14 @@ import { useDataContext } from "../contexts/data-context.hook";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ExcelExport from "../export-to-excel/ExcelExport";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { MagnifyingGlassIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { MagnifyingGlassIcon} from "@heroicons/react/20/solid";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { FunnelIcon, XCircleIcon } from "@heroicons/react/20/solid";
 
 const RenderFilterResults = () => {
   const {
     filteredData,
-    totalCount,
+    // totalCount,
     selectedFilter,
     setFilteredData,
     setFilters,
@@ -60,52 +62,29 @@ const RenderFilterResults = () => {
   return (
     <>
       {filteredData && filteredData.length > 0 ? (
-        <section className="mt-16">
-          <h1 className="px-3 mb-8 text-3xl font-extrabold bg-">
-            <span className="">Filter</span> Results
-          </h1>
-          <div className="z-40 px-3 sticky top-[70px] shadow-sm bg-slate-50">
-            {/* Banner */}
-            <div className="flex flex-wrap items-center justify-between gap-x-4">
-              <p className="text-sm leading-6 text-gray-900">
-                <strong className="font-semibold ">
-                  {totalCount} <span className="text-gray-900">Results</span>
-                </strong>
-              </p>
-              <div className="flex gap-2">
-                <button
-                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                  className="flex-none rounded-full bg-secondary-600 px-3 py-1 text-sm font-medium text-white shadow-sm"
-                >
-                  Filters
-                </button>
-                <button
-                  onClick={clearFilters}
-                  className="flex-none rounded-full bg-secondary-600 px-3 py-1 text-sm font-medium text-white shadow-sm"
-                >
-                  Clear Filters
-                </button>
-              </div>
-            </div>
-            {/* Search & Export button container */}
-            <div className="flex items-end justify-between gap-4 mt-2 bg-white py-2">
+        <div>
+          <div className="z-20 px-4 pt-2 sticky top-0 border-b border-gray-400 bg-white">
+            {/* <h1 className="text-xs font-semibold text-gray-600 pb-2">
+              {totalCount} <span className="text-gray-900">Results</span>
+            </h1> */}
+            {/* Filter top menu [search, filter, clear, export] */}
+            <div className="py-2 flex gap-2 bg-white">
               {/* Search bar */}
-              <div className="relative w-full flex items-center">
+              <div className="relative w-6/6 sm:w-full flex items-center">
                 <span className="absolute">
-                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-400" />
+                  <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
-
                 <input
                   value={searchTerm}
                   onChange={handleSearch}
                   type="text"
-                  placeholder="Search results by school name"
-                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-700 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-secondary-600 sm:max-w-[295px]"
+                  placeholder="Search"
+                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 sm:max-w-[295px]"
                 />
                 {searchTerm ? (
                   <button
                     onClick={clearSearch}
-                    className="relative p-1 -left-8 cursor-pointer text-gray-400 active:ring-1 active:ring-gray-900 rounded-full"
+                    className="absolute p-1 pl-2 right-2 cursor-pointer text-gray-500 active:ring-1 active:ring-gray-900 rounded-full"
                   >
                     <XMarkIcon aria-hidden="true" className="h-5 w-5" />
                   </button>
@@ -113,12 +92,33 @@ const RenderFilterResults = () => {
                   ""
                 )}
               </div>
-              {/* End of search bar */}
-              <ExcelExport
-                data={filteredData}
-                fileName={"quintileDataExport"}
-              />
+              {/* Open filters */}
+              <div className="w-1/6">
+                <button
+                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
+                >
+                  <FunnelIcon className="w-6 h-6" />
+                </button>
+              </div>
+              {/* Clear filters */}
+              <div className="w-1/6">
+                <button
+                  onClick={clearFilters}
+                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
+                >
+                  <XCircleIcon className="w-6 h-6" />
+                </button>
+              </div>
+              {/* Export */}
+              <div className="w-1/6">
+                <ExcelExport
+                  data={filteredData}
+                  fileName={"quintileDataExport"}
+                />
+              </div>
             </div>
+            {/* End of filter top menu buttons */}
           </div>
           <div className="z-10">
             {cachedFilteredData.length > 0 ? (
@@ -140,22 +140,22 @@ const RenderFilterResults = () => {
                 <table className="table-auto w-full">
                   <thead className="border-b border-gray-400 bg-white">
                     <tr>
-                      <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                      <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         School
                       </th>
-                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         Quintile
                       </th>
-                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         Province
                       </th>
-                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         Phase
                       </th>
-                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-600">
+                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         Sector
                       </th>
-                      <th className="px-4 py-3 text-sm text-left font-semibold text-nowrap text-gray-600">
+                      <th className="px-3 py-3 text-sm text-left font-semibold text-nowrap text-gray-900">
                         Fee Paying
                       </th>
                     </tr>
@@ -164,7 +164,7 @@ const RenderFilterResults = () => {
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index} className="odd:bg-secondary-50">
+                        <tr key={index} className="odd:bg-slate-100">
                           <td className="pl-5 pr-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
                             {school.name}
                           </td>
@@ -195,7 +195,7 @@ const RenderFilterResults = () => {
               </p>
             )}
           </div>
-        </section>
+        </div>
       ) : null}
     </>
   );

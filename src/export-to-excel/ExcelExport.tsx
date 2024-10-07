@@ -1,6 +1,6 @@
 import * as XLSX from "xlsx";
 import { saveAs } from 'file-saver'
-import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import { ArrowDownTrayIcon } from "@heroicons/react/20/solid";
 
 interface ExcelExport {
   data: Array<object>;
@@ -22,14 +22,14 @@ const ExcelExport = (props: ExcelExport) => {
   };
 
   return (
-      <button
-        onClick={exportToExcel}
-        className="flex items-center p-3 h-10 text-sm bg-slate-600 rounded-xl gap-x-2 hover:bg-slate-700 text-white active:ring-1 active:ring-gray-900"
-      >
-       <ArrowDownTrayIcon className="w-6 h-6 text-white" />
+    <button
+      onClick={exportToExcel}
+      className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg gap-x-2 text-white "
+    >
+      <ArrowDownTrayIcon className="w-6 h-6" />
 
-        <span className="hidden">Export to Excel</span>
-      </button>
+      <span className="hidden">Export to Excel</span>
+    </button>
   );
 
 };

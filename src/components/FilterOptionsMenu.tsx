@@ -213,7 +213,7 @@ export default function SidebarFilterOptions() {
                   </Disclosure>
                 ))}
               </form>
-              <div className="sticky bottom-0 border-t border-1 border-slate-300 py-6 px-4 flex justify-between gap-4 bg-white">
+              <div className="sticky bottom-0 border-t border-1 border-slate-300 py-10 px-4 flex justify-between gap-4 bg-white">
                 <button
                   onClick={clearFilters}
                   className="w-1/2 text-xs  font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2 active:ring-1 active:ring-gray-900"

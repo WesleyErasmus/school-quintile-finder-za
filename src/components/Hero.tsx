@@ -4,7 +4,8 @@ import InformationCard from "./InformationCard";
 const PageHero = () => {
   return (
     // <div className="py-16 relative border-b border-slate-100">
-    <div className="mt-[74px] py-16 relative">
+    // <div className="mt-[74px] py-16 relative">
+    <div className="py-16 relative">
       {/* Custom bg */}
       <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div>
       {/* End background */}

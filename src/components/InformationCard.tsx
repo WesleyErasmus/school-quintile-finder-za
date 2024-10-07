@@ -12,7 +12,7 @@ const InformationCard = (props: InformationCard) => {
     <div>
       <div className="px-4">
         <div className="mx-auto grid max-w-lg grid-cols-1 gap-5 lg:grid-cols-3">
-          <div className="bg-gradient-to-r from-primary-50 from-10% via-primary-50 via-50% to-primary-100 to-90% shadow-sm flex rounded-lg p-4 max-w-xl flex-col items-start justify-between">
+          <div className="bg-gradient-to-r from-primary-50 from-10% via-primary-50 via-50% to-primary-100 to-90% shadow-sm shadow-slate-100 flex rounded-lg p-4 max-w-xl flex-col items-start justify-between">
             <div className="group relative">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
                 {props.icon}
