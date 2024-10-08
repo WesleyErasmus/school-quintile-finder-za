@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -21,6 +21,7 @@ import {
   GraphQLFilters,
 } from "../types/FilterTypes";
 import Alert from "./Alert";
+import DialogContactForm from "./MobileRenderFilterResults";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -38,6 +39,8 @@ export default function SidebarFilterOptions() {
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
+
+  const [open,setOpen] = useState(true);
 
   const { refetch } = useQuery(FILTER_SCHOOLS, {
     fetchPolicy: "cache-first",
@@ -249,6 +252,8 @@ export default function SidebarFilterOptions() {
             Select filters to create the a searchable and downloadable data
             table of according to your specific needs.
           </p>
+          <button onClick={() => setOpen(open)}>Open me!</button>
+          <DialogContactForm open={open} setOpen={setOpen} />
           <button
             type="button"
             onClick={() => setMobileFiltersOpen(true)}

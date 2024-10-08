@@ -6,6 +6,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon} from "@heroicons/react/20/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FunnelIcon, XCircleIcon } from "@heroicons/react/20/solid";
+// import DialogContactForm from "./DialogContactForm";
 
 const RenderFilterResults = () => {
   const {
@@ -20,6 +21,7 @@ const RenderFilterResults = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
+  // const [open, setOpen] = useState(true)
 
   useEffect(() => {
     setDisplayedItems(50);
@@ -63,6 +65,8 @@ const RenderFilterResults = () => {
     <>
       {filteredData && filteredData.length > 0 ? (
         <div>
+          {/* <button onClick={() => setOpen(open)}>Open me!</button>
+          <DialogContactForm open={open} setOpen={setOpen} /> */}
           <div className="z-20 px-4 pt-2 sticky top-0 border-b border-gray-400 bg-white">
             {/* <h1 className="text-xs font-semibold text-gray-600 pb-2">
               {totalCount} <span className="text-gray-900">Results</span>
