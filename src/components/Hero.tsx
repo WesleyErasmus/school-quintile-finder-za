@@ -7,7 +7,7 @@ const PageHero = () => {
     // <div className="mt-[74px] py-16 relative">
     <div className="py-16 relative">
       {/* Custom bg */}
-      <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+      {/* <div className="absolute inset-0 -z-10 h-full w-full bg-white bg-[linear-gradient(to_right,#f8fafc_1px,transparent_1px),linear-gradient(to_bottom,#f8fafc_1px,transparent_1px)] bg-[size:14px_24px]"></div> */}
       {/* End background */}
 
       {/* Hero inner container */}

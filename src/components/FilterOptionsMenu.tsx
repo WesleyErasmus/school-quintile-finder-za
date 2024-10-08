@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -21,7 +21,6 @@ import {
   GraphQLFilters,
 } from "../types/FilterTypes";
 import Alert from "./Alert";
-import DialogContactForm from "./MobileRenderFilterResults";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -39,8 +38,6 @@ export default function SidebarFilterOptions() {
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
-
-  const [open,setOpen] = useState(true);
 
   const { refetch } = useQuery(FILTER_SCHOOLS, {
     fetchPolicy: "cache-first",
@@ -61,6 +58,7 @@ export default function SidebarFilterOptions() {
   ) => {
     setSelectedSchool(null);
     setFilters((prevFilters: Filters) => {
+       window.scrollTo({ top: 0, behavior: "smooth" });
       const updatedFilters = { ...prevFilters };
       if (isChecked) {
         updatedFilters[filterType] = [...updatedFilters[filterType], value];
@@ -216,17 +214,17 @@ export default function SidebarFilterOptions() {
                   </Disclosure>
                 ))}
               </form>
-              <div className="sticky bottom-0 border-t border-1 border-slate-300 py-10 px-4 flex justify-between gap-4 bg-white">
+              <div className="sticky bottom-0 border-t border-1 border-slate-300 py-6 px-4 flex justify-between gap-4 bg-white">
                 <button
                   onClick={clearFilters}
-                  className="w-1/2 text-xs  font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2 active:ring-1 active:ring-gray-900"
+                  className="w-1/2 text-sm font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-900 px-4 py-2 active:ring-1 active:ring-gray-900"
                 >
                   Clear Filters
                 </button>
                 <button
                   type="button"
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="w-1/2 text-xs font-medium tracking-wide rounded-lg text-white bg-primary-600 px-4 py-2 active:ring-1 active:ring-primary-900"
+                  className="w-1/2 text-sm font-medium tracking-wide rounded-lg text-white bg-primary-600 px-4 py-2 active:ring-1 active:ring-primary-900"
                 >
                   Done
                 </button>
@@ -252,8 +250,7 @@ export default function SidebarFilterOptions() {
             Select filters to create the a searchable and downloadable data
             table of according to your specific needs.
           </p>
-          <button onClick={() => setOpen(open)}>Open me!</button>
-          <DialogContactForm open={open} setOpen={setOpen} />
+          {/* PUT MOBILE FILTER RENDER HERE */}
           <button
             type="button"
             onClick={() => setMobileFiltersOpen(true)}

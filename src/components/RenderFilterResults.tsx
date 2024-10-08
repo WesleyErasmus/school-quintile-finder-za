@@ -67,7 +67,7 @@ const RenderFilterResults = () => {
         <div>
           {/* <button onClick={() => setOpen(open)}>Open me!</button>
           <DialogContactForm open={open} setOpen={setOpen} /> */}
-          <div className="z-20 px-4 pt-2 sticky top-0 border-b border-gray-400 bg-white">
+          <div className="z-20 px-4 pt-2 sticky top-0 bg-white">
             {/* <h1 className="text-xs font-semibold text-gray-600 pb-2">
               {totalCount} <span className="text-gray-900">Results</span>
             </h1> */}
@@ -141,8 +141,8 @@ const RenderFilterResults = () => {
                   </p>
                 }
               >
-                <table className="table-auto w-full">
-                  <thead className="border-b border-gray-400 bg-white">
+                <table className="table-auto w-full border border-1 border-gray-300">
+                  <thead className="border-b border-gray-300 bg-white">
                     <tr>
                       <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         School

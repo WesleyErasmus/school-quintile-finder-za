@@ -1,6 +1,7 @@
 import RenderFilterResults from "./RenderFilterResults";
 import SearchBar from "./SearchBar";
 import FilterOptionsMenu from "./FilterOptionsMenu";
+import MobileRenderFilterResults from "./MobileRenderFilterResults";
 const SearchAndFilterSection = () => {
   return (
     <div>
@@ -9,7 +10,7 @@ const SearchAndFilterSection = () => {
         <div className="mx-auto max-w-[1230px] w-full flex flex-col md:flex-row-reverse md:items-start">
           <div className="w-full flex flex-col">
             <SearchBar />
-            <div className="w-full">
+            <div className="w-full invisible sm:visible">
               <RenderFilterResults />
             </div>
           </div>
@@ -17,6 +18,9 @@ const SearchAndFilterSection = () => {
             <FilterOptionsMenu />
           </div>
         </div>
+      </div>
+      <div className="sm:hidden">
+        <MobileRenderFilterResults />
       </div>
     </div>
   );
