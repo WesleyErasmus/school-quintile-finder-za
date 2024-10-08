@@ -177,7 +177,94 @@ const DialogContactForm = (props: DialogProps) => {
                         </p>
                       }
                     >
-                      <table className="table-auto w-full">
+                      <div className="overflow-x-auto">
+                        <table className="w-full border-collapse bg-white text-left text-sm text-gray-500">
+                          <thead className="bg-gray-50">
+                            <tr>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900"
+                              >
+                                School
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell"
+                              >
+                                Quintile
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell"
+                              >
+                                Province
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell"
+                              >
+                                Phase
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell"
+                              >
+                                Sector
+                              </th>
+                              <th
+                                scope="col"
+                                className="px-6 py-4 font-medium text-gray-900 hidden sm:table-cell"
+                              >
+                                Fee Paying
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-gray-100 border-t border-gray-100">
+                            {cachedFilteredData
+                              .slice(0, displayedItems)
+                              .map((school: School, index: number) => (
+                                <tr key={index} className="hover:bg-gray-50">
+                                  <td className="px-6 py-4">
+                                    <div className="font-medium text-gray-900">
+                                      {school.name}
+                                    </div>
+                                    <div className="mt-1 sm:hidden">
+                                      <div className="text-gray-500">
+                                        Quintile level: {school.quintile}
+                                      </div>
+                                      <div className="text-gray-500">{school.province}</div>
+                                      <div className="text-gray-500">
+                                        {school.phase}
+                                      </div>
+                                      <div className="text-gray-500">
+                                        {school.sector}
+                                      </div>
+                                      <div className="text-gray-500">
+                                        {school.fee_paying}
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td className="px-6 py-4 hidden sm:table-cell">
+                                    {school.quintile}
+                                  </td>
+                                  <td className="px-6 py-4 hidden sm:table-cell">
+                                    {school.province}
+                                  </td>
+                                  <td className="px-6 py-4 hidden sm:table-cell">
+                                    {school.phase}
+                                  </td>
+                                  <td className="px-6 py-4 hidden sm:table-cell">
+                                    {school.sector}
+                                  </td>
+                                  <td className="px-6 py-4 hidden sm:table-cell">
+                                    {school.fee_paying}
+                                  </td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </div>
+                      {/* <table className="table-auto w-full">
                         <thead className="border-b border-gray-400 bg-white">
                           <tr>
                             <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-900">
@@ -195,7 +282,7 @@ const DialogContactForm = (props: DialogProps) => {
                             <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                               Sector
                             </th>
-                            <th className="px-3 py-3 text-sm text-left font-semibold text-nowrap text-gray-900">
+                            <th className="hidden px-3 py-3 text-sm text-left font-semibold text-nowrap text-gray-900">
                               Fee Paying
                             </th>
                           </tr>
@@ -220,13 +307,13 @@ const DialogContactForm = (props: DialogProps) => {
                                 <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
                                   {school.sector} School
                                 </td>
-                                <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
+                                <td className="hidden px-3 py-2.5 text-sm text-gray-800 text-left">
                                   {school.fee_paying}
                                 </td>
                               </tr>
                             ))}
                         </tbody>
-                      </table>
+                      </table> */}
                     </InfiniteScroll>
                   ) : (
                     <p className="p-4 text-center text-gray-500">
