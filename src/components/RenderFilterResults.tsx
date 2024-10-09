@@ -100,7 +100,7 @@ const RenderFilterResults = () => {
               <div className="w-1/6">
                 <button
                   onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
+                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white"
                 >
                   <FunnelIcon className="w-6 h-6" />
                 </button>
@@ -109,7 +109,7 @@ const RenderFilterResults = () => {
               <div className="w-1/6">
                 <button
                   onClick={clearFilters}
-                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
+                  className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white"
                 >
                   <XCircleIcon className="w-6 h-6" />
                 </button>
@@ -124,7 +124,7 @@ const RenderFilterResults = () => {
             </div>
             {/* End of filter top menu buttons */}
           </div>
-          <div className="z-10">
+          <div className="z-10 rounded-lg overflow-hidden border border-gray-100">
             {cachedFilteredData.length > 0 ? (
               <InfiniteScroll
                 dataLength={displayedItems}
@@ -141,8 +141,8 @@ const RenderFilterResults = () => {
                   </p>
                 }
               >
-                <table className="table-auto w-full border border-1 border-gray-300">
-                  <thead className="border-b border-gray-300 bg-white">
+                <table className="table-auto w-full bg-white">
+                  <thead className="border-b border-gray-100 bg-white">
                     <tr>
                       <th className="pl-5 pr-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         School
@@ -168,23 +168,23 @@ const RenderFilterResults = () => {
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index} className="odd:bg-slate-100">
-                          <td className="pl-5 pr-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
+                        <tr key={index}>
+                          <td className="pl-5 pr-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.name}
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
+                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
                             {school.quintile}
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
+                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.province}
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left text-wrap">
+                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.phase}
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
+                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
                             {school.sector} School
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-800 text-left">
+                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
                             {school.fee_paying}
                           </td>
                         </tr>

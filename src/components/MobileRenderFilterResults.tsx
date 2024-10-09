@@ -64,7 +64,7 @@ const MobileRenderFilterResults = () => {
       {filteredData && filteredData.length > 0 ? (
         <div className="z-40 absolute top-0 h-screen w-full bg-white">
           {/* Sticky header section */}
-          <div className="z-20 w-full p-4 sticky top-0 border-b border-gray-400 bg-white flex justify-between gap-2">
+          <div className="z-20 w-full p-4 sticky top-0 border-b border-gray-100 bg-white flex justify-between gap-2">
             {/* Search bar */}
             <div className="relative sm:w-full flex items-center">
               <span className="absolute">
@@ -75,7 +75,7 @@ const MobileRenderFilterResults = () => {
                 onChange={handleSearch}
                 type="text"
                 placeholder="Search"
-                className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-white border border-gray-400 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 sm:max-w-[295px]"
+                className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-slate-100 border border-gray-100 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 sm:max-w-[295px] focus:bg-white"
               />
               {searchTerm ? (
                 <button
@@ -88,7 +88,7 @@ const MobileRenderFilterResults = () => {
                 ""
               )}
             </div>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               {/* <button
                 onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
                 className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
@@ -126,32 +126,29 @@ const MobileRenderFilterResults = () => {
               }
             >
               <table className="table-auto w-full">
-                <thead className="border-b border-gray-400 bg-white">
-                  <tr className="font-medium text-gray-900 text-base text-left">
-                    <th scope="col" className="px-4 py-4 ">
+                <thead className="border-b border-gray-100 bg-white">
+                  <tr className="font-medium text-gray-900 text-sm text-left">
+                    <th scope="col" className="px-4 py-3 ">
                       Schools
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+                <tbody className="bg-white divide-y divide-gray-100">
                   {cachedFilteredData
                     .slice(0, displayedItems)
                     .map((school: School, index: number) => (
-                      <tr
-                        key={index}
-                        className="hover:bg-gray-50 odd:bg-slate-100"
-                      >
+                      <tr key={index} className="hover:bg-gray-50">
                         <td className="px-4 py-2.5">
-                          <h6 className="font-bold text-nowrap text-base text-gray-900">
+                          <h6 className="font-semibold text-nowrap text-sm text-gray-900">
                             {school.name}
                           </h6>
-                          <div className="flex items-center justify-between text-sm">
-                            <div className="mt-1 text-nowrap text-gray-700 sm:hidden">
+                          <div className="flex items-center justify-between text-xs">
+                            <div className="mt-0.5 text-nowrap text-gray-700 sm:hidden">
                               <p>{school.province}</p>
                               <p>{school.sector} School</p>
                               <p>Fee Paying: {school.fee_paying}</p>
                             </div>
-                            <div className="px-6 mt-1">
+                            <div className="px-6 mt-0.5">
                               <p className="font-medium text-gray-600">
                                 Quintile level: {school.quintile}
                               </p>
@@ -170,18 +167,18 @@ const MobileRenderFilterResults = () => {
             </p>
           )}
           {/* Bottom buttons */}
-          <div className="fixed w-full bottom-0 border-t border-1 border-gray-300 py-6 px-4 flex justify-between gap-4 bg-white">
+          <div className="fixed w-full bottom-0 border-t border-1 border-gray-100 py-6 px-4 flex justify-between gap-4 bg-white">
             <button
               onClick={clearFilters}
               type="button"
-              className="w-1/2 text-sm border border-1 rounded-md border-gray-900 font-semibold leading-6 text-gray-900"
+              className="w-1/2 text-sm border border-1 rounded-md border-gray-400 tracking-wide font-medium text-gray-900"
             >
               Close
             </button>
             <button
               onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
               type="submit"
-              className="w-1/2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="w-1/2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium tracking-wide text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Filters
             </button>

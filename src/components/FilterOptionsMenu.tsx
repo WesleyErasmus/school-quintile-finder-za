@@ -58,7 +58,7 @@ export default function SidebarFilterOptions() {
   ) => {
     setSelectedSchool(null);
     setFilters((prevFilters: Filters) => {
-       window.scrollTo({ top: 0, behavior: "smooth" });
+      //  window.scrollTo({ top: 0, behavior: "smooth" });
       const updatedFilters = { ...prevFilters };
       if (isChecked) {
         updatedFilters[filterType] = [...updatedFilters[filterType], value];
