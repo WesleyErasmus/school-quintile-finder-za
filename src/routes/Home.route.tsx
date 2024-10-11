@@ -7,13 +7,13 @@ import RenderFilterResults from "../components/Filtering/RenderFilterResults";
 import SearchBar from "../components/SearchBar/SearchBar";
 import { useDataContext } from "../contexts/data-context.hook";
 import TopNavbar from "../components/TopNavbar";
+import Footer from "../components/Footer";
 
 const Home = () => {
   const {filteredData} = useDataContext()
   return (
     <div className="min-h-screen">
       <TopNavbar />
-      {/* <LoaderFullPage /> */}
       <Hero />
       <div className="mx-auto max-w-[1230px] w-full flex flex-col md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-8">
         <div className="w-full flex flex-col">
@@ -44,6 +44,7 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

@@ -69,6 +69,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useDataContext = () => {
   const context = useContext(DataContext);
   if (context === undefined) {
