@@ -1,5 +1,5 @@
 import "../styles/search-bar.css";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
 import { School } from "../types/SchoolTypes";
@@ -154,7 +154,8 @@ const SearchBar = () => {
                 showIcon={false}
                 onSelect={handleOnSelect}
                 onHover={handleOnHover}
-                inputSearchString={searchString}
+                // inputSearchString={searchString}
+
                 items={
                   searchString.trim().length > 0 ? data?.schools || [] : []
                 }

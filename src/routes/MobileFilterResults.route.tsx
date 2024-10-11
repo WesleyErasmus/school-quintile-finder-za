@@ -173,10 +173,13 @@ const MobileFilterResults = () => {
               </table>
             </InfiniteScroll>
           ) : (
-            <p className="p-4 text-center text-gray-500">
-              No matches found. Try a different filter or use the main search
-              bar.
-            </p>
+            <div className="p-4 text-center mt-[65px]">
+              <p>No matches found.</p>
+              <p>
+                No matches found. Try a different combination of filters or use
+                the main search bar.
+              </p>
+            </div>
           )}
           {/* Bottom buttons */}
           <div className="fixed w-full bottom-0 border-t border-1 border-slate-100 pb-6 pt-2 px-4 flex justify-between gap-4 bg-white">
@@ -201,7 +204,6 @@ const MobileFilterResults = () => {
           </div>
         </div>
       ) : (
-        // ) : null}
         <div className="text-center py-10 px-4">
           <p>No matches found.</p>
           <p>
@@ -209,9 +211,9 @@ const MobileFilterResults = () => {
             the{" "}
             <a
               className="cursor-pointer text-primary-600"
-              onClick={() =>{
-                 navigate(homePage);
-                 clearFilters();
+              onClick={() => {
+                navigate(homePage);
+                clearFilters();
               }}
             >
               Home Page.
