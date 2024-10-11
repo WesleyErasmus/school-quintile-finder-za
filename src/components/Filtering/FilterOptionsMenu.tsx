@@ -1,4 +1,4 @@
-"use client";
+// Headless UI
 import { useEffect } from "react";
 import {
   Dialog,
@@ -8,21 +8,25 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-import { InformationCircleIcon } from "@heroicons/react/24/solid";
+
+// HeroIcons
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
-import { useDataContext } from "../contexts/data-context.hook";
-import FilterSchools from "../graphql/fetch-by-filter.graphql";
+
+// Data imports
+import { useDataContext } from "../../contexts/data-context.hook";
+import FilterSchools from "../../graphql/fetch-by-filter.graphql";
 import { gql, useQuery } from "@apollo/client";
 import {
   FilterKey,
   Filters,
   filterOptions,
   GraphQLFilters,
-} from "../types/FilterTypes";
-import Alert from "./Alert";
+} from "../../types/FilterTypes";
+
+// React router dom imports
 import { useNavigate } from "react-router-dom";
-import { mobileFilterResultsPage } from "../routes";
+import { mobileFilterResultsPage } from "../../routes";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -36,7 +40,7 @@ export default function FilterOptionsMenu() {
     setSelectedSchool,
     filters,
     setFilters,
-    filteredData,
+
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
@@ -246,20 +250,7 @@ export default function FilterOptionsMenu() {
           </DialogPanel>
         </div>
       </Dialog>
-
-      {/* Mobile filter button */}
-      <div className="lg:hidden relative px-4 sm:px-8 pt-12 pb-16">
-        {/* badge */}
-        <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
-          Filter and Export
-        </span>
-        <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
-          Filter <span className="text-primary-600">SA Schools Database</span>
-        </h1>
-        <p className="text-sm mt-2 text-gray-700 tracking-wide leading-5">
-          Select filters to create the a searchable and downloadable data table
-          of according to your specific needs.
-        </p>
+      <div className="lg:hidden relative px-4 sm:px-8">
         <button
           type="button"
           onClick={() => {
@@ -268,28 +259,14 @@ export default function FilterOptionsMenu() {
               navigate(mobileFilterResultsPage);
             }
           }}
-          className="w-full mt-8 mb-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-sm hover:shadow-md active:bg-primary-700"
+          className="w-full my-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-sm hover:shadow-md active:bg-primary-700"
         >
           Generate Custom Data Table
         </button>
-        {!filteredData && (
-          <Alert
-            icon={
-              <InformationCircleIcon
-                aria-hidden="true"
-                className="h-6 w-6 text-blue-400"
-              />
-            }
-            message={
-              "Use the Generate Custom Data Table button to create a table by using the filters. Easily search through the data and export to Excel."
-            }
-          />
-        )}
       </div>
 
       {/* Desktop filters */}
       <div className="hidden lg:block mr-2 overflow-y-auto pt-4 max-h-screen bg-white rounded-lg lg:ml-4">
-        {/* Filters */}
         <form className="w-[250px] px-6 ">
           <h1 className="py-4 border-b border-gray-300 font-semibold lg:pt-0">
             Filter Options

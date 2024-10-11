@@ -5,10 +5,10 @@ import {
 import { School } from "../types/SchoolTypes";
 import { useDataContext } from "../contexts/data-context.hook";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import ExportButtonMobile from "../components/ExportButtonMobile";
+import ExportButtonMobile from "../components/ExportToExcel/ExportButtonMobile";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import FilterOptionsMenu from "../components/FilterOptionsMenu";
+import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
 import { useNavigate } from "react-router-dom";
 import { homePage } from "../routes";
 import TopNavbar from "../components/TopNavbar";

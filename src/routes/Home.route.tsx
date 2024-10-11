@@ -1,10 +1,10 @@
 import Alert from "../components/Alert";
-import FilterOptionsMenu from "../components/FilterOptionsMenu";
-import FilterSectionHeader from "../components/FilterSectionHeader";
+import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
+import FilterSectionHeader from "../components/Filtering/FilterSectionHeader";
 import Hero from "../components/Hero";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
-import RenderFilterResults from "../components/RenderFilterResults";
-import SearchBar from "../components/SearchBar";
+import RenderFilterResults from "../components/Filtering/RenderFilterResults";
+import SearchBar from "../components/SearchBar/SearchBar";
 import { useDataContext } from "../contexts/data-context.hook";
 import TopNavbar from "../components/TopNavbar";
 

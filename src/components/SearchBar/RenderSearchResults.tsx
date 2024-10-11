@@ -7,8 +7,7 @@ import {
   
 } from "@heroicons/react/24/outline";
 import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
-import { useDataContext } from "../contexts/data-context.hook";
-import Loader from "./Loader";
+import { useDataContext } from "../../contexts/data-context.hook";
 
 const RenderSearchResults = () => {
   const { selectedSchool, isLoading, setIsLoading } = useDataContext();
@@ -19,14 +18,10 @@ const RenderSearchResults = () => {
 
   return (
     <>
-      {isLoading ? (
-        <div>
-          <Loader />
-        </div>
-      ) : selectedSchool ? (
+      {selectedSchool ? (
         // Card container
           <div className="p-6 rounded-lg tracking-wide bg-white">
-            {/* Card head with color */}
+            {/* Card header */}
             <div>
               <h2 className="text-lg font-bold leading-6 text-gray-900">
                 {selectedSchool.name}

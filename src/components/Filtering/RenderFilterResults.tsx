@@ -1,7 +1,7 @@
-import { School } from "../types/SchoolTypes";
-import { useDataContext } from "../contexts/data-context.hook";
+import { School } from "../../types/SchoolTypes";
+import { useDataContext } from "../../contexts/data-context.hook";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import ExportButton from "./ExportButton";
+import ExportButton from "../ExportToExcel/ExportButton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import {

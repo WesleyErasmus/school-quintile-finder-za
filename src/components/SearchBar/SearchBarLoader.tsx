@@ -1,6 +1,6 @@
 import { BarLoader } from "react-spinners"
 
-const LoaderSearchBar = () => {
+const SearchBarLoader = () => {
   return (
     <>
       <div className="relative max-w-3xl mx-auto text-center">
@@ -11,4 +11,4 @@ const LoaderSearchBar = () => {
   );
 };
 
-export default LoaderSearchBar;
+export default SearchBarLoader;

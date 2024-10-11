@@ -1,12 +1,12 @@
-import "../styles/search-bar.css";
+import "../../styles/search-bar.css";
 import { useState, useEffect } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useQuery, gql } from "@apollo/client";
-import { School } from "../types/SchoolTypes";
-import SearchSchools from "../graphql/fetch-school-data.graphql";
-import { useDataContext } from "../contexts/data-context.hook";
-import LoaderSearchBar from "./LoaderSearchBar";
-import Alert from "./Alert";
+import { School } from "../../types/SchoolTypes";
+import SearchSchools from "../../graphql/fetch-school-data.graphql";
+import { useDataContext } from "../../contexts/data-context.hook";
+import SearchBarLoader from "./SearchBarLoader";
+import Alert from "../Alert";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import RenderSearchResults from "./RenderSearchResults";
@@ -107,7 +107,7 @@ const SearchBar = () => {
     <div className="py-12 lg:py-0">
       {loading ? (
         <div className="mx-4 sm:mx-8">
-          <LoaderSearchBar />
+          <SearchBarLoader />
         </div>
       ) : (
         <div className="px-4 sm:px-8 lg:px-4">
