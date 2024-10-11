@@ -19,6 +19,8 @@ interface DataContextType {
   setFilters: React.Dispatch<React.SetStateAction<Filters>>;
   mobileFiltersOpen: boolean;
   setMobileFiltersOpen: (boolean: boolean) => void;
+  mobileFilterResultsOpen: boolean;
+  setMobileFilterResultsOpen: (boolean: boolean) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -37,6 +39,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     phase: [],
   });
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+    const [mobileFilterResultsOpen, setMobileFilterResultsOpen] = useState(false);
 
   return (
     <DataContext.Provider
@@ -57,6 +60,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setFilters,
         mobileFiltersOpen,
         setMobileFiltersOpen,
+        mobileFilterResultsOpen,
+        setMobileFilterResultsOpen,
       }}
     >
       {children}

@@ -1,22 +1,35 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  AdjustmentsHorizontalIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { School } from "../types/SchoolTypes";
 import { useDataContext } from "../contexts/data-context.hook";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import ExcelExport from "../export-to-excel/ExcelExport";
+import ExportButtonMobile from "../components/ExportButtonMobile";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-// import { FunnelIcon } from "@heroicons/react/20/solid";
+import FilterOptionsMenu from "../components/FilterOptionsMenu";
+import { useNavigate } from "react-router-dom";
+import { homePage } from "../routes";
+import TopNavbar from "../components/TopNavbar";
 
-const MobileRenderFilterResults = () => {
+const MobileFilterResults = () => {
   const {
     filteredData,
-    // totalCount,
     selectedFilter,
     setFilteredData,
     setFilters,
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!filteredData || filteredData.length === 0) {
+  //     navigate(homePage);
+  //   }
+  // }, [filteredData, navigate]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
@@ -60,11 +73,12 @@ const MobileRenderFilterResults = () => {
   };
 
   return (
-    <>
+    <div className="sm:hidden">
+      <TopNavbar />
       {filteredData && filteredData.length > 0 ? (
-        <div className="z-40 absolute top-0 h-screen w-full bg-white">
+        <div className="z-[13] absolute top-0 h-full w-full bg-white">
           {/* Sticky header section */}
-          <div className="z-20 w-full p-4 sticky top-0 border-b border-gray-100 bg-white flex justify-between gap-2">
+          <div className="z-[14] w-full px-4 pt-4 pb-2 fixed top-0 border-b border-slate-100 bg-white flex justify-between gap-2">
             {/* Search bar */}
             <div className="relative sm:w-full flex items-center">
               <span className="absolute">
@@ -74,8 +88,8 @@ const MobileRenderFilterResults = () => {
                 value={searchTerm}
                 onChange={handleSearch}
                 type="text"
-                placeholder="Search"
-                className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-slate-100 border border-gray-100 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 sm:max-w-[295px] focus:bg-white"
+                placeholder="Search results"
+                className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-slate-100 border border-slate-100 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 sm:max-w-[295px] focus:bg-white"
               />
               {searchTerm ? (
                 <button
@@ -89,18 +103,16 @@ const MobileRenderFilterResults = () => {
               )}
             </div>
             <div className="flex items-center gap-2">
-              {/* <button
-                onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                className="flex items-center p-3 h-10 text-sm bg-primary-600 rounded-lg text-white border"
-              >
-                <FunnelIcon className="w-6 h-6" />
-              </button> */}
-              <ExcelExport
+              <ExportButtonMobile
                 data={filteredData}
                 fileName={"quintileDataExport"}
               />
               <button
-                onClick={clearFilters}
+                // onClick={clearFilters}
+                onClick={() => {
+                  clearFilters();
+                  navigate(homePage);
+                }}
                 type="button"
                 className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-600"
               >
@@ -115,7 +127,7 @@ const MobileRenderFilterResults = () => {
               next={handleInfiniteScroll}
               hasMore={displayedItems < cachedFilteredData.length}
               loader={
-                <p className="p-4 text-center text-gray-500">
+                <p className="mb-[75px] p-4 text-center text-gray-500">
                   Loading more schools...
                 </p>
               }
@@ -125,8 +137,8 @@ const MobileRenderFilterResults = () => {
                 </p>
               }
             >
-              <table className="table-auto w-full">
-                <thead className="border-b border-gray-100 bg-white">
+              <table className="mt-[65px] table-auto w-full">
+                <thead className="border-b border-slate-100 bg-white">
                   <tr className="font-medium text-gray-900 text-sm text-left">
                     <th scope="col" className="px-4 py-3 ">
                       Schools
@@ -142,7 +154,7 @@ const MobileRenderFilterResults = () => {
                           <h6 className="font-semibold text-nowrap text-sm text-gray-900">
                             {school.name}
                           </h6>
-                          <div className="flex items-center justify-between text-xs">
+                          <div className="flex items-center justify-between text-xs max-w-lg">
                             <div className="mt-0.5 text-nowrap text-gray-700 sm:hidden">
                               <p>{school.province}</p>
                               <p>{school.sector} School</p>
@@ -167,9 +179,12 @@ const MobileRenderFilterResults = () => {
             </p>
           )}
           {/* Bottom buttons */}
-          <div className="fixed w-full bottom-0 border-t border-1 border-gray-100 py-6 px-4 flex justify-between gap-4 bg-white">
+          <div className="fixed w-full bottom-0 border-t border-1 border-slate-100 pb-6 pt-2 px-4 flex justify-between gap-4 bg-white">
             <button
-              onClick={clearFilters}
+              onClick={() => {
+                clearFilters();
+                navigate(homePage);
+              }}
               type="button"
               className="w-1/2 text-sm border border-1 rounded-md border-gray-400 tracking-wide font-medium text-gray-900"
             >
@@ -178,15 +193,35 @@ const MobileRenderFilterResults = () => {
             <button
               onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
               type="submit"
-              className="w-1/2 rounded-md bg-indigo-600 px-3 py-2 text-sm font-medium tracking-wide text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="w-1/2 px-6 py-2 rounded-md bg-white border border-gray-400 text-sm font-medium tracking-wide text-primary-600 flex items-center justify-center"
             >
+              <AdjustmentsHorizontalIcon className="mr-3 w-6 h-6" />
               Filters
             </button>
           </div>
         </div>
-      ) : null}
-    </>
+      ) : (
+        // ) : null}
+        <div className="text-center py-10 px-4">
+          <p>No matches found.</p>
+          <p>
+            Try a different combination of filters or use the main search bar on
+            the{" "}
+            <a
+              className="cursor-pointer text-primary-600"
+              onClick={() =>{
+                 navigate(homePage);
+                 clearFilters();
+              }}
+            >
+              Home Page.
+            </a>
+          </p>
+        </div>
+      )}
+      <FilterOptionsMenu />
+    </div>
   );
 };
 
-export default MobileRenderFilterResults;
+export default MobileFilterResults;

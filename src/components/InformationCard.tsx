@@ -9,31 +9,26 @@ interface InformationCard {
 
 const InformationCard = (props: InformationCard) => {
   return (
-    <div>
-      <div className="px-4">
-        <div className="mx-auto grid max-w-lg grid-cols-1 gap-5 lg:grid-cols-3">
-          <div className="bg-gradient-to-r from-primary-50 from-10% via-primary-50 via-50% to-primary-100 to-90% shadow-sm shadow-slate-100 flex rounded-lg p-4 max-w-xl flex-col items-start justify-between">
-            <div className="group relative">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-600">
-                {props.icon}
-              </div>
-              <h3 className="flex mt-6 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600">
-                <div>
-                  <span className="absolute inset-0" />
-                  {props.title}
-                </div>
-              </h3>
-              <p className="mt-3 line-clamp-2 text-sm leading-6 text-gray-700">
-                {props.subtitle}
-              </p>
-            </div>
-            <div className="relative mt-3 flex items-center gap-x-4">
-              <button className="text-primary-600 font-bold">
-               {props.buttonText}
-              </button>
-            </div>
+    <div className="grid max-w-lg gap-5 lg:max-w-lg lg:block">
+      <div className="p-4 max-w-xl flex flex-col justify-between bg-white rounded-lg shadow-sm shadow-slate-200 hover:shadow-md">
+        <div className="lg:flex lg:items-center">
+          <div className="flex flex-initial lg:mr-3 h-10 w-10 min-w-10 items-center justify-center rounded-lg bg-primary-600">
+            {props.icon}
           </div>
-      
+          <div>
+            <h3 className="flex mt-6 lg:mt-0 text-lg font-bold leading-6 text-gray-900 group-hover:text-gray-600 lg:text-base">
+              <div>{props.title}</div>
+            </h3>
+            <p className="mt-3 line-clamp-2 lg:line-clamp-1 text-sm leading-6 text-gray-700 lg:mt-0 ">
+              {props.subtitle}
+            </p>
+          </div>
+        </div>
+
+        <div className="relative mt-3  flex items-center lg:justify-end gap-x-4 lg:mt-2">
+          <button className="text-primary-600 font-bold lg:text-sm lg:font-semibold">
+            {props.buttonText}
+          </button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import { useEffect } from "react";
 import {
   Dialog,
@@ -8,7 +8,7 @@ import {
   DisclosureButton,
   DisclosurePanel,
 } from "@headlessui/react";
-// import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 import { useDataContext } from "../contexts/data-context.hook";
@@ -20,7 +20,7 @@ import {
   filterOptions,
   GraphQLFilters,
 } from "../types/FilterTypes";
-// import Alert from "./Alert";
+import Alert from "./Alert";
 import { useNavigate } from "react-router-dom";
 import { mobileFilterResultsPage } from "../routes";
 
@@ -36,7 +36,7 @@ export default function FilterOptionsMenu() {
     setSelectedSchool,
     filters,
     setFilters,
-    // filteredData,
+    filteredData,
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
@@ -248,10 +248,9 @@ export default function FilterOptionsMenu() {
       </Dialog>
 
       {/* Mobile filter button */}
-      {/* <div className="lg:hidden relative px-4 sm:px-8 pt-12 pb-16"> */}
-      <div className="lg:hidden relative px-4 sm:px-8">
-        
-        {/* <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+      <div className="lg:hidden relative px-4 sm:px-8 pt-12 pb-16">
+        {/* badge */}
+        <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
           Filter and Export
         </span>
         <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
@@ -260,7 +259,7 @@ export default function FilterOptionsMenu() {
         <p className="text-sm mt-2 text-gray-700 tracking-wide leading-5">
           Select filters to create the a searchable and downloadable data table
           of according to your specific needs.
-        </p> */}
+        </p>
         <button
           type="button"
           onClick={() => {
@@ -269,11 +268,11 @@ export default function FilterOptionsMenu() {
               navigate(mobileFilterResultsPage);
             }
           }}
-          className="w-full my-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-sm hover:shadow-md active:bg-primary-700"
+          className="w-full mt-8 mb-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-sm hover:shadow-md active:bg-primary-700"
         >
           Generate Custom Data Table
         </button>
-        {/* {!filteredData && (
+        {!filteredData && (
           <Alert
             icon={
               <InformationCircleIcon
@@ -285,7 +284,7 @@ export default function FilterOptionsMenu() {
               "Use the Generate Custom Data Table button to create a table by using the filters. Easily search through the data and export to Excel."
             }
           />
-        )} */}
+        )}
       </div>
 
       {/* Desktop filters */}

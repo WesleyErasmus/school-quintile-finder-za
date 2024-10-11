@@ -85,8 +85,7 @@ const SearchBar = () => {
           <p className="font-medium text-gray-900">{item.name}</p>
         </div>
         <div>
-          {/* <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-xs text-primary-600 ring-1 ring-inset ring-primary-500/10"> */}
-          <div className="inline-flex items-center pt-2 pb-3 text-sm text-gray-500">
+          <div className="inline-flex items-center pt-0.5 pb-3 text-xs text-gray-500">
             Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
@@ -105,45 +104,51 @@ const SearchBar = () => {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <div className="py-8">
+    <div className="py-12 lg:py-0">
       {loading ? (
-        <div className="mx-4">
+        <div className="mx-4 sm:mx-8">
           <LoaderSearchBar />
         </div>
       ) : (
-        <div className="px-3">
+        <div className="px-4 sm:px-8 lg:px-4">
           <div>
             {/* badge */}
-            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10 lg:hidden">
               Search for Schools
             </span>
             {/* title */}
-            <h1 className="mt-8 text-3xl font-extrabold tracking-tight">
+            <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:mt-0 lg:text-base lg:font-semibold lg:pt-4">
               Search for
-              <span className="text-primary-600"> School Quintile Data</span>
+              <span className="text-primary-600 lg:text-gray-900">
+                {" "}
+                School Quintile Data
+              </span>
             </h1>
             {/* subtitle */}
-            <p className="text-sm mt-2 tracking-wide leading-5 text-gray-600">
-              Discover Quintile level Province Sector Phase Address data
+            <p className="text-sm mt-2 tracking-wide leading-5 text-gray-700">
+              Find quintile, province, sector, phase, address, and fee paying
+              data.
             </p>
           </div>
-          <form onKeyDown={handleKeyDown} className="mt-8 mb-4 min-w-[275px]">
+          <form
+            onKeyDown={handleKeyDown}
+            className="mt-8 mb-4 min-w-[275px] lg:mt-4"
+          >
             <div className="relative">
               <div>
-                <span className="z-40 absolute mt-3">
+                <span className="z-[11] absolute mt-3">
                   <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
               </div>
               <ReactSearchAutocomplete
-                // className="search-bar-input z-30 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 shadow-sm hover:ring-2 hover:ring-primary-600 hover:ring-offset-2"
-                className="search-bar-input z-30 tracking-wide text-gray-900 rounded-lg focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 hover:ring-2 hover:ring-primary-600 hover:ring-offset-2"
+                className="search-bar-input tracking-wide text-gray-900 rounded-lg focus-within:ring-1 focus-within:ring-primary-600 focus-within:ring-offset-0 hover:shadow-sm border border-1 border-slate-200 z-10"
                 styling={{
-                  border: "1px solid #9ca3af",
+                  // border: "1px solid #d1d5db",
+                  border: "none",
                   fontSize: "0.90rem",
                   fontFamily:
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                   borderRadius: "0.5rem",
-                  placeholderColor: "",
                 }}
                 onSearch={handleOnSearch}
                 showIcon={false}

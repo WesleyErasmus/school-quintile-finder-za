@@ -2,9 +2,11 @@ import {
   BriefcaseIcon,
   MapPinIcon,
   BanknotesIcon,
-  MapIcon,
+  HomeIcon,
   Squares2X2Icon,
-} from "@heroicons/react/16/solid";
+  
+} from "@heroicons/react/24/outline";
+import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
 import { useDataContext } from "../contexts/data-context.hook";
 import Loader from "./Loader";
 
@@ -23,99 +25,104 @@ const RenderSearchResults = () => {
         </div>
       ) : selectedSchool ? (
         // Card container
-        <div className="mt-4">
-          {/* <div
-            className={`py-8 rounded-lg bg-${color}-50 ring-1 ring-inset ring-${color}-600/20 bg-opacity-25`}
-          > */}
-          <div className="py-8 rounded-lg border border-[rgb(223, 225, 229)]">
+          <div className="p-6 rounded-lg tracking-wide bg-white">
             {/* Card head with color */}
-            <div className="px-4">
-              <p>
-                <span
-                  className="mb-4 inline-flex items-center rounded-lg shadow-md bg-primary-600 tracking-wider px-2 py-1 text-sm font-medium text-white 
-                ring-1 ring-inset ring-primary-500/10"
-                >
-                  Quintile level: {selectedSchool.quintile}
-                </span>
-              </p>
-              <h2 className="text-2xl font-bold text-gray-900">
+            <div>
+              <h2 className="text-lg font-bold leading-6 text-gray-900">
                 {selectedSchool.name}
               </h2>
             </div>
             {/* Card Body */}
-            <div className="px-4">
-              <div className="flex pb-2 pt-4">
-                <div className="mt-1 h-7 w-7 flex items-center justify-center rounded-md shadow-md bg-primary-600">
-                  <MapIcon aria-hidden="true" className="w-5 h-5 text-white" />
+            <div className="pt-2">
+              <div className="flex py-1.5">
+                <div className="flex items-center justify-center">
+                  <Square3Stack3DIcon
+                    aria-hidden="true"
+                    className="w-5 h-5 text-primary-600"
+                  />
                 </div>
-                <div className="ml-3">
-                  <p className="leading-6 text-sm text-gray-700">Province</p>
-                  <h4 className="text-gray-900 text-sm font-semibold">
+                <div className="ml-2.5 text-sm text-primary-600 font-extrabold">
+                  Quintile level: {selectedSchool.quintile}
+                </div>
+                {/* </span> */}
+              </div>
+
+              <div className="flex py-1.5">
+                <div className="flex items-center justify-center">
+                  <HomeIcon
+                    aria-hidden="true"
+                    className="w-5 h-5 text-slate-700"
+                  />
+                </div>
+                <div className="ml-2.5">
+                  <span className="text-sm text-slate-700">Province: </span>
+                  <span className="text-gray-900 text-sm font-medium">
                     {selectedSchool.province}
-                  </h4>
+                  </span>
                 </div>
               </div>
-              <div className="flex py-2">
-                <div className="mt-1 h-7 w-7 flex items-center justify-center rounded-md shadow-md bg-primary-600">
+
+              {/*  */}
+              <div className="flex py-1.5">
+                <div className="flex items-center justify-center">
                   <BriefcaseIcon
                     aria-hidden="true"
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 text-slate-700"
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="leading-6 text-sm text-gray-700">Sector</p>
-                  <h4 className="text-gray-900 text-sm font-semibold">
+                <div className="ml-2.5">
+                  <span className="text-sm text-slate-700">Sector: </span>
+                  <span className="text-gray-900 text-sm font-medium">
                     {selectedSchool.sector}
-                  </h4>
+                  </span>
                 </div>
               </div>
-              <div className="flex py-2">
-                <div className="mt-1 h-7 w-7 flex items-center justify-center rounded-md shadow-md bg-primary-600">
+              {/*  */}
+
+              <div className="flex py-1.5">
+                <div className="flex items-center justify-center">
                   <Squares2X2Icon
                     aria-hidden="true"
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 text-slate-700"
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="leading-6 text-sm text-gray-700">Phase</p>
-                  <h4 className="text-gray-900 text-sm font-semibold">
+                <div className="ml-2.5">
+                  <span className="text-sm text-slate-700">Phase: </span>
+                  <span className="text-gray-900 text-sm font-medium">
                     {selectedSchool.phase}
-                  </h4>
+                  </span>
                 </div>
               </div>
-              <div className="flex py-2">
-                <div className="mt-1 h-7 w-7 flex items-center justify-center rounded-md shadow-md bg-primary-600">
+              <div className="flex py-1.5">
+                <div className="flex items-center justify-center">
                   <BanknotesIcon
                     aria-hidden="true"
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 text-slate-700"
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="leading-6 text-sm text-gray-700">Fee paying</p>
-                  <h4 className="text-gray-900 text-sm font-semibold">
+                <div className="ml-2.5">
+                  <span className="text-sm text-slate-700">Fee paying: </span>
+                  <span className="text-gray-900 text-sm font-medium">
                     {selectedSchool.fee_paying}
-                  </h4>
+                  </span>
                 </div>
               </div>
-              <div className="flex pt-2 pb-2">
-                <div
-                  className={`mt-1 h-7 w-7 px-1 flex items-center justify-center rounded-md shadow-md bg-primary-600`}
-                >
+              <div className="flex pt-1.5">
+                <div className="flex items-start justify-center">
                   <MapPinIcon
                     aria-hidden="true"
-                    className="w-5 h-5 text-white"
+                    className="w-5 h-5 mt-0.5 text-slate-700"
                   />
                 </div>
-                <div className="ml-3">
-                  <p className="leading-6 text-sm text-gray-700">Address</p>
-                  <h4 className="text-gray-900 text-sm font-semibold">
+                <div className="ml-2.5">
+                  <span className="text-sm text-slate-700">Address: </span>
+                  <span className="text-gray-900 text-sm font-medium">
                     {selectedSchool.address}
-                  </h4>
+                  </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
       ) : null}
     </>
   );

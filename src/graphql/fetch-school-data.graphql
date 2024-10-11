@@ -1,5 +1,5 @@
 query SearchSchools @cached {
-  schools (limit: 10000){
+  schools (limit: 1){
     id
     name
     quintile
