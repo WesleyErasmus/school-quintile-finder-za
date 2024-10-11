@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 import { School } from "../types/SchoolTypes";
-import { Filters } from '../types/FilterTypes'
+import { Filters } from "../types/FilterTypes";
 
 interface DataContextType {
   selectedSchool: School | null;
@@ -38,8 +38,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     province: [],
     phase: [],
   });
-    const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-    const [mobileFilterResultsOpen, setMobileFilterResultsOpen] = useState(false);
+  const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const [mobileFilterResultsOpen, setMobileFilterResultsOpen] = useState(false);
 
   return (
     <DataContext.Provider

@@ -1,18 +1,3 @@
-// Headless UI
-import { useEffect } from "react";
-import {
-  Dialog,
-  DialogBackdrop,
-  DialogPanel,
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
-
-// HeroIcons
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
-
 // Data imports
 import { useDataContext } from "../../contexts/data-context.hook";
 import FilterSchools from "../../graphql/fetch-by-filter.graphql";
@@ -27,6 +12,21 @@ import {
 // React router dom imports
 import { useNavigate } from "react-router-dom";
 import { mobileFilterResultsPage } from "../../routes";
+
+// Headless UI
+import { useEffect } from "react";
+import {
+  Dialog,
+  DialogBackdrop,
+  DialogPanel,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+
+// HeroIcons
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -308,7 +308,6 @@ export default function FilterOptionsMenu() {
                 </button>
                 <button
                   type="button"
-                  // onClick={() => setMobileFiltersOpen(false)}
                   onClick={() => {
                     setMobileFiltersOpen(false);
                     if (hasActiveFilters(filters)) {
@@ -342,11 +341,16 @@ export default function FilterOptionsMenu() {
       {/* Desktop filters */}
       <div className="hidden lg:block mr-2 overflow-y-auto pt-4 max-h-screen bg-white rounded-lg lg:ml-4">
         <form className="w-[250px] px-6 ">
-          <h1 className="py-4 border-b border-gray-300 font-semibold lg:pt-0">
+          <h1 className="py-4 border-b lg:text-lg border-gray-300 font-semibold lg:pt-0">
             Filter Options
           </h1>
-          {filterOptions.map((section) => (
-            <Disclosure key={section.id} as="div" className="py-6">
+          {filterOptions.map((section, index) => (
+            <Disclosure
+              key={section.id}
+              as="div"
+              className="py-6"
+              defaultOpen={index === 0}
+            >
               <h3 className="-my-3 flow-root">
                 <DisclosureButton className="group flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
                   <span className="font-medium text-gray-900">

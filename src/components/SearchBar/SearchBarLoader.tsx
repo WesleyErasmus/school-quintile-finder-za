@@ -1,4 +1,4 @@
-import { BarLoader } from "react-spinners"
+import { BarLoader } from "react-spinners";
 
 const SearchBarLoader = () => {
   return (

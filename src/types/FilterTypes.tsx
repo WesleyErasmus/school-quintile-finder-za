@@ -14,7 +14,7 @@ export interface FilterSection {
 
 export type Filters = {
   [key in FilterKey]: string[];
-}
+};
 
 export type GraphQLFilters = {
   [key: string]: {

@@ -1,16 +1,16 @@
-.search-bar-input input[type='text']:focus {
-    outline: none;
-    outline-offset: none;
-    --tw-ring-inset: none;
-    --tw-ring-offset-width: none;
-    --tw-ring-offset-color: none;
-    --tw-ring-color: none;
-    --tw-ring-offset-shadow: none;
-    --tw-ring-shadow: none;
-    box-shadow: none;
-    border-color: none;
+.search-bar-input input[type="text"]:focus {
+  outline: none;
+  outline-offset: none;
+  --tw-ring-inset: none;
+  --tw-ring-offset-width: none;
+  --tw-ring-offset-color: none;
+  --tw-ring-color: none;
+  --tw-ring-offset-shadow: none;
+  --tw-ring-shadow: none;
+  box-shadow: none;
+  border-color: none;
 }
 
-.search-bar-input input[type='text'] {
-padding-left: 2.4rem !important;
+.search-bar-input input[type="text"] {
+  padding-left: 2.4rem !important;
 }

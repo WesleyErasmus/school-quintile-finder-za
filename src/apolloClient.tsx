@@ -1,8 +1,4 @@
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-} from "@apollo/client";
+import { ApolloClient, InMemoryCache, HttpLink } from "@apollo/client";
 
 const HASURA_ENDPOINT = import.meta.env.VITE_HASURA_ENDPOINT;
 const HASURA_GRAPHQL_ADMIN_SECRET = import.meta.env.VITE_HASURA_ADMIN_SECRET;

@@ -1,15 +1,24 @@
+// Style imports
 import "../../styles/search-bar.css";
+
+// React hooks
 import { useState, useEffect } from "react";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
+
+// Data imports
 import { useQuery, gql } from "@apollo/client";
-import { School } from "../../types/SchoolTypes";
 import SearchSchools from "../../graphql/fetch-school-data.graphql";
 import { useDataContext } from "../../contexts/data-context.hook";
+import { ReactSearchAutocomplete } from "react-search-autocomplete";
+import { School } from "../../types/SchoolTypes";
+
+// Component imports
 import SearchBarLoader from "./SearchBarLoader";
 import Alert from "../Alert";
+import RenderSearchResults from "./RenderSearchResults";
+
+// HeroIcons
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import RenderSearchResults from "./RenderSearchResults";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -18,12 +27,8 @@ const GET_SCHOOL_DATA = gql`
 const SearchBar = () => {
   const [searchString, setSearchString] = useState("");
   const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
-  const {
-    selectedSchool,
-    setSelectedSchool,
-    setFilteredData,
-    setFilters,
-  } = useDataContext();
+  const { selectedSchool, setSelectedSchool, setFilteredData, setFilters } =
+    useDataContext();
 
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
@@ -54,13 +59,12 @@ const SearchBar = () => {
     setSelectedSchool(item);
     setSuggestedItem(item);
     setFilteredData(null);
-     setFilters({
-       quintile: [],
-       sector: [],
-       province: [],
-       phase: [],
-     });
-
+    setFilters({
+      quintile: [],
+      sector: [],
+      province: [],
+      phase: [],
+    });
   };
 
   const handleOnHover = (result: School) => {
@@ -112,19 +116,16 @@ const SearchBar = () => {
       ) : (
         <div className="px-4 sm:px-8 lg:px-4">
           <div>
-            {/* badge */}
             <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10 lg:hidden">
               Search for Schools
             </span>
-            {/* title */}
-            <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:mt-0 lg:text-base lg:font-semibold lg:pt-4">
+            <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:mt-0 lg:text-xl lg:font-semibold lg:pt-4">
               Search for
               <span className="text-primary-600 lg:text-gray-900">
                 {" "}
                 School Quintile Data
               </span>
             </h1>
-            {/* subtitle */}
             <p className="text-sm mt-2 tracking-wide leading-5 text-gray-700">
               Find quintile, province, sector, phase, address, and fee paying
               data.
@@ -143,7 +144,6 @@ const SearchBar = () => {
               <ReactSearchAutocomplete
                 className="search-bar-input tracking-wide text-gray-900 rounded-lg focus-within:ring-1 focus-within:ring-primary-600 focus-within:ring-offset-0 hover:shadow-sm border border-1 border-slate-200 z-10"
                 styling={{
-                  // border: "1px solid #d1d5db",
                   border: "none",
                   fontSize: "0.90rem",
                   fontFamily:
@@ -154,8 +154,6 @@ const SearchBar = () => {
                 showIcon={false}
                 onSelect={handleOnSelect}
                 onHover={handleOnHover}
-                // inputSearchString={searchString}
-
                 items={
                   searchString.trim().length > 0 ? data?.schools || [] : []
                 }

@@ -1,16 +1,21 @@
-import Alert from "../components/Alert";
-import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
-import FilterSectionHeader from "../components/Filtering/FilterSectionHeader";
-import Hero from "../components/Hero";
-import { InformationCircleIcon } from "@heroicons/react/24/solid";
-import RenderFilterResults from "../components/Filtering/RenderFilterResults";
-import SearchBar from "../components/SearchBar/SearchBar";
+// Data imports
 import { useDataContext } from "../contexts/data-context.hook";
+
+// Component imports
 import TopNavbar from "../components/TopNavbar";
+import Hero from "../components/Hero";
+import SearchBar from "../components/SearchBar/SearchBar";
+import RenderFilterResults from "../components/Filtering/RenderFilterResults";
+import FilterSectionHeader from "../components/Filtering/FilterSectionHeader";
+import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
+import Alert from "../components/Alert";
 import Footer from "../components/Footer";
 
+// HeroIcons
+import { InformationCircleIcon } from "@heroicons/react/24/solid";
+
 const Home = () => {
-  const {filteredData} = useDataContext()
+  const { filteredData } = useDataContext();
   return (
     <div className="min-h-screen">
       <TopNavbar />

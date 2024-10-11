@@ -1,9 +1,14 @@
-import { School } from "../../types/SchoolTypes";
-import { useDataContext } from "../../contexts/data-context.hook";
+// React hooks
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ExportButton from "../ExportToExcel/ExportButton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+
+// Data imports
+import { School } from "../../types/SchoolTypes";
+import { useDataContext } from "../../contexts/data-context.hook";
+
+// HeroIcons
 import {
   AdjustmentsHorizontalIcon,
   XMarkIcon,
@@ -39,7 +44,7 @@ const RenderFilterResults = () => {
   }, [filteredData, searchTerm]);
 
   const handleInfiniteScroll = useCallback(() => {
-       setDisplayedItems((prevItems) => prevItems + 50);
+    setDisplayedItems((prevItems) => prevItems + 50);
   }, []);
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -195,9 +200,7 @@ const RenderFilterResults = () => {
               </InfiniteScroll>
             ) : (
               <div className="p-4 text-center">
-                <p>
-                  No matches found.
-                </p>
+                <p>No matches found.</p>
                 <p>
                   No matches found. Try a different combination of filters or
                   use the main search bar.

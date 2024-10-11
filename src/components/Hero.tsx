@@ -1,5 +1,8 @@
-import { AcademicCapIcon, HomeModernIcon } from "@heroicons/react/24/outline";
+// Component imports
 import InformationCard from "./InformationCard";
+
+// HeroIcons
+import { AcademicCapIcon, HomeModernIcon } from "@heroicons/react/24/outline";
 
 const PageHero = () => {
   return (
@@ -30,19 +33,6 @@ const PageHero = () => {
         <div className="pt-16 lg:pt-0 flex lg:flex-none lg:grid lg:grid-rows-2 flex-col sm:flex-row gap-8 lg:gap-4 lg:pr-4">
           <InformationCard
             icon={
-              <AcademicCapIcon
-                aria-hidden="true"
-                className="h-7 w-7 text-white"
-              />
-            }
-            title={"Quintile reporting requirements in higher education"}
-            subtitle={
-              "This article outlines the the various DHET and CHE data requirements for reporting. Find out what data you need to be storing and reporting on."
-            }
-            buttonText={"Learn more ->"}
-          />
-          <InformationCard
-            icon={
               <HomeModernIcon
                 aria-hidden="true"
                 className="h-7 w-7 text-white"
@@ -51,6 +41,19 @@ const PageHero = () => {
             title={"South African school quintile levels explained"}
             subtitle={
               "Get a better understanding of a school quintile level is and how the different quintile levels are categorized. How quintile levels apply to public and private schools."
+            }
+            buttonText={"Learn more ->"}
+          />
+          <InformationCard
+            icon={
+              <AcademicCapIcon
+                aria-hidden="true"
+                className="h-7 w-7 text-white"
+              />
+            }
+            title={"Quintile reporting requirements in higher education"}
+            subtitle={
+              "This article outlines the the various DHET and CHE data requirements for reporting. Find out what data you need to be storing and reporting on."
             }
             buttonText={"Learn more ->"}
           />

@@ -1,7 +1,14 @@
-import { ChevronRightIcon } from "@heroicons/react/16/solid";
+// Component imports
 import TopNavbar from "../components/TopNavbar";
-import { homePage } from "../routes";
+
+// HeroIcons
+import { ChevronRightIcon } from "@heroicons/react/16/solid";
+
+// React router dom
 import { useNavigate } from "react-router-dom";
+
+// Route imports
+import { homePage } from "../routes";
 
 const PageNotFound = () => {
   const navigate = useNavigate();

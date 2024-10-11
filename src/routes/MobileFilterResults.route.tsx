@@ -1,17 +1,28 @@
+// React hooks
+import { useCallback, useEffect, useMemo, useState } from "react";
+
+// Data imports
+import { useDataContext } from "../contexts/data-context.hook";
+import { School } from "../types/SchoolTypes";
+
+// Components imports
+import TopNavbar from "../components/TopNavbar";
+import ExportButtonMobile from "../components/ExportToExcel/ExportButtonMobile";
+import InfiniteScroll from "react-infinite-scroll-component";
+import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
+
+// HeroIcons
 import {
   AdjustmentsHorizontalIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { School } from "../types/SchoolTypes";
-import { useDataContext } from "../contexts/data-context.hook";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import ExportButtonMobile from "../components/ExportToExcel/ExportButtonMobile";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
-import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
+
+// React router dom
 import { useNavigate } from "react-router-dom";
+
+// Route imports
 import { homePage } from "../routes";
-import TopNavbar from "../components/TopNavbar";
 
 const MobileFilterResults = () => {
   const {
@@ -108,7 +119,6 @@ const MobileFilterResults = () => {
                 fileName={"quintileDataExport"}
               />
               <button
-                // onClick={clearFilters}
                 onClick={() => {
                   clearFilters();
                   navigate(homePage);

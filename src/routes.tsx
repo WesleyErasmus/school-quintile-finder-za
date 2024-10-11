@@ -1,14 +1,18 @@
+// React router dom imports
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
+// Page imports
 import Home from "./routes/Home.route";
 import MobileFilterResults from "./routes/MobileFilterResults.route";
-import PageNotFound from './routes/PageNotFound.route'
+import PageNotFound from "./routes/PageNotFound.route";
 import { useEffect } from "react";
 
+// Page element exports
 export const homePage = "/";
 export const mobileFilterResultsPage = "/mobileFilterResults";
-export const pageNotFound = "pageNotFound"
+export const pageNotFound = "pageNotFound";
 
+// eslint-disable-next-line react-refresh/only-export-components
 const ScrollToTop = () => {
   const { pathname } = useLocation();
 

@@ -1,5 +1,10 @@
-import LoaderFullPage from "./components/LoaderFullPage";
+// Data imports
 import { DataProvider } from "./contexts/data-context.hook";
+
+// Component imports
+import LoaderFullPage from "./components/LoaderFullPage";
+
+// Route imports
 import routes from "./routes";
 
 function App() {
