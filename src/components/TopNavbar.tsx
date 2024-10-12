@@ -2,7 +2,7 @@
 import { useNavigate } from "react-router-dom";
 
 // Route import
-import { homePage } from "../routes";
+import { homePage } from "../App";
 
 const TopNavbar = () => {
   const navigate = useNavigate();
@@ -14,16 +14,10 @@ const TopNavbar = () => {
             onClick={() => navigate(homePage)}
             className="flex items-center cursor-pointer"
           >
-            <div className="mr-2 flex items-center justify-center bg-white w-9 h-9 rounded-full shadow-md">
-              <img
-                className="w-6 h-6"
-                src="./assets/footer-logo.png"
-                alt="logo"
-              />
-            </div>
+            <img className="mr-2 w-8 h-8" src="./assets/logo.png" alt="logo" />
             <div className="mt-1">
-              <h1 className="text-[1.39rem] font-extrabold tracking-wide text-gray-950">
-                Quintile Finder
+              <h1 className="text-[1.39rem] [text-shadow:_0px_1px_2px_rgba(0_0_0_/_25%)] font-extrabold tracking-wide text-gray-950">
+                Quintile Finder SA
               </h1>
             </div>
           </div>

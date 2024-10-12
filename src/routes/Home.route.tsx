@@ -2,14 +2,12 @@
 import { useDataContext } from "../contexts/data-context.hook";
 
 // Component imports
-import TopNavbar from "../components/TopNavbar";
 import Hero from "../components/Hero";
 import SearchBar from "../components/SearchBar/SearchBar";
 import RenderFilterResults from "../components/Filtering/RenderFilterResults";
 import FilterSectionHeader from "../components/Filtering/FilterSectionHeader";
 import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
 import Alert from "../components/Alert";
-import Footer from "../components/Footer";
 
 // HeroIcons
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
@@ -18,7 +16,6 @@ const Home = () => {
   const { filteredData } = useDataContext();
   return (
     <div className="min-h-screen">
-      <TopNavbar />
       <Hero />
       <div className="mx-auto max-w-[1230px] w-full flex flex-col md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-8">
         <div className="w-full flex flex-col">
@@ -49,7 +46,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

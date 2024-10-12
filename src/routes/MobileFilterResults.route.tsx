@@ -6,7 +6,6 @@ import { useDataContext } from "../contexts/data-context.hook";
 import { School } from "../types/SchoolTypes";
 
 // Components imports
-import TopNavbar from "../components/TopNavbar";
 import ExportButtonMobile from "../components/ExportToExcel/ExportButtonMobile";
 import InfiniteScroll from "react-infinite-scroll-component";
 import FilterOptionsMenu from "../components/Filtering/FilterOptionsMenu";
@@ -22,7 +21,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import { useNavigate } from "react-router-dom";
 
 // Route imports
-import { homePage } from "../routes";
+import { homePage } from "../App";
 
 const MobileFilterResults = () => {
   const {
@@ -85,7 +84,6 @@ const MobileFilterResults = () => {
 
   return (
     <div className="sm:hidden">
-      <TopNavbar />
       {filteredData && filteredData.length > 0 ? (
         <div className="z-[13] absolute top-0 h-full w-full bg-white">
           {/* Sticky header section */}

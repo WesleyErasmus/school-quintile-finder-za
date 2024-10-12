@@ -11,7 +11,7 @@ import {
 
 // React router dom imports
 import { useNavigate } from "react-router-dom";
-import { mobileFilterResultsPage } from "../../routes";
+import { mobileFilterResultsPage } from "../../App";
 
 // Headless UI
 import { useEffect } from "react";

@@ -5,11 +5,15 @@ interface InformationCard {
   title: string;
   subtitle: string;
   buttonText: string;
+  onClick?: () => void;
 }
 
 const InformationCard = (props: InformationCard) => {
   return (
-    <div className="grid max-w-lg gap-5 lg:max-w-lg lg:block">
+    <div
+      onClick={props.onClick}
+      className="grid max-w-lg gap-5 lg:max-w-lg lg:block cursor-pointer"
+    >
       <div className="p-4 max-w-xl flex flex-col justify-between bg-white rounded-lg shadow-sm shadow-slate-200 hover:shadow-md">
         <div className="lg:flex lg:items-center">
           <div className="flex flex-initial lg:mr-3 h-10 w-10 min-w-10 items-center justify-center rounded-lg bg-primary-600">

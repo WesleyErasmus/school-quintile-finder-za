@@ -1,3 +1,9 @@
+// React router dom
+import { useNavigate } from "react-router-dom";
+
+// Route imports
+import { quintileReportingBlog, quintileSystemBlog } from "../App";
+
 // Component imports
 import InformationCard from "./InformationCard";
 
@@ -5,6 +11,7 @@ import InformationCard from "./InformationCard";
 import { AcademicCapIcon, HomeModernIcon } from "@heroicons/react/24/outline";
 
 const PageHero = () => {
+  const navigate = useNavigate();
   return (
     <div className="pt-16 pb-12 relative lg:pb-10 lg:pt-8 lg:border-b lg:border-slate-200">
       <div className="px-4 sm:px-8 mx-auto w-full max-w-[1230px] lg:flex lg:px-0">
@@ -32,6 +39,7 @@ const PageHero = () => {
         </div>
         <div className="pt-16 lg:pt-0 flex lg:flex-none lg:grid lg:grid-rows-2 flex-col sm:flex-row gap-8 lg:gap-4 lg:pr-4">
           <InformationCard
+            onClick={() => navigate(quintileSystemBlog)}
             icon={
               <HomeModernIcon
                 aria-hidden="true"
@@ -45,6 +53,7 @@ const PageHero = () => {
             buttonText={"Learn more ->"}
           />
           <InformationCard
+            onClick={() => navigate(quintileReportingBlog)}
             icon={
               <AcademicCapIcon
                 aria-hidden="true"

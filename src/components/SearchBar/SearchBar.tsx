@@ -89,7 +89,7 @@ const SearchBar = () => {
           <p className="font-medium text-gray-900">{item.name}</p>
         </div>
         <div>
-          <div className="inline-flex items-center pt-0.5 pb-3 text-xs text-gray-500">
+          <div className="inline-flex items-center pt-0.5 pb-3 text-xs text-gray-600">
             Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
