@@ -10,24 +10,19 @@ import { useDataContext } from "../../contexts/data-context.hook";
 
 // HeroIcons
 import {
-  AdjustmentsHorizontalIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
 const RenderFilterResults = () => {
   const {
     filteredData,
-    // totalCount,
     selectedFilter,
     setFilteredData,
     setFilters,
-    mobileFiltersOpen,
-    setMobileFiltersOpen,
   } = useDataContext();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
-  // const [open, setOpen] = useState(true)
 
   useEffect(() => {
     setDisplayedItems(50);
@@ -71,7 +66,7 @@ const RenderFilterResults = () => {
     <>
       {filteredData && filteredData.length > 0 ? (
         <div>
-          <div className="z-20 px-4 lg:px-0 sm:px-8 pt-2 sticky top-0 bg-white lg:mx-4 rounded-t-xl lg:mt-4">
+          <div className="z-20 mx-4 sm:px-4 lg:px-0 pt-2 sticky top-0 bg-white lg:mx-4 rounded-t-xl lg:mt-4">
             {/* Filter top menu [search, filter, clear, export] */}
             <div className="py-2 flex flex-auto gap-4 justify-between bg-white border-b border-1 border-slate-100 lg:px-4">
               {/* Search bar */}
@@ -84,7 +79,7 @@ const RenderFilterResults = () => {
                   onChange={handleSearch}
                   type="text"
                   placeholder="Search results"
-                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-slate-100 border border-slate-100 rounded-lg placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 focus:bg-white sm:max-w-[295px]"
+                  className="block w-full py-1.5 pr-8 h-10 text-sm text-gray-600 bg-slate-100 border border-slate-100 rounded-full placeholder-gray-600/70 pl-11 focus:ring-1 focus:ring-primary-600 focus:bg-white sm:max-w-[295px] hover:shadow-md transition duration-200 ease-in-out"
                 />
                 {searchTerm ? (
                   <button
@@ -100,17 +95,6 @@ const RenderFilterResults = () => {
 
               {/* Open filters */}
               <div className="flex gap-4">
-                <button
-                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
-                  className="flex items-center p-3 h-10 text-gray-900 rounded-lg border border-gray-300 bg-white tracking-wide"
-                >
-                  <AdjustmentsHorizontalIcon
-                    aria-hidden="true"
-                    className="mr-3 w-6 h-6 text-slate-700"
-                  />
-                  <div className="text-sm text-gray-900">Filters</div>
-                </button>
-
                 {/* Export */}
                 <ExportButton
                   data={filteredData}
@@ -121,16 +105,19 @@ const RenderFilterResults = () => {
                 <button
                   onClick={clearFilters}
                   type="button"
-                  className="flex items-center justify-center h-10 rounded-lg bg-white p-2 text-slate-600"
+                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-2 text-slate-600 hover:bg-slate-100"
                 >
                   <span className="sr-only">Close menu</span>
-                  <XMarkIcon aria-hidden="true" className="h-6 w-6" />
+                  <XMarkIcon
+                    aria-hidden="true"
+                    className="h-6 w-6 hover:scale-110 transition duration-200 ease-in-out"
+                  />
                 </button>
               </div>
             </div>
             {/* End of filter top menu buttons */}
           </div>
-          <div className="z-10 mx-8 rounded-b-lg overflow-hidden lg:mx-4 lg:overflow-hidden">
+          <div className="z-10 mx-4 rounded-b-lg overflow-hidden lg:overflow-hidden">
             {cachedFilteredData.length > 0 ? (
               <InfiniteScroll
                 dataLength={displayedItems}
@@ -150,7 +137,7 @@ const RenderFilterResults = () => {
                 <table className="table-auto w-full bg-white">
                   <thead className="border-b border-gray-100 bg-white">
                     <tr>
-                      <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
+                      <th className="pl-6 px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         School
                       </th>
                       <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
@@ -165,7 +152,7 @@ const RenderFilterResults = () => {
                       <th className="px-3 py-2.5 text-sm text-left font-semibold text-gray-900">
                         Sector
                       </th>
-                      <th className="px-3 py-3 text-sm text-left font-semibold text-nowrap text-gray-900">
+                      <th className="pr-6 px-3 py-3 text-sm text-left font-semibold text-nowrap text-gray-900">
                         Fee Paying
                       </th>
                     </tr>
@@ -175,7 +162,7 @@ const RenderFilterResults = () => {
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
                         <tr key={index}>
-                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
+                          <td className="pl-6 px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.name}
                           </td>
                           <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
@@ -190,7 +177,7 @@ const RenderFilterResults = () => {
                           <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
                             {school.sector} School
                           </td>
-                          <td className="px-3 py-2.5 text-sm text-gray-900 text-left">
+                          <td className="pr-6 px-3 py-2.5 text-sm text-gray-900 text-left">
                             {school.fee_paying}
                           </td>
                         </tr>

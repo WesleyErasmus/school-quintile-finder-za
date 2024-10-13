@@ -13,10 +13,10 @@ import { AcademicCapIcon, HomeModernIcon } from "@heroicons/react/24/outline";
 const PageHero = () => {
   const navigate = useNavigate();
   return (
-    <div className="pt-16 pb-12 relative lg:pb-10 lg:pt-8 lg:border-b lg:border-slate-200">
-      <div className="px-4 sm:px-8 mx-auto w-full max-w-[1230px] lg:flex lg:px-0">
+    <div className="pt-16 relative lg:pt-8">
+      <div className="px-4 sm:px-8 md:px-4 mx-auto w-full max-w-[1230px] lg:flex lg:px-0 lg:border-b lg:border-slate-300 pb-12">
         <div className="flex flex-col items-start w-full lg:max-w-[960px] lg:px-4">
-          <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10">
+          <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-600/10">
             Simplify Your Quintile Search
           </span>
           <div className="mt-8 flex">
@@ -28,11 +28,10 @@ const PageHero = () => {
               </h1>
               <p className="mt-8 text-lg leading-6 text-gray-700">
                 Your go-to South African School quintile finder.{" "}
-                <span className="text-primary-600 font-extrabold">Find</span>,{" "}
-                <span className="text-primary-600 font-extrabold">filter</span>{" "}
-                and{" "}
-                <span className="text-primary-600 font-extrabold">export</span>{" "}
-                the <span>data that you need</span>.
+                <span className="text-gray-950 font-extrabold">Find</span>,{" "}
+                <span className="text-gray-950 font-extrabold">filter</span> and{" "}
+                <span className="text-gray-950 font-extrabold">export</span> the{" "}
+                <span>data that you need</span>.
               </p>
             </div>
           </div>

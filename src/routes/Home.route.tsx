@@ -17,19 +17,17 @@ const Home = () => {
   return (
     <div className="min-h-screen">
       <Hero />
-      <div className="mx-auto max-w-[1230px] w-full flex flex-col md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-8">
+      <div className="mx-auto max-w-[1230px] w-full flex flex-col justify-end md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-12">
         <div className="w-full flex flex-col">
           <SearchBar />
           <div className="w-full hidden sm:block">
             <RenderFilterResults />
           </div>
         </div>
-        <div>
-          <FilterSectionHeader />
-          <div className="sticky top-0">
-            <FilterOptionsMenu />
-          </div>
-          <div className="lg:hidden pb-16 px-4">
+        <FilterSectionHeader />
+        <div className="sticky top-0">
+          <FilterOptionsMenu />
+          <div className="lg:hidden pb-16 px-4 sm:px-8 md:px-4 lg:px-4">
             {!filteredData && (
               <Alert
                 icon={

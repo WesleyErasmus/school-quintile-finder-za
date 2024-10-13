@@ -89,7 +89,7 @@ const SearchBar = () => {
           <p className="font-medium text-gray-900">{item.name}</p>
         </div>
         <div>
-          <div className="inline-flex items-center pt-0.5 pb-3 text-xs text-gray-600">
+          <div className="inline-flex items-center mt-0.5 pb-3 text-xs text-gray-600">
             Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
@@ -114,9 +114,9 @@ const SearchBar = () => {
           <SearchBarLoader />
         </div>
       ) : (
-        <div className="px-4 sm:px-8 lg:px-4">
+        <div className="px-4 sm:px-8 md:px-4 lg:px-4">
           <div>
-            <span className="inline-flex items-center rounded-lg bg-primary-50 px-2 py-1 text-sm font-medium text-primary-600 ring-1 ring-inset ring-primary-500/10 lg:hidden">
+            <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-600/10 lg:hidden">
               Search for Schools
             </span>
             <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:mt-0 lg:text-xl lg:font-semibold lg:pt-4">
@@ -142,13 +142,13 @@ const SearchBar = () => {
                 </span>
               </div>
               <ReactSearchAutocomplete
-                className="search-bar-input tracking-wide text-gray-900 rounded-lg focus-within:ring-1 focus-within:ring-primary-600 focus-within:ring-offset-0 hover:shadow-sm border border-1 border-slate-200 z-10"
+                className="search-bar-input tracking-wide text-gray-900 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-10 text-sm hover:shadow-lg transition duration-200 ease-in-out ring-1 ring-slate-300 lg:ring-0"
                 styling={{
                   border: "none",
-                  fontSize: "0.90rem",
+                  fontSize: "0.875rem",
                   fontFamily:
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                  borderRadius: "0.5rem",
+                  boxShadow: "none",
                 }}
                 onSearch={handleOnSearch}
                 showIcon={false}
@@ -162,7 +162,7 @@ const SearchBar = () => {
                   threshold: 0.3,
                   location: 0,
                   distance: 100,
-                  minMatchCharLength: 3,
+                  minMatchCharLength: 2,
                 }}
                 formatResult={formatResult}
                 maxResults={7}

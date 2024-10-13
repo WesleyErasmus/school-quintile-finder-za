@@ -24,13 +24,14 @@ interface Section {
 const BlogPost = (props: BlogPostProps) => {
   const navigate = useNavigate();
   return (
-    <div className="py-6 px-4 mx-auto max-w-[800px]">
-      <div className="flex items-center gap-2 text-primary-600 font-medium">
-        <ArrowLeftIcon className="w-4 h-4" />
-        <a onClick={() => navigate(homePage)} className="cursor-pointer">
-          Back to homepage{" "}
-        </a>
-      </div>
+    <div className="py-6 px-4 mx-auto max-w-[800px] active:text-primary-900">
+      <button
+        onClick={() => navigate(homePage)}
+        className="flex items-center gap-2 text-primary-600 font-medium active:text-gray-900"
+      >
+        <ArrowLeftIcon className="w-4 h-4 text-gray-700" />
+        Back to homepage
+      </button>
       <img
         className="mt-4 w-full"
         src={props.headerImage}

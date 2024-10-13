@@ -23,11 +23,9 @@ const ExportButtonMobile = (props: ExcelExport) => {
   return (
     <button
       onClick={exportToExcel}
-      className="flex items-center rounded-lg h-10 gap-x-2 text-gray-600"
+      className="flex items-center justify-center rounded-full h-10 w-10 text-gray-600 active:bg-slate-100"
     >
-      <ArrowDownTrayIcon className="w-6 h-6" />
-
-      <span className="hidden">Export to Excel</span>
+      <ArrowDownTrayIcon className="w-6 h-6 active:text-gray-900" />
     </button>
   );
 };

@@ -204,7 +204,6 @@ export default function FilterOptionsMenu() {
     },
   ];
 
-
   return (
     <>
       {/* Mobile filter dialog */}
@@ -323,7 +322,7 @@ export default function FilterOptionsMenu() {
           </DialogPanel>
         </div>
       </Dialog>
-      <div className="lg:hidden relative px-4 sm:px-8">
+      <div className="lg:hidden relative px-4 sm:px-8 md:px-4">
         <button
           type="button"
           onClick={() => {
@@ -332,15 +331,15 @@ export default function FilterOptionsMenu() {
               navigate(mobileFilterResultsPage);
             }
           }}
-          className="w-full my-4 px-6 py-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-sm hover:shadow-md active:bg-primary-700"
+          className="w-full my-4 px-3 py-3 flex items-center justify-center gap-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-md hover:shadow-lg  active:ring-1 active:ring-primary-900"
         >
-          Generate Custom Data Table
+          Generate & Export Custom Table
         </button>
       </div>
 
       {/* Desktop filters */}
-      <div className="hidden lg:block mr-2 overflow-y-auto pt-4 max-h-screen bg-white rounded-lg lg:ml-4">
-        <form className="w-[250px] px-6 ">
+      <div className="hidden sticky top-0 lg:block mr-2 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen">
+        <form className="w-[250px] px-6">
           <h1 className="py-4 border-b lg:text-lg border-gray-300 font-semibold lg:pt-0">
             Filter Options
           </h1>
@@ -352,8 +351,8 @@ export default function FilterOptionsMenu() {
               defaultOpen={index === 0}
             >
               <h3 className="-my-3 flow-root">
-                <DisclosureButton className="group flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-gray-500">
-                  <span className="font-medium text-gray-900">
+                <DisclosureButton className="group flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-primary-600">
+                  <span className="font-medium text-gray-900 group-hover:font-semibold">
                     {section.name}
                   </span>
                   <span className="ml-6 flex items-center">
@@ -377,7 +376,7 @@ export default function FilterOptionsMenu() {
                         id={`filter-${section.id}-${optionIdx}`}
                         name={`${section.id}[]`}
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-400 text-primary-600 focus:ring-primary-500"
+                        className="h-4 w-4 rounded border-gray-400 text-primary-600 focus:ring-primary-500 cursor-pointer"
                         onChange={(e) =>
                           handleFilterChange(
                             section.id,
@@ -389,7 +388,7 @@ export default function FilterOptionsMenu() {
                       />
                       <label
                         htmlFor={`filter-${section.id}-${optionIdx}`}
-                        className="ml-3 text-sm text-gray-900"
+                        className="ml-3 cursor-pointer text-sm text-gray-600 hover:text-gray-950 hover:font-medium"
                       >
                         {option.label}
                       </label>

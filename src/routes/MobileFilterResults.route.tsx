@@ -122,7 +122,7 @@ const MobileFilterResults = () => {
                   navigate(homePage);
                 }}
                 type="button"
-                className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-600"
+                className="flex h-10 w-10 items-center justify-center rounded-full active:bg-slate-100 p-2 text-gray-600 "
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="h-6 w-6" />
@@ -197,14 +197,14 @@ const MobileFilterResults = () => {
                 navigate(homePage);
               }}
               type="button"
-              className="w-1/2 text-sm border border-1 rounded-md border-gray-400 tracking-wide font-medium text-gray-900"
+              className="w-1/2 text-sm font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-400 px-4 py-2 active:ring-1 active:ring-gray-900"
             >
               Close
             </button>
             <button
               onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
               type="submit"
-              className="w-1/2 px-6 py-2 rounded-md bg-white border border-gray-400 text-sm font-medium tracking-wide text-primary-600 flex items-center justify-center"
+              className="w-1/2 text-sm font-medium tracking-wide rounded-lg text-white bg-primary-600 px-4 py-2 active:ring-1 active:ring-primary-900 flex items-center justify-center"
             >
               <AdjustmentsHorizontalIcon className="mr-3 w-6 h-6" />
               Filters
