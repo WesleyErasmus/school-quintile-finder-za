@@ -12,7 +12,7 @@ const TopNavbar = () => {
         <div className="mx-auto max-w-[1230px] w-full">
           <div
             onClick={() => navigate(homePage)}
-            className="inline-flex items-center cursor-pointer px-6 py-1 rounded-lg"
+            className="inline-flex items-center cursor-pointer py-1 rounded-lg"
           >
             <img className="mr-2 w-8 h-8" src="./assets/logo.png" alt="logo" />
             <div className="mt-1">

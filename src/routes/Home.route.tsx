@@ -13,9 +13,13 @@ import Alert from "../components/Alert";
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
 
 const Home = () => {
-  const { filteredData } = useDataContext();
+  const { filteredData, isLoadingFilteredData } = useDataContext();
   return (
-    <div className="min-h-screen">
+    <div
+      className={`min-h-screen ${
+        isLoadingFilteredData ? "pointer-events-none" : ""
+      }`}
+    >
       <Hero />
       <div className="mx-auto max-w-[1230px] w-full flex flex-col justify-end md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-12">
         <div className="w-full flex flex-col">

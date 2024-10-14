@@ -23,11 +23,11 @@ const ExportButton = (props: ExcelExport) => {
   return (
     <button
       onClick={exportToExcel}
-      className="group flex items-center justify-center p-3 h-10 font-medium text-no-wrap bg-white border border-gray-400 rounded-lg active:ring-1 active:ring-gray-900 hover:shadow-md"
+      className="group flex items-center justify-center gap-3 p-3 h-9 font-medium text-no-wrap bg-primary-600 rounded-lg active:ring-1 active:ring-primary-900 hover:shadow-lg hover:bg-primary-500"
     >
-      <ArrowDownTrayIcon className="mr-3 w-6 h-6 text-slate-700 group-active:text-gray-900 group-hover:text-gray-600" />
+      <ArrowDownTrayIcon className="w-6 h-6 text-white" />
 
-      <div className="text-gray-900 text-sm group-hover:text-gray-600">
+      <div className="text-white text-sm">
         Export to Excel
       </div>
     </button>

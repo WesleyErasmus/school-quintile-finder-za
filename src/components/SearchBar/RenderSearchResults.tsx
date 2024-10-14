@@ -22,7 +22,7 @@ const RenderSearchResults = () => {
     <>
       {selectedSchool ? (
         // Card container
-        <div className="p-6 rounded-lg tracking-wide bg-white">
+        <div className="p-6 rounded-lg sm:rounded-3xl tracking-wide bg-white ring-1 ring-inset ring-primary-600/10">
           {/* Card header */}
           <div>
             <h2 className="text-lg font-bold leading-6 text-gray-900">
@@ -41,7 +41,6 @@ const RenderSearchResults = () => {
               <div className="ml-2.5 text-sm text-primary-600 font-extrabold">
                 Quintile level: {selectedSchool.quintile}
               </div>
-              {/* </span> */}
             </div>
 
             <div className="flex py-1.5">

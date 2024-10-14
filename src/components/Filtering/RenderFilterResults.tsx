@@ -94,7 +94,7 @@ const RenderFilterResults = () => {
               </div>
 
               {/* Open filters */}
-              <div className="flex gap-4">
+              <div className="flex items-end gap-4">
                 {/* Export */}
                 <ExportButton
                   data={filteredData}
@@ -105,7 +105,7 @@ const RenderFilterResults = () => {
                 <button
                   onClick={clearFilters}
                   type="button"
-                  className="flex items-center justify-center h-10 w-10 rounded-full bg-white p-2 text-slate-600 hover:bg-slate-100"
+                  className="flex items-center justify-center h-9 w-9 rounded-full bg-white p-2 text-slate-600 hover:bg-slate-100"
                 >
                   <span className="sr-only">Close menu</span>
                   <XMarkIcon

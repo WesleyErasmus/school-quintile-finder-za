@@ -137,14 +137,14 @@ const SearchBar = () => {
           >
             <div className="relative">
               <div>
-                <span className="z-[11] absolute mt-3">
+                <span className="z-[22] absolute mt-3">
                   <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
               </div>
               <ReactSearchAutocomplete
-                className="search-bar-input tracking-wide text-gray-900 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-10 text-sm hover:shadow-lg transition duration-200 ease-in-out ring-1 ring-slate-300 lg:ring-0"
+                className="search-bar-input tracking-wide text-gray-900 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-[21] text-sm transition duration-200 ease-in-out hover:shadow-lg"
                 styling={{
-                  border: "none",
+                  border: "solid 1px rgb(79 70 229 / 0.2)",
                   fontSize: "0.875rem",
                   fontFamily:
                     "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",

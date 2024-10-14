@@ -36,6 +36,7 @@ export default function FilterOptionsMenu() {
   const {
     setFilteredData,
     setTotalCount,
+    isLoadingFilteredData,
     setIsLoadingFilteredData,
     setSelectedSchool,
     filters,
@@ -245,7 +246,9 @@ export default function FilterOptionsMenu() {
                   <Disclosure
                     key={section.id}
                     as="div"
-                    className="border-t border-gray-200 px-4 py-6"
+                    className={`border-t border-gray-200 px-4 py-6 ${
+                      isLoadingFilteredData ? "pointer-events-none" : ""
+                    }`}
                   >
                     <h3 className="-mx-2 -my-3 flow-root">
                       <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-600 hover:text-gray-500">
@@ -298,7 +301,11 @@ export default function FilterOptionsMenu() {
                   </Disclosure>
                 ))}
               </form>
-              <div className="sticky bottom-0 border-t border-1 border-slate-300 py-6 px-4 flex justify-between gap-4 bg-white">
+              <div
+                className={`sticky bottom-0 border-t border-1 border-slate-300 py-6 px-4 flex justify-between gap-4 bg-white ${
+                  isLoadingFilteredData ? "pointer-events-none" : ""
+                }`}
+              >
                 <button
                   onClick={clearFilters}
                   className="w-1/2 text-sm font-medium tracking-wide rounded-lg border border-1 text-gray-900 border-gray-400 px-4 py-2 active:ring-1 active:ring-gray-900"
@@ -331,14 +338,14 @@ export default function FilterOptionsMenu() {
               navigate(mobileFilterResultsPage);
             }
           }}
-          className="w-full my-4 px-3 py-3 flex items-center justify-center gap-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-md hover:shadow-lg  active:ring-1 active:ring-primary-900"
+          className="w-full my-4 px-3 py-3 flex items-center justify-center gap-3 text-white tracking-wide rounded-lg bg-primary-600 shadow-md hover:shadow-lg active:ring-1 active:ring-primary-900"
         >
           Generate & Export Custom Table
         </button>
       </div>
 
       {/* Desktop filters */}
-      <div className="hidden sticky top-0 lg:block mr-2 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen">
+      <div className="hidden sticky top-0 lg:block mr-2 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen ring-1 ring-inset ring-primary-600/10">
         <form className="w-[250px] px-6">
           <h1 className="py-4 border-b lg:text-lg border-gray-300 font-semibold lg:pt-0">
             Filter Options

@@ -47,7 +47,7 @@ const PageHero = () => {
             }
             title={"South African school quintile levels explained"}
             subtitle={
-              "Get a better understanding of a school quintile level is and how the different quintile levels are categorized. How quintile levels apply to public and private schools."
+              "Gain a clearer understanding of what school quintile levels are and how they are categorized."
             }
             buttonText={"Learn more ->"}
           />
@@ -61,7 +61,7 @@ const PageHero = () => {
             }
             title={"Quintile reporting requirements in higher education"}
             subtitle={
-              "This article outlines the the various DHET and CHE data requirements for reporting. Find out what data you need to be storing and reporting on."
+              "This article provides a general overview of key aspects of school quintile data reporting requirements in higher education."
             }
             buttonText={"Learn more ->"}
           />
