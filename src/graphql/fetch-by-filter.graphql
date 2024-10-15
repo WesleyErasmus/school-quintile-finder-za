@@ -4,7 +4,7 @@ query FilterSchools($filters: schools_bool_exp!) @cached {
       count
     }
   }
-  schools(where: $filters, order_by: { name: asc }) {
+  schools (where: $filters, order_by: { name: asc }) {
     id
     name
     quintile

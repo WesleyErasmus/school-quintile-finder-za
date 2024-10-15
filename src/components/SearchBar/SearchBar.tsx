@@ -17,8 +17,12 @@ import Alert from "../Alert";
 import RenderSearchResults from "./RenderSearchResults";
 
 // HeroIcons
-import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import {
+  InformationCircleIcon,
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+import ErrorAlert from "../ErrorAlert";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -105,7 +109,18 @@ const SearchBar = () => {
     </>
   );
 
-  if (error) return <p>Error: {error.message}</p>;
+  // if (error) return <p>Error: {error.message}</p>;
+  if (error) return (
+    <ErrorAlert
+      icon={
+        <ExclamationTriangleIcon
+          aria-hidden="true"
+          className="h-6 w-6 text-red-400"
+        />
+      }
+      message={"There was an error fetching the data for the search functionalities. Please refresh the page or try again later."}
+    />
+  );
 
   return (
     <div className="py-12 lg:py-0">

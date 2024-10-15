@@ -117,7 +117,7 @@ const RenderFilterResults = () => {
             </div>
             {/* End of filter top menu buttons */}
           </div>
-          <div className="z-10 mx-4 rounded-b-lg overflow-hidden lg:overflow-hidden">
+          <div className="z-10 mx-4 rounded-b-lg overflow-hidden lg:overflow-hidden shadow-lg">
             {cachedFilteredData.length > 0 ? (
               <InfiniteScroll
                 dataLength={displayedItems}
@@ -161,7 +161,7 @@ const RenderFilterResults = () => {
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index}>
+                        <tr key={index} className="odd:bg-neutral-50">
                           <td className="pl-6 px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.name}
                           </td>

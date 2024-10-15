@@ -164,19 +164,19 @@ export default function FilterOptionsMenu() {
       name: "Phase",
       options: [
         {
-          value: "Pre-Primary School",
-          label: "Pre-Primary Schools",
+          value: "Ecd",
+          label: "ECD",
           checked: false,
         },
         { value: "Primary School", label: "Primary Schools", checked: false },
         {
-          value: "Intermediate Schools",
+          value: "Intermediate School",
           label: "Intermediate Schools",
           checked: false,
         },
         {
           value: "Secondary School",
-          label: "Secondary School",
+          label: "Secondary Schools",
           checked: false,
         },
         {
@@ -185,8 +185,13 @@ export default function FilterOptionsMenu() {
           checked: false,
         },
         {
-          value: "Specialized School",
-          label: "Specialized Schools",
+          value: "Special Needs Education",
+          label: "Special Needs Education",
+          checked: false,
+        },
+        {
+          value: "School Of",
+          label: "Special Needs Education",
           checked: false,
         },
       ],
