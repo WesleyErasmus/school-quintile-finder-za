@@ -41,20 +41,22 @@ export default function FilterOptionsMenu() {
     setSelectedSchool,
     filters,
     setFilters,
-
+    setFilterError,
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
 
   const navigate = useNavigate();
 
-  const { refetch } = useQuery(FILTER_SCHOOLS, {
+  const { error, refetch } = useQuery(FILTER_SCHOOLS, {
     fetchPolicy: "cache-first",
     variables: {
       filters: {},
     },
     skip: true,
   });
+
+  const apolloError = error;
 
   const hasActiveFilters = (filters: Filters) => {
     return Object.values(filters).some((filter) => filter.length > 0);
@@ -86,6 +88,7 @@ export default function FilterOptionsMenu() {
       sector: [],
       province: [],
       phase: [],
+      fee_paying: [],
     });
   };
 
@@ -107,10 +110,11 @@ export default function FilterOptionsMenu() {
         });
 
         if (data && data.schools) {
+          setFilterError(false);
           setFilteredData(data.schools);
           setTotalCount(data.schools_aggregate.aggregate.count);
         } else {
-          console.log("No data returned from query");
+          // console.log("No data returned from query");
           setFilteredData([]);
           setTotalCount(0);
         }
@@ -118,6 +122,7 @@ export default function FilterOptionsMenu() {
         console.error("Error fetching data:", error);
         setFilteredData([]);
         setTotalCount(0);
+        setFilterError(true);
       } finally {
         setIsLoadingFilteredData(false);
       }
@@ -125,9 +130,11 @@ export default function FilterOptionsMenu() {
 
     fetchFilteredData();
   }, [
+    apolloError,
     filters,
     refetch,
     setFilteredData,
+    setFilterError,
     setIsLoadingFilteredData,
     setTotalCount,
   ]);
@@ -190,8 +197,8 @@ export default function FilterOptionsMenu() {
           checked: false,
         },
         {
-          value: "School Of",
-          label: "Special Needs Education",
+          value: "Hospital School",
+          label: "Hospital Schools",
           checked: false,
         },
       ],
@@ -204,6 +211,18 @@ export default function FilterOptionsMenu() {
         {
           value: "Independent",
           label: "Independent Schools",
+          checked: false,
+        },
+      ],
+    },
+    {
+      id: "fee_paying",
+      name: "Fees",
+      options: [
+        { value: "Yes", label: "Fee Paying Schools", checked: false },
+        {
+          value: "No",
+          label: "None-Fee Paying Schools",
           checked: false,
         },
       ],

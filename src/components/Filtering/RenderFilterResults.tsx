@@ -2,16 +2,18 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import ExportButton from "../ExportToExcel/ExportButton";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 // Data imports
 import { School } from "../../types/SchoolTypes";
 import { useDataContext } from "../../contexts/data-context.hook";
 
 // HeroIcons
-import {
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+
+// Components
+import ErrorAlert from "../ErrorAlert";
 
 const RenderFilterResults = () => {
   const {
@@ -19,6 +21,8 @@ const RenderFilterResults = () => {
     selectedFilter,
     setFilteredData,
     setFilters,
+    filters,
+    filterError,
   } = useDataContext();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,11 +63,29 @@ const RenderFilterResults = () => {
       sector: [],
       province: [],
       phase: [],
+      fee_paying: [],
     });
   };
 
+  if (filterError === true)
+    return (
+      <div className="m-4 ">
+        <ErrorAlert
+          icon={
+            <ExclamationTriangleIcon
+              aria-hidden="true"
+              className="h-6 w-6 text-red-600"
+            />
+          }
+          message={
+            "There was an error processing this query. Please refresh the page or try again later."
+          }
+        />
+      </div>
+    );
+
   return (
-    <>
+    <div>
       {filteredData && filteredData.length > 0 ? (
         <div>
           <div className="z-20 mx-4 sm:px-4 lg:px-0 pt-2 sticky top-0 bg-white lg:mx-4 rounded-t-xl lg:mt-4">
@@ -157,7 +179,7 @@ const RenderFilterResults = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-gray-100">
+                  <tbody className="bg-white divide-y divide-neutral-200">
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
@@ -187,17 +209,40 @@ const RenderFilterResults = () => {
               </InfiniteScroll>
             ) : (
               <div className="p-4 text-center">
-                <p>No matches found.</p>
+                <p className="mb-2 text-lg font-medium underline">
+                  No matches found.
+                </p>
                 <p>
-                  No matches found. Try a different combination of filters or
-                  use the main search bar.
+                  Try a different combination of filters or use the main search
+                  bar.
                 </p>
               </div>
             )}
           </div>
         </div>
-      ) : null}
-    </>
+      ) : (
+        // ) : null}
+        <div>
+          {filteredData && filters ? (
+            <div className="p-4 text-center">
+              <p className="mb-2 text-lg font-medium underline">
+                No matches found.
+              </p>
+              <p>
+                Try a different combination of filters or use the main search
+                bar.
+              </p>
+              <button
+                onClick={clearFilters}
+                className="py-2 px-6 my-4 bg-gray-500 text-white rounded-lg active:ring-1 active:ring-gray-600 hover:shadow-lg"
+              >
+                Clear Filters
+              </button>
+            </div>
+          ) : null}
+        </div>
+      )}
+    </div>
   );
 };
 

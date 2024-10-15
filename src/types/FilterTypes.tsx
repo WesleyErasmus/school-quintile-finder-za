@@ -1,4 +1,4 @@
-export type FilterKey = "quintile" | "sector" | "province" | "phase";
+export type FilterKey = "quintile" | "sector" | "province" | "phase" | "fee_paying";
 
 export interface FilterOption {
   value: string;

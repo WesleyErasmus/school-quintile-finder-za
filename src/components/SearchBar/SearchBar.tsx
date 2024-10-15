@@ -37,7 +37,7 @@ const SearchBar = () => {
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
   });
-  console.log("Apollo data log ", data);
+  // console.log("Apollo data log ", data);
 
   useEffect(() => {
     if (data?.schools && searchString) {
@@ -68,6 +68,7 @@ const SearchBar = () => {
       sector: [],
       province: [],
       phase: [],
+      fee_paying: [],
     });
   };
 
@@ -196,7 +197,7 @@ const SearchBar = () => {
                 />
               }
               message={
-                "Use the search bar to easily find the South African school you are looking for"
+                "Use the search bar to easily find the South African schools you are looking for"
               }
             />
           )}

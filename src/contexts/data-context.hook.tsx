@@ -8,6 +8,8 @@ interface DataContextType {
   selectedFilter: string;
   setSelectedFilter: (string: string) => void;
   filteredData: School[] | null;
+  filterError: unknown;
+  setFilterError: (boolean: boolean) => void;
   setFilteredData: (schools: School[] | null) => void;
   isLoading: boolean;
   setIsLoading: (loading: boolean) => void;
@@ -29,6 +31,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   const [selectedSchool, setSelectedSchool] = useState<School | null>(null);
   const [selectedFilter, setSelectedFilter] = useState("");
   const [filteredData, setFilteredData] = useState<School[] | null>(null);
+  const [filterError, setFilterError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingFilteredData, setIsLoadingFilteredData] = useState(false);
   const [totalCount, setTotalCount] = useState(0);
@@ -37,6 +40,7 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
     sector: [],
     province: [],
     phase: [],
+    fee_paying: [],
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [mobileFilterResultsOpen, setMobileFilterResultsOpen] = useState(false);
@@ -50,6 +54,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setSelectedFilter,
         filteredData,
         setFilteredData,
+        filterError,
+        setFilterError,
         isLoadingFilteredData,
         setIsLoadingFilteredData,
         isLoading,

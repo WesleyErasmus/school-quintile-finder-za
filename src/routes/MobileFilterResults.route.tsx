@@ -79,6 +79,7 @@ const MobileFilterResults = () => {
       sector: [],
       province: [],
       phase: [],
+      fee_paying: [],
     });
   };
 
@@ -214,7 +215,7 @@ const MobileFilterResults = () => {
       ) : (
         <div className="text-center py-10 px-4">
           <p>No matches found.</p>
-          <p>
+          <p className="text-gray-950">
             Try a different combination of filters or use the main search bar on
             the{" "}
             <a
