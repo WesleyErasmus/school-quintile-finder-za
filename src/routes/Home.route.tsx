@@ -21,7 +21,7 @@ const Home = () => {
       }`}
     >
       <Hero />
-      <div className="mx-auto max-w-[1230px] w-full flex flex-col justify-end md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-12">
+      <div className="mx-auto max-w-[1440px] w-full flex flex-col justify-end md:flex-row-reverse md:items-start md:flex-wrap lg:flex-nowrap lg:pt-12">
         <div className="w-full flex flex-col">
           <SearchBar />
           <div className="w-full hidden sm:block">

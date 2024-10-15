@@ -9,7 +9,7 @@ const TopNavbar = () => {
   return (
     <>
       <div className="py-4 px-4 sm:px-8 md:px-4 flex items-center">
-        <div className="mx-auto max-w-[1230px] w-full">
+        <div className="mx-auto max-w-[1440px] w-full">
           <div
             onClick={() => navigate(homePage)}
             className="inline-flex items-center cursor-pointer py-1 rounded-lg"

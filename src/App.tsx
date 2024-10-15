@@ -40,7 +40,7 @@ function App() {
   return (
     <DataProvider>
       <LoaderFullPage />
-      <div className="bg-[#FAFBFF] bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,#E5E6F6,rgba(255,255,255,0))]">
+      <div className="bg-[#FAFBFF] bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,#E5E6F6,rgba(255,255,255,0))] xl:px-6">
         <BrowserRouter>
           <TopNavbar />
           <ScrollToTop />
