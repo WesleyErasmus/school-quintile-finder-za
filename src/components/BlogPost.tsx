@@ -27,7 +27,7 @@ const BlogPost = (props: BlogPostProps) => {
     <div className="py-6 px-4 mx-auto max-w-[800px] active:text-primary-900">
       <button
         onClick={() => navigate(homePage)}
-        className="flex items-center gap-2 text-primary-600 font-medium active:text-gray-900"
+        className="flex items-center gap-2 text-primary-600 hover:text-primary-500 font-medium active:text-gray-900"
       >
         <ArrowLeftIcon className="w-4 h-4 text-gray-700" />
         Back to homepage
