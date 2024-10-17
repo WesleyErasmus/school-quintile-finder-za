@@ -12,11 +12,8 @@ import {
 import { Square3Stack3DIcon } from "@heroicons/react/24/solid";
 
 const RenderSearchResults = () => {
-  const { selectedSchool, isLoading, setIsLoading } = useDataContext();
+  const { selectedSchool } = useDataContext();
 
-  if (selectedSchool && isLoading) {
-    setIsLoading(false);
-  }
 
   return (
     <>

@@ -15,6 +15,9 @@ import {
   AdjustmentsHorizontalIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import {
+  ExclamationTriangleIcon,
+} from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 // React router dom
@@ -22,6 +25,8 @@ import { useNavigate } from "react-router-dom";
 
 // Route imports
 import { homePage } from "../App";
+import ErrorAlert from "../components/ErrorAlert";
+import useSendErrorReport from "../hooks/useSendErrorReport.hook";
 
 const MobileFilterResults = () => {
   const {
@@ -31,7 +36,10 @@ const MobileFilterResults = () => {
     setFilters,
     mobileFiltersOpen,
     setMobileFiltersOpen,
+    filterError,
   } = useDataContext();
+
+   const { reportSearchError } = useSendErrorReport();
 
   const navigate = useNavigate();
 
@@ -82,6 +90,24 @@ const MobileFilterResults = () => {
       fee_paying: [],
     });
   };
+
+   if (filterError === true)
+     return (
+       <div className="my-4">
+         <ErrorAlert
+           onClick={reportSearchError}
+           icon={
+             <ExclamationTriangleIcon
+               aria-hidden="true"
+               className="h-8 w-8 text-red-600"
+             />
+           }
+           message={
+             "There was an error processing this query. Please refresh the page or try again later."
+           }
+         />
+       </div>
+     );
 
   return (
     <div className="sm:hidden">

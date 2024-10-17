@@ -14,6 +14,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
 // Components
 import ErrorAlert from "../ErrorAlert";
+import useSendErrorReport from "../../hooks/useSendErrorReport.hook";
 
 const RenderFilterResults = () => {
   const {
@@ -24,6 +25,8 @@ const RenderFilterResults = () => {
     filters,
     filterError,
   } = useDataContext();
+
+  const { reportSearchError } = useSendErrorReport();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
@@ -69,12 +72,13 @@ const RenderFilterResults = () => {
 
   if (filterError === true)
     return (
-      <div className="m-4 ">
+      <div className="my-4">
         <ErrorAlert
+          onClick={reportSearchError}
           icon={
             <ExclamationTriangleIcon
               aria-hidden="true"
-              className="h-6 w-6 text-red-600"
+              className="h-8 w-8 text-red-600"
             />
           }
           message={

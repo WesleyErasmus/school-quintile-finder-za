@@ -23,6 +23,7 @@ import {
 } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import ErrorAlert from "../ErrorAlert";
+import useSendErrorReport from "../../hooks/useSendErrorReport.hook";
 
 const GET_SCHOOL_DATA = gql`
   ${SearchSchools}
@@ -33,6 +34,8 @@ const SearchBar = () => {
   const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
   const { selectedSchool, setSelectedSchool, setFilteredData, setFilters } =
     useDataContext();
+
+  const { reportSearchError } = useSendErrorReport();
 
   const { loading, error, data } = useQuery(GET_SCHOOL_DATA, {
     fetchPolicy: "cache-first",
@@ -110,18 +113,21 @@ const SearchBar = () => {
     </>
   );
 
-  // if (error) return <p>Error: {error.message}</p>;
-  if (error) return (
-    <ErrorAlert
-      icon={
-        <ExclamationTriangleIcon
-          aria-hidden="true"
-          className="h-6 w-6 text-red-400"
-        />
-      }
-      message={"There was an error fetching the data for the search functionalities. Please refresh the page or try again later."}
-    />
-  );
+  if (error)
+    return (
+      <ErrorAlert
+        onClick={reportSearchError}
+        icon={
+          <ExclamationTriangleIcon
+            aria-hidden="true"
+            className="h-8 w-8 text-red-500"
+          />
+        }
+        message={
+          "There was an error fetching the data for the search query. Please refresh the page or try again later. If the error persists please click on the report button to report the issue."
+        }
+      />
+    );
 
   return (
     <div className="py-12 lg:py-0">

@@ -23,6 +23,10 @@ interface DataContextType {
   setMobileFiltersOpen: (boolean: boolean) => void;
   mobileFilterResultsOpen: boolean;
   setMobileFilterResultsOpen: (boolean: boolean) => void;
+  error: boolean;
+  setError: (boolean: boolean) => void;
+  errorSent: boolean;
+  setErrorSent: (boolean: boolean) => void;
 }
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
@@ -44,6 +48,8 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
   });
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [mobileFilterResultsOpen, setMobileFilterResultsOpen] = useState(false);
+  const [error, setError] = useState(false);
+  const [errorSent, setErrorSent] = useState(false);
 
   return (
     <DataContext.Provider
@@ -68,6 +74,10 @@ export const DataProvider = ({ children }: { children: ReactNode }) => {
         setMobileFiltersOpen,
         mobileFilterResultsOpen,
         setMobileFilterResultsOpen,
+        error,
+        setError,
+        errorSent,
+        setErrorSent,
       }}
     >
       {children}
