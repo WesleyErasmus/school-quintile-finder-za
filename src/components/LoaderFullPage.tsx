@@ -1,8 +1,8 @@
 import { ClipLoader } from "react-spinners";
-import { useDataContext } from "../contexts/data-context.hook";
+import { useLoadingContext } from "../contexts/loading-context.hook";
 
 const LoaderFullPage = () => {
-  const { isLoadingFilteredData } = useDataContext();
+  const { isLoadingFilteredData } = useLoadingContext();
   return (
     <>
       {isLoadingFilteredData ? (

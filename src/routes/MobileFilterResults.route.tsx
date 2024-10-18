@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { homePage } from "../App";
 import ErrorAlert from "../components/ErrorAlert";
 import useSendErrorReport from "../hooks/useSendErrorReport.hook";
+import { useErrorContext } from "../contexts/error-context.hook";
 
 const MobileFilterResults = () => {
   const {
@@ -36,8 +37,8 @@ const MobileFilterResults = () => {
     setFilters,
     mobileFiltersOpen,
     setMobileFiltersOpen,
-    filterError,
   } = useDataContext();
+  const { filterError } = useErrorContext();
 
    const { reportSearchError } = useSendErrorReport();
 
@@ -95,6 +96,7 @@ const MobileFilterResults = () => {
      return (
        <div className="my-4">
          <ErrorAlert
+         type={"filter"}
            onClick={reportSearchError}
            icon={
              <ExclamationTriangleIcon

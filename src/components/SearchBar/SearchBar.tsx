@@ -116,6 +116,7 @@ const SearchBar = () => {
   if (error)
     return (
       <ErrorAlert
+      type={"search"}
         onClick={reportSearchError}
         icon={
           <ExclamationTriangleIcon

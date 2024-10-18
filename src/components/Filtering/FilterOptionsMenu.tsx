@@ -27,6 +27,8 @@ import {
 // HeroIcons
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { MinusIcon, PlusIcon } from "@heroicons/react/20/solid";
+import { useLoadingContext } from "../../contexts/loading-context.hook";
+import { useErrorContext } from "../../contexts/error-context.hook";
 
 const FILTER_SCHOOLS = gql`
   ${FilterSchools}
@@ -36,15 +38,15 @@ export default function FilterOptionsMenu() {
   const {
     setFilteredData,
     setTotalCount,
-    isLoadingFilteredData,
-    setIsLoadingFilteredData,
     setSelectedSchool,
     filters,
     setFilters,
-    setFilterError,
     mobileFiltersOpen,
     setMobileFiltersOpen,
   } = useDataContext();
+  const { isLoadingFilteredData, setIsLoadingFilteredData } =
+    useLoadingContext();
+  const { setFilterError } = useErrorContext();
 
   const navigate = useNavigate();
 

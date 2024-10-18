@@ -11,9 +11,11 @@ import Alert from "../components/Alert";
 
 // HeroIcons
 import { InformationCircleIcon } from "@heroicons/react/24/solid";
+import { useLoadingContext } from "../contexts/loading-context.hook";
 
 const Home = () => {
-  const { filteredData, isLoadingFilteredData } = useDataContext();
+  const { filteredData } = useDataContext();
+  const { isLoadingFilteredData } = useLoadingContext();
   return (
     <div
       className={`min-h-screen ${

@@ -18,6 +18,8 @@ import QuintileSystemBlog from "./routes/Blogs/QuintileSystemBlog.route";
 import QuintileReportingBlog from "./routes/Blogs/QuintileReportingBlog.route";
 import TopNavbar from "./components/TopNavbar";
 import Footer from "./components/Footer";
+import { LoadingProvider } from "./contexts/loading-context.hook";
+import { ErrorProvider } from "./contexts/error-context.hook";
 
 // Page element exports
 export const homePage = "/";
@@ -39,27 +41,34 @@ function App() {
 
   return (
     <DataProvider>
-      <LoaderFullPage />
-      <div className="bg-[#FAFBFF] bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,#E5E6F6,rgba(255,255,255,0))] xl:px-6">
-        <BrowserRouter>
-          <TopNavbar />
-          <ScrollToTop />
-          <Routes>
-            <Route path={homePage} element={<Home />} />
-            <Route
-              path={mobileFilterResultsPage}
-              element={<MobileFilterResults />}
-            />
-            <Route path={quintileSystemBlog} element={<QuintileSystemBlog />} />
-            <Route
-              path={quintileReportingBlog}
-              element={<QuintileReportingBlog />}
-            />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-          <Footer />
-        </BrowserRouter>
-      </div>
+      <LoadingProvider>
+        <ErrorProvider>
+          <LoaderFullPage />
+          <div className="bg-[#FAFBFF] bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,#E5E6F6,rgba(255,255,255,0))] xl:px-6">
+            <BrowserRouter>
+              <TopNavbar />
+              <ScrollToTop />
+              <Routes>
+                <Route path={homePage} element={<Home />} />
+                <Route
+                  path={mobileFilterResultsPage}
+                  element={<MobileFilterResults />}
+                />
+                <Route
+                  path={quintileSystemBlog}
+                  element={<QuintileSystemBlog />}
+                />
+                <Route
+                  path={quintileReportingBlog}
+                  element={<QuintileReportingBlog />}
+                />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
+          </div>
+        </ErrorProvider>
+      </LoadingProvider>
     </DataProvider>
   );
 }
