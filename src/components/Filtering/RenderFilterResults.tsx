@@ -8,7 +8,7 @@ import { School } from "../../types/SchoolTypes";
 import { useDataContext } from "../../contexts/data-context.hook";
 
 // HeroIcons
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { AdjustmentsHorizontalIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
 import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 
@@ -16,6 +16,7 @@ import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import ErrorAlert from "../ErrorAlert";
 import useSendErrorReport from "../../hooks/useSendErrorReport.hook";
 import { useErrorContext } from "../../contexts/error-context.hook";
+import ExportButtonMobile from "../ExportToExcel/ExportButtonMobile";
 
 const RenderFilterResults = () => {
   const {
@@ -24,6 +25,9 @@ const RenderFilterResults = () => {
     setFilteredData,
     setFilters,
     filters,
+    totalCount,
+    mobileFiltersOpen,
+    setMobileFiltersOpen,
   } = useDataContext();
   const { filterError } = useErrorContext();
 
@@ -75,7 +79,7 @@ const RenderFilterResults = () => {
     return (
       <div className="my-4">
         <ErrorAlert
-        type={"filter"}
+          type={"filter"}
           onClick={reportFilterError}
           icon={
             <ExclamationTriangleIcon
@@ -84,7 +88,7 @@ const RenderFilterResults = () => {
             />
           }
           message={
-            "There was an error processing this query. Please refresh the page or try again later."
+            "There was an error processing the filter query. Please refresh the page or try again later."
           }
         />
       </div>
@@ -96,7 +100,7 @@ const RenderFilterResults = () => {
         <div>
           <div className="z-20 mx-4 sm:px-4 lg:px-0 pt-2 sticky top-0 bg-white lg:mx-4 rounded-t-xl lg:mt-4">
             {/* Filter top menu [search, filter, clear, export] */}
-            <div className="py-2 flex flex-auto gap-4 justify-between bg-white border-b border-1 border-slate-100 lg:px-4">
+            <div className="py-2 flex flex-auto gap-4 justify-between items-end bg-white border-b border-1 border-slate-100 lg:px-4">
               {/* Search bar */}
               <div className="relative flex items-center">
                 <span className="absolute">
@@ -120,14 +124,30 @@ const RenderFilterResults = () => {
                   ""
                 )}
               </div>
-
               {/* Open filters */}
               <div className="flex items-end gap-4">
+                {/* Filters */}
+                <button
+                  onClick={() => setMobileFiltersOpen(!mobileFiltersOpen)}
+                  type="submit"
+                  className="invisible sm:visible lg:invisible text-sm font-medium tracking-wide rounded-lg text-white bg-primary-600 px-4 py-1.5 active:ring-1 active:ring-primary-900 flex items-center justify-center"
+                >
+                  <AdjustmentsHorizontalIcon className="mr-3 w-6 h-6" />
+                  Filters
+                </button>
                 {/* Export */}
-                <ExportButton
-                  data={filteredData}
-                  fileName={"quintileDataExport"}
-                />
+                <div className="hidden sm:block md:hidden cursor-pointer">
+                  <ExportButtonMobile
+                    data={filteredData}
+                    fileName={"quintileDataExport"}
+                  />
+                </div>
+                <div className="hidden md:block">
+                  <ExportButton
+                    data={filteredData}
+                    fileName={"quintileDataExport"}
+                  />
+                </div>
 
                 {/* Clear filters */}
                 <button
@@ -143,6 +163,9 @@ const RenderFilterResults = () => {
                 </button>
               </div>
             </div>
+            <p className="px-4 py-1.5 text-sm font-medium text-center text-gray-600 border-b border-1 border-slate-100">
+              {totalCount} Total Results
+            </p>
             {/* End of filter top menu buttons */}
           </div>
           <div className="z-10 mx-4 rounded-b-lg overflow-hidden lg:overflow-hidden shadow-lg">
@@ -152,13 +175,13 @@ const RenderFilterResults = () => {
                 next={handleInfiniteScroll}
                 hasMore={displayedItems < cachedFilteredData.length}
                 loader={
-                  <p className="p-4 text-center text-gray-500 bg-white rounded-b-xl">
+                  <p className="p-4 text-center text-sm text-gray-950 bg-white rounded-b-xl">
                     Loading more schools...
                   </p>
                 }
                 endMessage={
-                  <p className="p-4 text-center text-gray-500">
-                    No more results to show.
+                  <p className="px-4 py-2.5 text-sm text-center text-gray-950 border-t border-slate-200 bg-white">
+                    End of Results
                   </p>
                 }
               >
@@ -214,11 +237,9 @@ const RenderFilterResults = () => {
                 </table>
               </InfiniteScroll>
             ) : (
-              <div className="p-4 text-center">
-                <p className="mb-2 text-lg font-medium underline">
-                  No matches found.
-                </p>
-                <p>
+              <div className="p-4 text-center bg-white">
+                <p className="mb-2 text-lg font-semibold">No matches found</p>
+                <p className="text-sm">
                   Try a different combination of filters or use the main search
                   bar.
                 </p>
@@ -230,19 +251,17 @@ const RenderFilterResults = () => {
         // ) : null}
         <div>
           {filteredData && filters ? (
-            <div className="p-4 text-center">
-              <p className="mb-2 text-lg font-medium underline">
-                No matches found.
-              </p>
-              <p>
+            <div className="p-4 text-center text-gray-950">
+              <p className="mb-2 text-lg font-semibold">No matches found</p>
+              <p className="text-sm">
                 Try a different combination of filters or use the main search
                 bar.
               </p>
               <button
                 onClick={clearFilters}
-                className="py-2 px-6 my-4 bg-gray-500 text-white rounded-lg active:ring-1 active:ring-gray-600 hover:shadow-lg"
+                className="py-1.5 px-6 my-4 bg-primary-600 text-sm text-white rounded-lg active:ring-1 active:ring-primary-700 hover:shadow-lg"
               >
-                Clear Filters
+                Reset Filters
               </button>
             </div>
           ) : null}

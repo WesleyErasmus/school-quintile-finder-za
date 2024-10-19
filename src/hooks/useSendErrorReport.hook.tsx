@@ -19,7 +19,8 @@ const useSendErrorReport = () => {
   const reportSearchError = async () => {
     try {
       setLoadingSearchReport(true);
-      const docRef = await addDoc(
+      // const docRef = await addDoc(
+      await addDoc(
         collection(fireStoreDatabase, "userErrorReports"),
         {
           report: "A Search bar data error has been reported",
@@ -28,10 +29,10 @@ const useSendErrorReport = () => {
       setLoadingSearchReport(false);
       setReportSearchError(false);
       setSearchReportSendSuccess(true);
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       setReportSearchError(true);
-      console.error("Error adding document: ", e);
+      console.error("Error sending a report to the server: ", e);
       setLoadingSearchReport(false);
     }
   };
@@ -40,7 +41,8 @@ const useSendErrorReport = () => {
   const reportFilterError = async () => {
     try {
       setLoadingFilterReport(true);
-      const docRef = await addDoc(
+      // const docRef = await addDoc(
+      await addDoc(
         collection(fireStoreDatabase, "userErrorReports"),
         {
           report: "A filter data error has been reported",
@@ -49,10 +51,10 @@ const useSendErrorReport = () => {
       setLoadingFilterReport(false);
       setReportFilterError(false);
       setFilterReportSendSuccess(true);
-      console.log("Document written with ID: ", docRef.id);
+      // console.log("Document written with ID: ", docRef.id);
     } catch (e) {
       setReportFilterError(true);
-      console.error("Error adding document: ", e);
+      console.error("Error sending a report to the server: ", e);
       setLoadingFilterReport(false);
     }
   };

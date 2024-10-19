@@ -1,17 +1,32 @@
-query FilterSchools($filters: schools_bool_exp!) @cached {
-  schools_aggregate(where: $filters) {
-    aggregate {
-      count
+# query FilterSchools($filters: schools_bool_exp!) @cached {
+#   schools_aggregate(where: $filters) {
+#     aggregate {
+#       count
+#     }
+#   }
+#   schools (where: $filters, order_by: { name: asc }) {
+#     id
+#     name
+#     quintile
+#     province
+#     phase
+#     sector
+#     fee_paying
+#     address
+#   }
+# }
+query FilterSchools($filters: SchoolFilters) {
+  filterSchools(filters: $filters) {
+    count
+    schools {
+      id
+      name
+      quintile
+      province
+      phase
+      sector
+      fee_paying
+      address
     }
-  }
-  schools (where: $filters, order_by: { name: asc }) {
-    id
-    name
-    quintile
-    province
-    phase
-    sector
-    fee_paying
-    address
   }
 }

@@ -2,12 +2,8 @@
 import { useDataContext } from "../../contexts/data-context.hook";
 import FilterSchools from "../../graphql/fetch-by-filter.graphql";
 import { gql, useQuery } from "@apollo/client";
-import {
-  FilterKey,
-  Filters,
-  GraphQLFilters,
-  FilterSection,
-} from "../../types/FilterTypes";
+import { FilterKey, Filters, GraphQLFilters } from "../../types/FilterTypes";
+import { filterOptions } from "../../utils/filter-options.utils";
 
 // React router dom imports
 import { useNavigate } from "react-router-dom";
@@ -40,6 +36,7 @@ export default function FilterOptionsMenu() {
     setTotalCount,
     setSelectedSchool,
     filters,
+    filteredData,
     setFilters,
     mobileFiltersOpen,
     setMobileFiltersOpen,
@@ -50,7 +47,8 @@ export default function FilterOptionsMenu() {
 
   const navigate = useNavigate();
 
-  const { error, refetch } = useQuery(FILTER_SCHOOLS, {
+  // const { error, refetch } = useQuery(FILTER_SCHOOLS, {
+  const { refetch } = useQuery(FILTER_SCHOOLS, {
     fetchPolicy: "cache-first",
     variables: {
       filters: {},
@@ -58,7 +56,7 @@ export default function FilterOptionsMenu() {
     skip: true,
   });
 
-  const apolloError = error;
+  // const apolloError = error;
 
   const hasActiveFilters = (filters: Filters) => {
     return Object.values(filters).some((filter) => filter.length > 0);
@@ -94,142 +92,43 @@ export default function FilterOptionsMenu() {
     });
   };
 
-  useEffect(() => {
-    if (!hasActiveFilters(filters)) return;
+   useEffect(() => {
+  if (!hasActiveFilters(filters)) return;
 
-    const fetchFilteredData = async () => {
-      setIsLoadingFilteredData(true);
-      try {
-        const graphqlFilters: GraphQLFilters = {};
-        Object.entries(filters).forEach(([key, values]) => {
-          if (values.length > 0) {
-            graphqlFilters[key] = { _in: values };
-          }
-        });
-
-        const { data } = await refetch({
-          filters: graphqlFilters,
-        });
-
-        if (data && data.schools) {
-          setFilterError(false);
-          setFilteredData(data.schools);
-          setTotalCount(data.schools_aggregate.aggregate.count);
-        } else {
-          // console.log("No data returned from query");
-          setFilteredData([]);
-          setTotalCount(0);
+  const fetchFilteredData = async () => {
+    setIsLoadingFilteredData(true);
+    try {
+      const graphqlFilters: GraphQLFilters = {};
+      Object.entries(filters).forEach(([key, values]) => {
+        if (values.length > 0) {
+          graphqlFilters[key as FilterKey] = values.join(",");
         }
-      } catch (error) {
-        console.error("Error fetching data:", error);
+      });
+
+      const { data } = await refetch({
+        filters: graphqlFilters,
+      });
+
+      if (data && data.filterSchools) {
+        setFilterError(false);
+        setFilteredData(data.filterSchools.schools);
+        setTotalCount(data.filterSchools.count);
+      } else {
         setFilteredData([]);
         setTotalCount(0);
-        setFilterError(true);
-      } finally {
-        setIsLoadingFilteredData(false);
       }
-    };
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setFilteredData([]);
+      setTotalCount(0);
+      setFilterError(true);
+    } finally {
+      setIsLoadingFilteredData(false);
+    }
+  };
 
-    fetchFilteredData();
-  }, [
-    apolloError,
-    filters,
-    refetch,
-    setFilteredData,
-    setFilterError,
-    setIsLoadingFilteredData,
-    setTotalCount,
-  ]);
-
-  const filterOptions: FilterSection[] = [
-    {
-      id: "quintile",
-      name: "Quintile",
-      options: [
-        { value: "1", label: "Quintile 1", checked: false },
-        { value: "2", label: "Quintile 2", checked: false },
-        { value: "3", label: "Quintile 3", checked: false },
-        { value: "4", label: "Quintile 4", checked: false },
-        { value: "5", label: "Quintile 5", checked: false },
-      ],
-    },
-    {
-      id: "province",
-      name: "Province",
-      options: [
-        { value: "Eastern Cape", label: "Eastern Cape", checked: false },
-        { value: "Free State", label: "Free State", checked: false },
-        { value: "Gauteng", label: "Gauteng", checked: false },
-        { value: "KwaZulu-Natal", label: "KwaZulu-Natal", checked: false },
-        { value: "Limpopo", label: "Limpopo", checked: false },
-        { value: "Mpumalanga", label: "Mpumalanga", checked: false },
-        { value: "Northern Cape", label: "Northern Cape", checked: false },
-        { value: "North-West", label: "North-West", checked: false },
-        { value: "Western Cape", label: "Western Cape", checked: false },
-      ],
-    },
-    {
-      id: "phase",
-      name: "Phase",
-      options: [
-        {
-          value: "Ecd",
-          label: "ECD",
-          checked: false,
-        },
-        { value: "Primary School", label: "Primary Schools", checked: false },
-        {
-          value: "Intermediate School",
-          label: "Intermediate Schools",
-          checked: false,
-        },
-        {
-          value: "Secondary School",
-          label: "Secondary Schools",
-          checked: false,
-        },
-        {
-          value: "Combined School",
-          label: "Combined Schools",
-          checked: false,
-        },
-        {
-          value: "Special Needs Education",
-          label: "Special Needs Education",
-          checked: false,
-        },
-        {
-          value: "Hospital School",
-          label: "Hospital Schools",
-          checked: false,
-        },
-      ],
-    },
-    {
-      id: "sector",
-      name: "Sector",
-      options: [
-        { value: "Public", label: "Public Schools", checked: false },
-        {
-          value: "Independent",
-          label: "Independent Schools",
-          checked: false,
-        },
-      ],
-    },
-    {
-      id: "fee_paying",
-      name: "Fees",
-      options: [
-        { value: "Yes", label: "Fee Paying Schools", checked: false },
-        {
-          value: "No",
-          label: "None-Fee Paying Schools",
-          checked: false,
-        },
-      ],
-    },
-  ];
+  fetchFilteredData();
+}, [filters, refetch, setFilteredData, setFilterError, setIsLoadingFilteredData, setTotalCount]);
 
   return (
     <>
@@ -355,7 +254,11 @@ export default function FilterOptionsMenu() {
           </DialogPanel>
         </div>
       </Dialog>
-      <div className="lg:hidden relative px-4 sm:px-8 md:px-4">
+      <div
+        className={`${
+          !filteredData ? "lg:hidden" : "sm:hidden"
+        } relative px-4 sm:px-8 md:px-4`}
+      >
         <button
           type="button"
           onClick={() => {
@@ -371,7 +274,7 @@ export default function FilterOptionsMenu() {
       </div>
 
       {/* Desktop filters */}
-      <div className="hidden sticky top-0 lg:block mr-2 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen ring-1 ring-inset ring-primary-600/10">
+      <div className="hidden sticky top-0 lg:block mr-1 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen ring-1 ring-inset ring-primary-600/10">
         <form className="w-[250px] px-6">
           <h1 className="py-4 border-b lg:text-lg border-gray-300 font-semibold lg:pt-0">
             Filter Options

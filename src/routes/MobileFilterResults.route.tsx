@@ -37,18 +37,13 @@ const MobileFilterResults = () => {
     setFilters,
     mobileFiltersOpen,
     setMobileFiltersOpen,
+    totalCount,
   } = useDataContext();
   const { filterError } = useErrorContext();
 
-   const { reportSearchError } = useSendErrorReport();
+   const { reportFilterError } = useSendErrorReport();
 
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   if (!filteredData || filteredData.length === 0) {
-  //     navigate(homePage);
-  //   }
-  // }, [filteredData, navigate]);
 
   const [searchTerm, setSearchTerm] = useState("");
   const [displayedItems, setDisplayedItems] = useState(50);
@@ -97,7 +92,7 @@ const MobileFilterResults = () => {
        <div className="my-4">
          <ErrorAlert
          type={"filter"}
-           onClick={reportSearchError}
+           onClick={reportFilterError}
            icon={
              <ExclamationTriangleIcon
                aria-hidden="true"
@@ -105,7 +100,7 @@ const MobileFilterResults = () => {
              />
            }
            message={
-             "There was an error processing this query. Please refresh the page or try again later."
+             "There was an error processing the filter query. Please refresh the page or try again later. Select the logo icon or app name to go back to the home page."
            }
          />
        </div>
@@ -164,21 +159,27 @@ const MobileFilterResults = () => {
               next={handleInfiniteScroll}
               hasMore={displayedItems < cachedFilteredData.length}
               loader={
-                <p className="mb-[75px] p-4 text-center text-gray-500">
+                <p className="mb-[75px] text-sm p-4 text-center text-gray-950">
                   Loading more schools...
                 </p>
               }
               endMessage={
-                <p className="p-4 text-center text-gray-500">
-                  No more results to show.
+                <p className="px-4 py-2.5 text-sm text-center text-gray-950 border-t border-slate-200 bg-white">
+                  End of Results
                 </p>
               }
             >
               <table className="mt-[65px] table-auto w-full">
                 <thead className="border-b border-slate-100 bg-white">
                   <tr className="font-medium text-gray-900 text-sm text-left">
-                    <th scope="col" className="px-4 py-3 ">
+                    <th
+                      scope="col"
+                      className="px-4 py-3 flex justify-between items-end"
+                    >
                       Schools
+                      <span className="text-xs text-gray-600">
+                        {totalCount} results
+                      </span>
                     </th>
                   </tr>
                 </thead>
@@ -210,9 +211,9 @@ const MobileFilterResults = () => {
               </table>
             </InfiniteScroll>
           ) : (
-            <div className="p-4 text-center mt-[65px]">
-              <p>No matches found.</p>
-              <p>
+            <div className="p-4 text-center text-gray-950 mt-[65px]">
+              <p className="mb-2 text-lg font-semibold">No matches found</p>
+              <p className="text-sm">
                 No matches found. Try a different combination of filters or use
                 the main search bar.
               </p>

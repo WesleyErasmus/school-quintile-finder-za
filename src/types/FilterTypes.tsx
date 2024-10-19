@@ -1,4 +1,9 @@
-export type FilterKey = "quintile" | "sector" | "province" | "phase" | "fee_paying";
+export type FilterKey =
+  | "quintile"
+  | "sector"
+  | "province"
+  | "phase"
+  | "fee_paying";
 
 export interface FilterOption {
   value: string;
@@ -17,7 +22,5 @@ export type Filters = {
 };
 
 export type GraphQLFilters = {
-  [key: string]: {
-    _in: string[];
-  };
+  [key in FilterKey]?: string;
 };

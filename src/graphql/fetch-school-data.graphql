@@ -1,4 +1,16 @@
-query SearchSchools @cached {
+# query SearchSchools @cached {
+#   schools {
+#     id
+#     name
+#     quintile
+#     province
+#     phase
+#     sector
+#     address
+#     fee_paying
+#   }
+# }
+query SearchSchools {
   schools {
     id
     name
