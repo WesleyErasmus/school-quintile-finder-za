@@ -1,17 +1,5 @@
-# query SearchSchools @cached {
-#   schools {
-#     id
-#     name
-#     quintile
-#     province
-#     phase
-#     sector
-#     address
-#     fee_paying
-#   }
-# }
-query SearchSchools {
-  schools {
+query SearchSchools($searchTerm: String!) {
+  searchSchools(searchTerm: $searchTerm) {
     id
     name
     quintile

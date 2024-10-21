@@ -8,7 +8,7 @@ const QuintileSystemBlog = () => {
       heading: "Understanding the Quintile Levels",
       content: [
         "The quintile system categorizes all public schools into five groups based on the relative poverty of their surrounding communities.",
-        `Quintile 1 represents the "poorest" schools, while Quintile 5 includes the "least poor."`,
+        `Quintile 1 represents the "poorest" schools, while Quintile 5 includes the "least poor. Private schools are not included in the quintile catagories."`,
       ],
     },
     {

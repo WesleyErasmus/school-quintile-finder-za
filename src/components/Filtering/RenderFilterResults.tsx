@@ -84,7 +84,7 @@ const RenderFilterResults = () => {
           icon={
             <ExclamationTriangleIcon
               aria-hidden="true"
-              className="h-8 w-8 text-red-600"
+              className="h-7 w-7 text-red-600"
             />
           }
           message={

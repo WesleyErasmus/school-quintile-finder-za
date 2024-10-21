@@ -10,6 +10,7 @@ export const filterOptions: FilterSection[] = [
       { value: "3", label: "Quintile 3", checked: false },
       { value: "4", label: "Quintile 4", checked: false },
       { value: "5", label: "Quintile 5", checked: false },
+      { value: "N/A", label: "N/A", checked: false },
     ],
   },
   {

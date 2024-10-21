@@ -1,10 +1,7 @@
 import { ReactNode } from "react";
 import { useLoadingContext } from "../contexts/loading-context.hook";
-import {
-  BellAlertIcon,
-  CheckCircleIcon,
-  ExclamationTriangleIcon,
-} from "@heroicons/react/24/outline";
+import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
 import Loader from "./Loader";
 import { useErrorContext } from "../contexts/error-context.hook";
 
@@ -24,75 +21,80 @@ const ErrorAlert = ({ icon, message, onClick, type }: ErrorAlertProps) => {
     filterReportSendSuccess,
   } = useErrorContext();
 
- 
   const isLoading =
     type === "search" ? loadingSearchReport : loadingFilterReport;
   const hasError = type === "search" ? reportSearchError : reportFilterError;
   const isSuccess =
     type === "search" ? searchReportSendSuccess : filterReportSendSuccess;
 
-  const handleButtonText = () => {
+  const handleAlertText = () => {
     if (isLoading) {
       return (
-        <div className="flex items-center justify-center">
-          <span className="mr-3">Sending</span>
-          <Loader color={"#fff"} size={24} />
-        </div>
+        <span className="mt-1 flex items-center justify-center text-gray-950 font-semibold">
+          <Loader color={"#4f46e5"} size={20} />
+          <span className="ml-2">Sending error report...</span>
+        </span>
       );
     }
 
     if (isSuccess) {
       return (
-        <div className="flex items-center justify-center">
-          <CheckCircleIcon className="mr-2 w-6 h-6" />
-          Report Sent Successfully
-        </div>
+        <span className="mt-1 flex items-center justify-center  font-semibold">
+          <CheckCircleIcon className="mr-2 w-6 h-6 text-green-500" />
+          Error Report Sent
+        </span>
       );
     }
 
     if (hasError) {
       return (
-        <div className="flex md:items-center justify-center flex-col md:flex-row">
-          <ExclamationTriangleIcon className="text-yellow-600 mr-2 w-7 h-7" />
-          <span className="mt-2 md:mt-0 text-yellow-600 text-left">
-            Something went wrong while sending the report. Please refresh the
-            page or try again later.
-          </span>
-        </div>
+        <span className="mt-1 flex items-start justify-center text-gray-950 font-semibold">
+          <ExclamationCircleIcon className="text-amber-500 mr-2 min-w-6 min-h-6 w-6 h-6" />
+          Failed. Server temporarily down, please try again later.
+        </span>
       );
     }
 
-    return (
-      <div className="flex items-center justify-center">
-        <BellAlertIcon className="mr-3 w-[22px] h-[22px]" />
-        Send Report
-      </div>
-    );
+    return null;
+  };
+
+  const getBackgroundColor = () => {
+    if (isSuccess) return "bg-white ring-1 ring-inset ring-green-500";
+    if (isLoading) return "bg-white ring-1 ring-inset ring-primary-500";
+    if (hasError) return "bg-white ring-1 ring-inset ring-yellow-400";
+    return "bg-red-100/50";
   };
 
   return (
-    <div className="mx-4 sm:mx-8 md:mx-4 bg-white rounded-sm font-medium py-4 sm:px-4 flex items-start flex-col text-red-600 shadow-sm border-l-4 border-red-500">
-      <div className="flex flex-col sm:flex-row px-4 sm:px-0 items-start">
-        <div className="mb-3 sm:mb-0 mr-3">{icon}</div>
+    <div
+      className={`mx-4 sm:mx-8 md:mx-4 sm:px-4 p-4 rounded-md font-medium shadow-sm transition-all duration-200 ease-in-out
+        ${getBackgroundColor()} 
+        `}
+    >
+      <div className="flex flex-row sm:px-0 items-start">
+        <div className="mb-2 sm:mb-0 mr-3">
+          {!isSuccess && !hasError && !isLoading && icon}
+        </div>
         <div>
-          <p className="text-sm leading-6 tracking-wide">{message}</p>
-          <div className="mt-6">
+          {!isSuccess && !hasError && !isLoading ? (
+            <p className="text-sm leading-6 tracking-wide text-red-600 font-semibold">
+              {message}
+            </p>
+          ) : (
+            <p className="text-sm leading-6 tracking-wide">
+              {handleAlertText()}
+            </p>
+          )}
+          {!isSuccess && !hasError && !isLoading && (
             <button
-              disabled={isLoading || isSuccess || hasError}
               onClick={onClick}
-              className={`text-white tracking-wide text-sm px-6 py-1.5 rounded-lg shadow-sm hover:shadow-md active:ring-1 ${
-                !isSuccess
-                  ? `${
-                      hasError
-                        ? "bg-yellow-50 ring-yellow-400/10 rounded-sm hover:shadow-sm border-l-4 border-yellow-500"
-                        : "bg-red-500 active:ring-red-600"
-                    }`
-                  : "bg-green-600 active:ring-0"
-              }`}
+              className="mt-2 sm:mt-1 font-medium tracking-wide text-sm transition-opacity duration-300 ease-in-out"
             >
-              {handleButtonText()}
+              <span className="text-secondary-600 hover:text-secondary-800 underline">
+                Report Issue
+              </span>
             </button>
-          </div>
+          )}
         </div>
       </div>
     </div>
