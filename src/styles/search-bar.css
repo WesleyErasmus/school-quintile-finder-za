@@ -12,9 +12,13 @@
 }
 
 .search-bar-input input[type="text"] {
-  padding-left: 2.4rem !important;
+  padding-left: 2.8rem !important;
 }
 
 .dYrfwz {
   min-height: 44px !important;
+}
+
+li {
+  padding-left: 2rem !important;
 }

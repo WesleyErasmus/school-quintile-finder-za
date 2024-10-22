@@ -92,12 +92,13 @@ const SearchBar = () => {
   const formatResult = (item: School) => (
     <>
       <span className="hidden">{item.id}</span>
-      <div className="border-b border-gray-200 mr-3">
+      {/* <div className="border-b border-gray-200 mr-3"> */}
+      <div className="">
         <div>
-          <p className="font-medium text-gray-900">{item.name}</p>
+          <p className="text-gray-950 text-sm font-medium">{item.name}</p>
         </div>
         <div>
-          <div className="inline-flex items-center mt-0.5 pb-3 text-xs text-gray-600">
+          <div className="inline-flex items-center mt-0.5 pb-3 text-xs text-sky-800 font-medium">
             Quintile level: {item.quintile}{" "}
             <svg
               viewBox="0 0 2 2"
@@ -115,7 +116,6 @@ const SearchBar = () => {
 
   if (error)
     return (
-  // <div className="inline-block">
   <div>
       <ErrorAlert
         type={"search"}
@@ -163,20 +163,24 @@ const SearchBar = () => {
               </span>
             </div>
             <ReactSearchAutocomplete
-              className="search-bar-input tracking-wide text-gray-900 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-[21] text-sm transition duration-200 ease-in-out hover:shadow-lg"
+              className="search-bar-input tracking-wide text-gray-950 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-[21] text-sm transition duration-200 ease-in-out hover:shadow-lg "
               styling={{
                 border: "solid 1px rgb(79 70 229 / 0.2)",
                 fontSize: "0.875rem",
                 fontFamily:
                   "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
                 boxShadow: "none",
+                placeholderColor: "#1f2937",
+                color: "#030712",
+                backgroundColor: "#ffffff",
+                hoverBackgroundColor: "#f1f5f9",
               }}
               onSearch={handleOnSearch}
               showIcon={false}
               onSelect={handleOnSelect}
               onHover={handleOnHover}
               items={schools}
-              autoFocus={true}
+              autoFocus={false}
               formatResult={formatResult}
               maxResults={7}
               inputDebounce={100}
