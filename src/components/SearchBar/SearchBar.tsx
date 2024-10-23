@@ -183,7 +183,7 @@ const SearchBar = () => {
               autoFocus={false}
               formatResult={formatResult}
               maxResults={7}
-              inputDebounce={100}
+              inputDebounce={1}
               placeholder="Search by school name for quintile data"
               showNoResultsText={loading ? "Loading..." : "No schools found"}
             />
