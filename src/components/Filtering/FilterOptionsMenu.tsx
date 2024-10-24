@@ -117,8 +117,9 @@ export default function FilterOptionsMenu() {
         setFilteredData([]);
         setTotalCount(0);
       }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      console.error("Error fetching data:", error);
+      // console.error("Error fetching data:", error);
       setFilteredData([]);
       setTotalCount(0);
       setFilterError(true);

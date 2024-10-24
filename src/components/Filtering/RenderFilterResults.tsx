@@ -107,6 +107,8 @@ const RenderFilterResults = () => {
                   <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
                 </span>
                 <input
+                  id="searchBar"
+                  name="searchBar"
                   value={searchTerm}
                   onChange={handleSearch}
                   type="text"
