@@ -5,8 +5,8 @@ interface LoaderProps {
   size: number;
 }
 
-const Loader = (props: LoaderProps) => {
+const SpinnerLoader = (props: LoaderProps) => {
   return <ClipLoader size={props.size} color={props.color} />;
 };
 
-export default Loader;
+export default SpinnerLoader;

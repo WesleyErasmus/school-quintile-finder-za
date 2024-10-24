@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { useLoadingContext } from "../contexts/loading-context.hook";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import Loader from "./Loader";
+import SpinnerLoader from "./SpinnerLoader";
 import { useErrorContext } from "../contexts/error-context.hook";
 
 interface ErrorAlertProps {
@@ -31,7 +31,7 @@ const ErrorAlert = ({ icon, message, onClick, type }: ErrorAlertProps) => {
     if (isLoading) {
       return (
         <span className="mt-1 flex items-center justify-center text-gray-950 font-semibold">
-          <Loader color={"#4f46e5"} size={20} />
+          <SpinnerLoader color={"#4f46e5"} size={20} />
           <span className="ml-2">Sending error report...</span>
         </span>
       );

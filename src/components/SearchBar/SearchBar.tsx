@@ -1,70 +1,89 @@
-// Style imports
-import "../../styles/search-bar.css";
-
-// React hooks
-import { useEffect, useState } from "react";
-
 // Data imports
+import { useEffect, useState, useRef } from "react";
 import { gql, useLazyQuery } from "@apollo/client";
-import SearchSchools from "../../graphql/fetch-school-data.graphql";
-import { useDataContext } from "../../contexts/data-context.hook";
-import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { School } from "../../types/SchoolTypes";
-
-// Component imports
-import Alert from "../Alert";
-import RenderSearchResults from "./RenderSearchResults";
+import { useDataContext } from "../../contexts/data-context.hook";
+import useSendErrorReport from "../../hooks/useSendErrorReport.hook";
+import SearchSchools from "../../graphql/fetch-school-data.graphql";
 
 // HeroIcons
+import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
 import {
   InformationCircleIcon,
   ExclamationTriangleIcon,
 } from "@heroicons/react/24/solid";
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid";
+
+// Components imports
+import Alert from "../Alert";
 import ErrorAlert from "../ErrorAlert";
-import useSendErrorReport from "../../hooks/useSendErrorReport.hook";
+import RenderSearchResults from "./RenderSearchResults";
+import SpinnerLoader from "../SpinnerLoader";
 
 const SEARCH_SCHOOLS = gql`
   ${SearchSchools}
 `;
 
 const SearchBar = () => {
-  const [schools, setSchools] = useState<School[]>([]);
-  const [searchString, setSearchString] = useState("");
-  const [suggestedItem, setSuggestedItem] = useState<School | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const [shouldShowSuggestions, setShouldShowSuggestions] = useState(false);
+
+  const searchRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
+
   const { selectedSchool, setSelectedSchool, setFilteredData, setFilters } =
     useDataContext();
 
   const { reportSearchError } = useSendErrorReport();
 
-  const [searchSchools, { loading, error }] = useLazyQuery(SEARCH_SCHOOLS, {
-     onCompleted: (data) => {
-      setSchools(data.searchSchools);
-    },
+  const [searchSchools, { loading, error, data }] = useLazyQuery(
+    SEARCH_SCHOOLS,
+    {
+      onCompleted: () => {
+        setIsOpen(true);
+      },
     }
   );
 
-   useEffect(() => {
-     if (searchString.trim().length > 1) {
-       searchSchools({ variables: { searchTerm: searchString } });
-     } else {
-       setSchools([]);
-     }
-   }, [searchString, searchSchools]);
-
-
-  const handleOnSearch = (string: string, results: School[]) => {
-    setSearchString(string);
-
-    if (results.length > 0) {
-      setSuggestedItem(results[0]);
-    }
+  const closeSearch = () => {
+    setIsOpen(false);
+    setShouldShowSuggestions(false);
+    setHighlightedIndex(-1);
   };
 
-  const handleOnSelect = (item: School) => {
-    setSearchString("");
-    setSelectedSchool(item);
-    setSuggestedItem(item);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        closeSearch();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Debounce
+  useEffect(() => {
+    const debounceTimer = setTimeout(() => {
+      if (searchTerm.trim().length > 1) {
+        setShouldShowSuggestions(true);
+        searchSchools({ variables: { searchTerm: searchTerm.trim() } });
+      } else {
+        closeSearch();
+      }
+    }, 200);
+
+    return () => clearTimeout(debounceTimer);
+  }, [searchTerm, searchSchools]);
+
+  const handleSelect = (school: School) => {
+    setSelectedSchool(school);
+    setSearchTerm("");
+    closeSearch();
     setFilteredData(null);
     setFilters({
       quintile: [],
@@ -75,50 +94,37 @@ const SearchBar = () => {
     });
   };
 
-  const handleOnHover = (result: School) => {
-    setSuggestedItem(result);
-  };
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (!isOpen || !data?.searchSchools) return;
 
-  const handleKeyDown = (e: { key: string; preventDefault: () => void }) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-
-      if (suggestedItem) {
-        handleOnSelect(suggestedItem);
-      }
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setHighlightedIndex((prev) =>
+          prev < data.searchSchools.length - 1 ? prev + 1 : prev
+        );
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setHighlightedIndex((prev) => (prev > 0 ? prev - 1 : -1));
+        break;
+      case "Enter":
+        e.preventDefault();
+        if (highlightedIndex >= 0) {
+          handleSelect(data.searchSchools[highlightedIndex]);
+        }
+        break;
+      case "Escape":
+        e.preventDefault();
+        closeSearch();
+        break;
     }
   };
 
-  const formatResult = (item: School) => (
-    <>
-      <span className="hidden">{item.id}</span>
-      {/* <div className="border-b border-gray-200 mr-3"> */}
-      <div className="">
-        <div>
-          <p className="text-gray-950 text-sm font-medium">{item.name}</p>
-        </div>
-        <div>
-          <div className="inline-flex items-center mt-0.5 pb-3 text-xs text-sky-800 font-medium">
-            Quintile level: {item.quintile}{" "}
-            <svg
-              viewBox="0 0 2 2"
-              aria-hidden="true"
-              className="mx-2 inline h-0.5 w-0.5 fill-current"
-            >
-              <circle r={1} cx={1} cy={1} />
-            </svg>{" "}
-            {item.province}
-          </div>
-        </div>
-      </div>
-    </>
-  );
-
-  if (error)
+  if (error) {
     return (
-  <div>
       <ErrorAlert
-        type={"search"}
+        type="search"
         onClick={reportSearchError}
         icon={
           <ExclamationTriangleIcon
@@ -126,12 +132,68 @@ const SearchBar = () => {
             className="h-7 w-7 text-red-500"
           />
         }
-        message={
-          "There was an error fetching the data for the search query. Please refresh the page or try again later."
-        }
+        message="There was an error fetching the data for the search query. Please refresh the page or try again later."
       />
-      </div>
     );
+  }
+
+  const renderSearchSuggestions = () => {
+    if (!shouldShowSuggestions) return null;
+
+    if (loading) {
+      return (
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 px-4 py-8 z-50">
+          <div className="flex items-center justify-center">
+            <SpinnerLoader color={"#4f46e5"} size={24} />
+            <span className="ml-2 text-gray-500 text-sm">Loading...</span>
+          </div>
+        </div>
+      );
+    }
+
+    if (!loading && data?.searchSchools?.length === 0) {
+      return (
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 px-4 py-8 z-50">
+          <p className="text-gray-500 text-sm text-center">No schools found</p>
+        </div>
+      );
+    }
+
+    if (!loading && data?.searchSchools?.length > 0) {
+      return (
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 overflow-hidden pb-4 z-50">
+          {data.searchSchools
+            .slice(0, 7)
+            .map((school: School, index: number) => (
+              <div
+                key={school.id}
+                onClick={() => handleSelect(school)}
+                onMouseEnter={() => setHighlightedIndex(index)}
+                className={`px-4 py-2 cursor-pointer ${
+                  highlightedIndex === index ? "bg-neutral-200/50" : ""
+                } hover:bg-neutral-200/50`}
+              >
+                <p className="text-gray-950 text-sm font-medium">
+                  {school.name}
+                </p>
+                <div className="inline-flex items-center mt-0.5 text-xs text-sky-800 font-medium">
+                  Quintile level: {school.quintile}
+                  <svg
+                    viewBox="0 0 2 2"
+                    className="mx-2 inline h-0.5 w-0.5 fill-current"
+                  >
+                    <circle cx="1" cy="1" r="1" />
+                  </svg>
+                  {school.province}
+                </div>
+              </div>
+            ))}
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   return (
     <div className="py-12 lg:py-0">
@@ -152,43 +214,38 @@ const SearchBar = () => {
             data.
           </p>
         </div>
-        <form
-          onKeyDown={handleKeyDown}
-          className="mt-8 mb-4 min-w-[275px] lg:mt-4"
-        >
+
+        <div className="mt-8 mb-4 min-w-[275px] lg:mt-4" ref={searchRef}>
           <div className="relative">
-            <div>
-              <span className="z-[22] absolute mt-3">
-                <MagnifyingGlassIcon className="w-5 h-5 mx-3 text-gray-500" />
-              </span>
+            <div className="relative">
+              <MagnifyingGlassIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-500" />
+              <input
+                ref={inputRef}
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleKeyDown}
+                onFocus={() => {
+                  if (searchTerm.length > 1) {
+                    setIsOpen(true);
+                    setShouldShowSuggestions(true);
+                  }
+                }}
+                placeholder="Search by school name for quintile data"
+                className={`w-full pl-10 pr-4 py-3.5 text-sm bg-white border border-gray-200 rounded-full 
+                          focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent
+                          shadow-sm transition duration-200 ease-in-out hover:shadow-md 
+                          ${
+                            isOpen || shouldShowSuggestions || loading
+                              ? "rounded-b-none rounded-t-3xl focus:ring-0 focus:border-gray-200"
+                              : ""
+                          }`}
+              />
             </div>
-            <ReactSearchAutocomplete
-              className="search-bar-input tracking-wide text-gray-950 rounded-full focus-within:ring-2 focus-within:ring-primary-600 focus-within:ring-offset-0 z-[21] text-sm transition duration-200 ease-in-out hover:shadow-lg "
-              styling={{
-                border: "solid 1px rgb(79 70 229 / 0.2)",
-                fontSize: "0.875rem",
-                fontFamily:
-                  "Inter, system-ui, Avenir, Helvetica, Arial, sans-serif",
-                boxShadow: "none",
-                placeholderColor: "#1f2937",
-                color: "#030712",
-                backgroundColor: "#ffffff",
-                hoverBackgroundColor: "#f1f5f9",
-              }}
-              onSearch={handleOnSearch}
-              showIcon={false}
-              onSelect={handleOnSelect}
-              onHover={handleOnHover}
-              items={schools}
-              autoFocus={false}
-              formatResult={formatResult}
-              maxResults={7}
-              inputDebounce={1}
-              placeholder="Search by school name for quintile data"
-              showNoResultsText={loading ? "Loading..." : "No schools found"}
-            />
+            {renderSearchSuggestions()}
           </div>
-        </form>
+        </div>
+
         {!selectedSchool && (
           <Alert
             icon={
@@ -197,14 +254,12 @@ const SearchBar = () => {
                 className="h-6 w-6 text-blue-400"
               />
             }
-            message={
-              "Use the search bar to easily find the South African schools you are looking for"
-            }
+            message="Use the search bar to easily find the South African schools you are looking for"
           />
         )}
+
         <RenderSearchResults />
       </div>
-      {/* )} */}
     </div>
   );
 };
