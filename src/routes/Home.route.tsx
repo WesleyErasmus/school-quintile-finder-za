@@ -39,7 +39,7 @@ const Home = () => {
                 icon={
                   <InformationCircleIcon
                     aria-hidden="true"
-                    className="h-6 w-6 text-blue-700"
+                    className="h-6 w-6 text-blue-600"
                   />
                 }
                 message={
