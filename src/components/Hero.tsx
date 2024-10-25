@@ -14,7 +14,7 @@ const PageHero = () => {
   const navigate = useNavigate();
   return (
     <div className="pt-16 relative lg:pt-8">
-      <div className="px-4 sm:px-8 md:px-4 mx-auto w-full max-w-[1440px] lg:flex lg:px-0 lg:border-b lg:border-slate-300 pb-12">
+      <div className="px-4 sm:px-8 md:px-4 mx-auto w-full max-w-[1440px] lg:flex lg:px-0 lg:border-b lg:border-slate-400 pb-12">
         <div className="flex flex-col items-start w-full lg:max-w-[960px] lg:px-4">
           <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-600/10">
             Simplify Your Quintile Search

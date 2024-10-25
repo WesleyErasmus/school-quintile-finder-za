@@ -24,7 +24,7 @@ interface Section {
 const BlogPost = (props: BlogPostProps) => {
   const navigate = useNavigate();
   return (
-    <div className="py-6 px-4 mx-auto max-w-[800px] active:text-primary-900">
+    <div className="bg-white rounded-xl py-6 px-4 mx-auto max-w-[800px] active:text-primary-900">
       <button
         onClick={() => navigate(homePage)}
         className="flex items-center gap-2 text-primary-600 hover:text-primary-500 font-medium active:text-gray-900"

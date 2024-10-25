@@ -251,7 +251,7 @@ const SearchBar = () => {
             icon={
               <InformationCircleIcon
                 aria-hidden="true"
-                className="h-6 w-6 text-blue-400"
+                className="h-6 w-6 text-blue-700"
               />
             }
             message="Use the search bar to easily find the South African schools you are looking for"
