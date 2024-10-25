@@ -14,7 +14,7 @@ const InformationCard = (props: InformationCard) => {
       onClick={props.onClick}
       className="grid gap-5 lg:max-w-lg lg:block cursor-pointer"
     >
-      <div className="p-4 max-w-xl flex flex-col justify-between bg-white rounded-xl shadow-lg hover:shadow-xl group active:ring-2 active:ring-primary-600">
+      <div className="p-4 max-w-xl flex flex-col justify-between bg-white rounded-xl hover:shadow-lg group active:ring-2 active:ring-primary-600 border border-slate-200">
         <div className="lg:flex lg:items-center">
           <div className="flex flex-initial lg:mr-3 h-10 w-10 min-w-10 items-center justify-center rounded-lg bg-primary-600">
             {props.icon}

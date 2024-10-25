@@ -19,7 +19,7 @@ const RenderSearchResults = () => {
     <>
       {selectedSchool ? (
         // Card container
-        <div className="p-6 rounded-lg sm:rounded-3xl tracking-wide bg-white ring-1 ring-inset ring-primary-600/10">
+        <div className="p-6 rounded-lg sm:rounded-3xl tracking-wide bg-white border border-slate-200">
           {/* Card header */}
           <div>
             <h2 className="text-lg font-bold leading-6 text-gray-900">

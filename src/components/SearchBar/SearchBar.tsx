@@ -142,7 +142,7 @@ const SearchBar = () => {
 
     if (loading) {
       return (
-        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 px-4 py-8 z-50">
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-grslateay-200 px-4 py-8 z-50">
           <div className="flex items-center justify-center">
             <SpinnerLoader color={"#4f46e5"} size={24} />
             <span className="ml-2 text-gray-500 text-sm">Loading...</span>
@@ -153,7 +153,7 @@ const SearchBar = () => {
 
     if (!loading && data?.searchSchools?.length === 0) {
       return (
-        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 px-4 py-8 z-50">
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-slate-200 px-4 py-8 z-50">
           <p className="text-gray-500 text-sm text-center">No schools found</p>
         </div>
       );
@@ -161,7 +161,7 @@ const SearchBar = () => {
 
     if (!loading && data?.searchSchools?.length > 0) {
       return (
-        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-gray-200 overflow-hidden pb-4 z-50">
+        <div className="absolute w-full bg-white rounded-b-3xl shadow-lg border border-t-0 border-slate-200 overflow-hidden pb-4 z-50">
           {data.searchSchools
             .slice(0, 7)
             .map((school: School, index: number) => (
@@ -170,13 +170,13 @@ const SearchBar = () => {
                 onClick={() => handleSelect(school)}
                 onMouseEnter={() => setHighlightedIndex(index)}
                 className={`px-4 py-2 cursor-pointer ${
-                  highlightedIndex === index ? "bg-neutral-200/50" : ""
-                } hover:bg-neutral-200/50`}
+                  highlightedIndex === index ? "bg-slate-200/50" : ""
+                } hover:bg-slate-200/50`}
               >
-                <p className="text-gray-950 text-sm font-medium">
+                <p className="text-gray-950 text-sm tracking-wide">
                   {school.name}
                 </p>
-                <div className="inline-flex items-center mt-0.5 text-xs text-sky-800 font-medium">
+                <div className="inline-flex items-center mt-0.5 text-xs text-primary-800 font-medium tracking-wider">
                   Quintile level: {school.quintile}
                   <svg
                     viewBox="0 0 2 2"
@@ -232,14 +232,11 @@ const SearchBar = () => {
                   }
                 }}
                 placeholder="Search by school name for quintile data"
-                className={`w-full pl-10 pr-4 py-3.5 text-sm bg-white border border-gray-200 rounded-full 
-                          focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent
-                          shadow-sm transition duration-200 ease-in-out hover:shadow-md 
-                          ${
-                            isOpen || shouldShowSuggestions || loading
-                              ? "rounded-b-none rounded-t-3xl focus:ring-0 focus:border-gray-200"
-                              : ""
-                          }`}
+                className={`w-full pl-10 pr-4 py-3.5 text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary-600 focus:border-transparent  hover:shadow-lg border border-slate-200 ${
+                  isOpen || shouldShowSuggestions || loading
+                    ? "rounded-b-none rounded-t-3xl focus:ring-0 focus:border-gray-200"
+                    : ""
+                }`}
               />
             </div>
             {renderSearchSuggestions()}
@@ -251,7 +248,7 @@ const SearchBar = () => {
             icon={
               <InformationCircleIcon
                 aria-hidden="true"
-                className="h-6 w-6 text-blue-700"
+                className="h-6 w-6 text-sky-700"
               />
             }
             message="Use the search bar to easily find the South African schools you are looking for"

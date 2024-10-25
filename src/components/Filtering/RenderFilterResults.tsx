@@ -210,11 +210,11 @@ const RenderFilterResults = () => {
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-neutral-200">
+                  <tbody className="bg-white divide-y divide-slate-200">
                     {cachedFilteredData
                       .slice(0, displayedItems)
                       .map((school: School, index: number) => (
-                        <tr key={index} className="odd:bg-neutral-50">
+                        <tr key={index} className="odd:bg-slate-50">
                           <td className="pl-6 px-3 py-2.5 text-sm text-gray-900 text-left text-wrap">
                             {school.name}
                           </td>

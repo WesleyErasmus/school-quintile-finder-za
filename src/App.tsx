@@ -45,30 +45,28 @@ function App() {
         <ErrorProvider>
           <LoaderFullPage />
           {/* <div className="bg-[#FAFBFF] bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,#E5E6F6,rgba(255,255,255,0))] xl:px-6"> */}
-          <div className="bg-slate-200">
-
-          <BrowserRouter>
-            <TopNavbar />
-            <ScrollToTop />
-            <Routes>
-              <Route path={homePage} element={<Home />} />
-              <Route
-                path={mobileFilterResultsPage}
-                element={<MobileFilterResults />}
-              />
-              <Route
-                path={quintileSystemBlog}
-                element={<QuintileSystemBlog />}
-              />
-              <Route
-                path={quintileReportingBlog}
-                element={<QuintileReportingBlog />}
-              />
-              <Route path="*" element={<PageNotFound />} />
-            </Routes>
-            <Footer />
-          </BrowserRouter>
-
+          <div className="top-0 z-[-2] h-full w-full bg-slate-100 bg-[radial-gradient(60%_120%_at_50%_50%,hsla(0,0%,100%,0)_0,rgba(226,232,240,.5)_100%)]">
+            <BrowserRouter>
+              <TopNavbar />
+              <ScrollToTop />
+              <Routes>
+                <Route path={homePage} element={<Home />} />
+                <Route
+                  path={mobileFilterResultsPage}
+                  element={<MobileFilterResults />}
+                />
+                <Route
+                  path={quintileSystemBlog}
+                  element={<QuintileSystemBlog />}
+                />
+                <Route
+                  path={quintileReportingBlog}
+                  element={<QuintileReportingBlog />}
+                />
+                <Route path="*" element={<PageNotFound />} />
+              </Routes>
+              <Footer />
+            </BrowserRouter>
           </div>
         </ErrorProvider>
       </LoadingProvider>
