@@ -287,7 +287,7 @@ export default function FilterOptionsMenu() {
               className="py-6"
               defaultOpen={index === 0}
             >
-              <h3 className="-my-3 flow-root">
+              <div className="-my-3 flow-root">
                 <DisclosureButton className="group flex w-full items-center justify-between py-3 text-sm text-gray-400 hover:text-primary-600">
                   <span className="font-medium text-gray-900 group-hover:font-semibold">
                     {section.name}
@@ -303,7 +303,7 @@ export default function FilterOptionsMenu() {
                     />
                   </span>
                 </DisclosureButton>
-              </h3>
+              </div>
               <DisclosurePanel className="pt-6">
                 <div className="space-y-4">
                   {section.options.map((option, optionIdx) => (

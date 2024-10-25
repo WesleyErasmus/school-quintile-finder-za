@@ -199,7 +199,7 @@ const SearchBar = () => {
     <div className="py-12 lg:py-0">
       <div className="px-4 sm:px-8 md:px-4 lg:px-4">
         <div>
-          <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-600/30 lg:hidden">
+          <span className="inline-flex items-center rounded-lg bg-white px-2 py-1 text-xs font-medium text-primary-600 ring-1 ring-inset ring-primary-600/20 lg:hidden">
             Search for Schools
           </span>
           <h1 className="mt-8 text-3xl font-extrabold tracking-tight lg:mt-0 lg:text-xl lg:font-semibold lg:pt-4">
@@ -248,7 +248,7 @@ const SearchBar = () => {
             icon={
               <InformationCircleIcon
                 aria-hidden="true"
-                className="h-6 w-6 text-blue-600"
+                className="h-6 w-6 text-sky-600"
               />
             }
             message="Use the search bar to easily find the South African schools you are looking for"

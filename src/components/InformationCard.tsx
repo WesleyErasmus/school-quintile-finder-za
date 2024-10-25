@@ -20,9 +20,9 @@ const InformationCard = (props: InformationCard) => {
             {props.icon}
           </div>
           <div>
-            <h3 className="flex mt-6 lg:mt-0 text-lg font-bold leading-6 text-gray-900 lg:text-base">
+            <div className="flex mt-6 lg:mt-0 text-lg font-bold leading-6 text-gray-900 lg:text-base">
               <div>{props.title}</div>
-            </h3>
+            </div>
             <p className="mt-3 line-clamp-2 lg:line-clamp-1 text-sm leading-6 text-gray-700 lg:mt-0 ">
               {props.subtitle}
             </p>
