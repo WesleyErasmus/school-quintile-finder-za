@@ -277,7 +277,7 @@ export default function FilterOptionsMenu() {
       {/* Desktop filters */}
       <div className="hidden sticky top-0 lg:block mr-1 overflow-y-auto pt-4 bg-white rounded-lg lg:ml-4 max-h-screen border border-slate-200">
         <form className="w-[250px] px-6">
-          <h1 className="py-4 border-b lg:text-lg border-slate-300 font-semibold lg:pt-0">
+          <h1 className="pt-4 pb-5 border-b lg:text-lg border-slate-300 font-semibold lg:pt-0">
             Filter Options
           </h1>
           {filterOptions.map((section, index) => (

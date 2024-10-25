@@ -100,7 +100,7 @@ const RenderFilterResults = () => {
         <div>
           <div className="z-20 mx-4 sm:px-4 lg:px-0 pt-2 sticky top-0 bg-white lg:mx-4 rounded-t-xl lg:mt-4">
             {/* Filter top menu [search, filter, clear, export] */}
-            <div className="py-2 flex flex-auto gap-4 justify-between items-end bg-white border-b border-1 border-slate-100 lg:px-4">
+            <div className="py-2 flex flex-auto gap-4 justify-between items-end bg-white border-b border-1 border-slate-300 lg:px-4">
               {/* Search bar */}
               <div className="relative flex items-center">
                 <span className="absolute">
