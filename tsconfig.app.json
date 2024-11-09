@@ -20,5 +20,5 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src", "src/**/*.graphql"]
+  "include": ["src", "src/**/*.graphql", "__tests__"]
 }
